@@ -18,4 +18,9 @@ class Property {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($data);
     }
+
+    public function count() {
+        $stmt = $this->conn->query("SELECT COUNT(*) FROM properties");
+        return $stmt->fetchColumn();
+    }
 }

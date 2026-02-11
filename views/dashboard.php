@@ -13,11 +13,7 @@
                         <dt class="truncate text-sm font-medium text-gray-500">Total de Imóveis</dt>
                         <dd>
                             <div class="flex items-baseline">
-                                <span class="text-2xl font-bold text-gray-900">10</span>
-                                <span class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
-                                    <i class="fas fa-arrow-up self-center flex-shrink-0 text-green-500 mr-1"></i>
-                                    12%
-                                </span>
+                                <span class="text-2xl font-bold text-gray-900"><?php echo $totalProperties; ?></span>
                             </div>
                         </dd>
                     </dl>
@@ -45,11 +41,7 @@
                         <dt class="truncate text-sm font-medium text-gray-500">Leads Ativos</dt>
                         <dd>
                             <div class="flex items-baseline">
-                                <span class="text-2xl font-bold text-gray-900">28</span>
-                                <span class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
-                                    <i class="fas fa-arrow-up self-center flex-shrink-0 text-green-500 mr-1"></i>
-                                    4%
-                                </span>
+                                <span class="text-2xl font-bold text-gray-900"><?php echo $totalClients; ?></span>
                             </div>
                         </dd>
                     </dl>
@@ -77,11 +69,7 @@
                         <dt class="truncate text-sm font-medium text-gray-500">Propostas em Aberto</dt>
                         <dd>
                             <div class="flex items-baseline">
-                                <span class="text-2xl font-bold text-gray-900">5</span>
-                                <span class="ml-2 flex items-baseline text-sm font-semibold text-gray-500">
-                                    <i class="fas fa-minus self-center flex-shrink-0 text-gray-400 mr-1"></i>
-                                    0%
-                                </span>
+                                <span class="text-2xl font-bold text-gray-900"><?php echo $totalProposals; ?></span>
                             </div>
                         </dd>
                     </dl>

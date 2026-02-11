@@ -2,6 +2,14 @@
 
 class DashboardController {
     public function index() {
+        $clientModel = new Client();
+        $propertyModel = new Property();
+        $proposalModel = new Proposal();
+
+        $totalClients = $clientModel->count();
+        $totalProperties = $propertyModel->count();
+        $totalProposals = $proposalModel->count();
+
         $pageTitle = 'Dashboard';
         require_once 'views/layout/header.php';
         require_once 'views/dashboard.php';

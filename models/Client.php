@@ -66,4 +66,9 @@ class Client {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function count() {
+        $stmt = $this->conn->query("SELECT COUNT(*) FROM clients");
+        return $stmt->fetchColumn();
+    }
 }

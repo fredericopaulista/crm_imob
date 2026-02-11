@@ -23,4 +23,9 @@ class Proposal {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($data);
     }
+
+    public function count() {
+        $stmt = $this->conn->query("SELECT COUNT(*) FROM proposals");
+        return $stmt->fetchColumn();
+    }
 }
