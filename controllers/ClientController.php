@@ -3,7 +3,7 @@
 class ClientController {
     public function index() {
         $clientModel = new Client();
-        $clients = $clientModel->getAll();
+        $clients = $clientModel->getClients(); // Only buyers and tenants
         
         $pageTitle = 'Gestão de Clientes';
         require_once 'views/layout/header.php';
@@ -21,13 +21,13 @@ class ClientController {
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
-                'name' => $_POST['name'],
-                'email' => $_POST['email'],
-                'phone' => $_POST['phone'],
-                'type' => $_POST['type'],
-                'origin' => $_POST['origin'],
-                'observations' => $_POST['observations'],
-                'status' => 'new'
+                ':name' => $_POST['name'],
+                ':email' => $_POST['email'] ?? null,
+                ':phone' => $_POST['phone'],
+                ':type' => $_POST['type'], // buyer or tenant
+                ':origin' => $_POST['origin'] ?? null,
+                ':observations' => $_POST['observations'] ?? null,
+                ':status' => 'contacted'
             ];
 
             $clientModel = new Client();

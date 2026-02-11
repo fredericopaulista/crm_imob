@@ -120,11 +120,24 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="<?php echo APP_URL; ?>/painel/leads" class="<?php echo ($activeModule == 'lead' || $activeModule == 'leads') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-user-plus"></i></span>
+                                            <span class="truncate">Leads</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="<?php echo APP_URL; ?>/painel/clientes" class="<?php echo ($activeModule == 'client' || $activeModule == 'clientes') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
                                             <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-users"></i></span>
                                             <span class="truncate">Clientes</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/painel/proprietarios" class="<?php echo ($activeModule == 'owner' || $activeModule == 'proprietarios') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-user-tie"></i></span>
+                                            <span class="truncate">Proprietários</span>
+                                        </a>
+                                    </li>
+
                                     <li>
                                         <a href="<?php echo APP_URL; ?>/painel/propostas" class="<?php echo ($activeModule == 'proposal' || $activeModule == 'propostas') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
                                             <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-file-contract"></i></span>

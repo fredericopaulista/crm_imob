@@ -60,6 +60,24 @@ $routes = [
     '/painel/clientes/atualizar' => 'ClientController@update',
     '/painel/clientes/excluir' => 'ClientController@delete',
 
+    // Leads
+    '/painel/leads' => 'LeadController@index',
+    '/painel/leads/novo' => 'LeadController@create',
+    '/painel/leads/salvar' => 'LeadController@store',
+    '/painel/leads/editar' => 'LeadController@edit',
+    '/painel/leads/atualizar' => 'LeadController@update',
+    '/painel/leads/excluir' => 'LeadController@delete',
+    '/painel/leads/converter' => 'LeadController@convert',
+
+    // Proprietários (Owners)
+    '/painel/proprietarios' => 'OwnerController@index',
+    '/painel/proprietarios/novo' => 'OwnerController@create',
+    '/painel/proprietarios/salvar' => 'OwnerController@store',
+    '/painel/proprietarios/editar' => 'OwnerController@edit',
+    '/painel/proprietarios/atualizar' => 'OwnerController@update',
+    '/painel/proprietarios/excluir' => 'OwnerController@delete',
+
+
     // Proposals (Propostas)
     '/painel/propostas' => 'ProposalController@index',
     '/painel/propostas/novo' => 'ProposalController@create',

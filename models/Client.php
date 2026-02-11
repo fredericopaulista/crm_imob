@@ -13,6 +13,30 @@ class Client {
         return $stmt->fetchAll();
     }
 
+    public function getLeads() {
+        $stmt = $this->conn->prepare("SELECT * FROM clients WHERE type = 'lead' ORDER BY created_at DESC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getClients() {
+        $stmt = $this->conn->prepare("SELECT * FROM clients WHERE type IN ('buyer', 'tenant') ORDER BY created_at DESC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getOwners() {
+        $stmt = $this->conn->prepare("SELECT * FROM clients WHERE type = 'owner' ORDER BY created_at DESC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function convertLeadToClient($id, $newType) {
+        $sql = "UPDATE clients SET type = :type, status = 'contacted' WHERE id = :id AND type = 'lead'";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([':type' => $newType, ':id' => $id]);
+    }
+
     public function create($data) {
         $sql = "INSERT INTO clients (name, email, phone, type, origin, observations, status) VALUES (:name, :email, :phone, :type, :origin, :observations, :status)";
         $stmt = $this->conn->prepare($sql);
