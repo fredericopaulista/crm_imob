@@ -27,7 +27,7 @@ class SiteController {
 
     public function detail() {
         // Try slug first, fallback to ID for backwards compatibility
-        $slug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_STRING);
+        $slug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         
         $propertyModel = new Property();
