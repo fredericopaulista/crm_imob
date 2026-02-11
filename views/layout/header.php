@@ -131,6 +131,14 @@
                                     <span class="truncate">WhatsApp</span>
                                 </a>
                             </li>
+                        <?php if (can('manage_marketing')): ?>
+                            <li>
+                                <a href="<?php echo APP_URL; ?>/campaign" class="<?php echo $activeModule == 'campaign' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-bullhorn"></i></span>
+                                    <span class="truncate">Marketing</span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                         </ul>
                     </li>
 
