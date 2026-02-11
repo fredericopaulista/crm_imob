@@ -52,14 +52,20 @@ class UserController {
         }
     }
 
-    public function edit($id) {
+    public function edit() {
         if (!can('manage_users')) {
             echo "Acesso negado.";
             exit;
         }
 
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            header('Location: ' . APP_URL . '/painel/usuarios');
+            exit;
+        }
+
         $userModel = new User();
-        $user = $userModel->getUserById($id);
+        $user = $userModel->find($id);
 
         if (!$user) {
             header('Location: ' . APP_URL . '/painel/usuarios');

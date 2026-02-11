@@ -93,7 +93,7 @@ class PropertyController {
 
         $pageTitle = 'Editar Imóvel';
         require_once 'views/layout/header.php';
-        require_once 'views/properties/create.php'; // Reuse create form
+        require_once 'views/properties/edit.php';
         require_once 'views/layout/footer.php';
     }
 
