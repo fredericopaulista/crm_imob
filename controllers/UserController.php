@@ -81,20 +81,34 @@ class UserController {
         require_once 'views/layout/footer.php';
     }
 
-    public function update($id) {
-         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    public function update() {
+        if (!can('manage_users')) {
+            echo "Acesso negado.";
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+            if (!$id) {
+                header('Location: ' . APP_URL . '/painel/usuarios');
+                exit;
+            }
+
             $data = [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
-                'role_id' => $_POST['role_id'],
-                'password' => $_POST['password'] // Can be empty
+                'role_id' => $_POST['role_id']
             ];
+
+            if (!empty($_POST['password'])) {
+                $data['password'] = $_POST['password'];
+            }
 
             $userModel = new User();
             if ($userModel->update($id, $data)) {
                 header('Location: ' . APP_URL . '/painel/usuarios');
             } else {
-                 echo "Erro ao atualizar usuário.";
+                echo "Erro ao atualizar usuário.";
             }
         }
     }
