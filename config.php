@@ -1,7 +1,7 @@
 <?php
 
 // Database Configuration
-define('DB_HOST', 'localhost');
+define('DB_HOST', '177.136.234.91');
 define('DB_NAME', 'corret_ban');
 define('DB_USER', 'corret_seen');
 define('DB_PASS', '4RmR@dy[*_;s!]n[Dk');

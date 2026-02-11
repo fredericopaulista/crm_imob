@@ -123,8 +123,13 @@ if (array_key_exists($request, $routes)) {
     exit;
 }
 
+
 // Auth Check
-if ($controllerName !== 'AuthController' && $method !== 'webhook' && !isset($_SESSION['user_id'])) {
+// Public routes don't require authentication
+$publicControllers = ['AuthController', 'SiteController'];
+$publicMethods = ['webhook'];
+
+if (!in_array($controllerName, $publicControllers) && !in_array($method, $publicMethods) && !isset($_SESSION['user_id'])) {
     header('Location: ' . APP_URL . '/acesso/login');
     exit;
 }
@@ -132,10 +137,12 @@ if ($controllerName !== 'AuthController' && $method !== 'webhook' && !isset($_SE
 if (file_exists('controllers/' . $controllerName . '.php')) {
     $controller = new $controllerName();
     if (method_exists($controller, $method)) {
-        call_user_func([$controller, $method]);
+        $controller->$method();
     } else {
-        echo "404 - Method '$method' not found";
+        http_response_code(404);
+        echo "Método não encontrado";
     }
 } else {
-    echo "404 - Controller '$controllerName' not found";
+    http_response_code(404);
+    echo "Controller não encontrado";
 }
