@@ -65,7 +65,7 @@ class UserController {
         }
 
         $userModel = new User();
-        $user = $userModel->find($id);
+        $user = $userModel->getUserById($id);
 
         if (!$user) {
             header('Location: ' . APP_URL . '/painel/usuarios');
