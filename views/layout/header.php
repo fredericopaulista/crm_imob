@@ -139,10 +139,17 @@
                             <i class="fas fa-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
                             Configurações
                         </a>
-                        <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
+                        <?php if (can('manage_users')): ?>
                         <a href="<?php echo APP_URL; ?>/user" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
                             <i class="fas fa-users-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
                             Usuários
+                        </a>
+                        <?php endif; ?>
+                        
+                        <?php if (can('manage_roles')): ?>
+                        <a href="<?php echo APP_URL; ?>/role" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                            <i class="fas fa-id-badge h-6 w-6 shrink-0 flex items-center justify-center"></i>
+                            Perfis e Permissões
                         </a>
                         <?php endif; ?>
                         <a href="<?php echo APP_URL; ?>/auth/logout" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">

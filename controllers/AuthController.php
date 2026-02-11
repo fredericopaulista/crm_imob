@@ -20,7 +20,11 @@ class AuthController {
             if ($user) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
-                $_SESSION['user_role'] = $user['role'];
+                
+                // Load Permissions from DB
+                $_SESSION['user_role'] = $user['role_name'] ?? 'Usuario'; 
+                $_SESSION['user_permissions'] = $userModel->getPermissions($user['id']);
+                
                 header('Location: ' . APP_URL . '/dashboard');
                 exit;
             } else {

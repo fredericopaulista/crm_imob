@@ -3,9 +3,8 @@
 class UserController {
 
     public function __construct() {
-        // Enforce Admin Access
-        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
-            header('Location: ' . APP_URL . '/dashboard');
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: ' . APP_URL . '/auth/login');
             exit;
         }
     }
@@ -21,6 +20,14 @@ class UserController {
     }
 
     public function create() {
+        if (!$this->can('manage_users')) {
+            echo "Acesso negado.";
+            exit;
+        }
+
+        $roleModel = new Role();
+        $roles = $roleModel->getAll();
+
         $pageTitle = 'Novo Usuário';
         require_once 'views/layout/header.php';
         require_once 'views/users/create.php';
@@ -33,7 +40,7 @@ class UserController {
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
                 'password' => $_POST['password'],
-                'role' => $_POST['role']
+                'role_id' => $_POST['role_id']
             ];
 
             $userModel = new User();
@@ -46,6 +53,11 @@ class UserController {
     }
 
     public function edit($id) {
+        if (!$this->can('manage_users')) {
+            echo "Acesso negado.";
+            exit;
+        }
+
         $userModel = new User();
         $user = $userModel->getUserById($id);
 
@@ -53,6 +65,9 @@ class UserController {
             header('Location: ' . APP_URL . '/user');
             exit;
         }
+
+        $roleModel = new Role();
+        $roles = $roleModel->getAll();
 
         $pageTitle = 'Editar Usuário';
         require_once 'views/layout/header.php';
@@ -65,7 +80,7 @@ class UserController {
             $data = [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
-                'role' => $_POST['role'],
+                'role_id' => $_POST['role_id'],
                 'password' => $_POST['password'] // Can be empty
             ];
 
@@ -79,6 +94,11 @@ class UserController {
     }
 
     public function delete($id) {
+        if (!$this->can('manage_users')) {
+            echo "Acesso negado.";
+            exit;
+        }
+
         // Prevent deleting yourself
         if ($id == $_SESSION['user_id']) {
             header('Location: ' . APP_URL . '/user?error=cannot_delete_self');
@@ -89,4 +109,6 @@ class UserController {
         $userModel->delete($id);
         header('Location: ' . APP_URL . '/user');
     }
+
+    // Helper removed, using global can()
 }
