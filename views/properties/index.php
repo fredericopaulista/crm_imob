@@ -10,6 +10,51 @@
     </div>
 </div>
 
+<!-- Search Filter -->
+<div class="mt-6 bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-lg p-4">
+    <form method="GET" action="<?php echo APP_URL; ?>/painel/imoveis" class="grid grid-cols-1 gap-4 sm:grid-cols-4">
+        <div>
+            <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Buscar por Nome</label>
+            <input type="text" name="search" id="search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" 
+                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border" 
+                   placeholder="Digite o título...">
+        </div>
+        
+        <div>
+            <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+            <select name="type" id="type" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+                <option value="">Todos os tipos</option>
+                <option value="Apartamento" <?php echo (isset($_GET['type']) && $_GET['type'] == 'Apartamento') ? 'selected' : ''; ?>>Apartamento</option>
+                <option value="Casa" <?php echo (isset($_GET['type']) && $_GET['type'] == 'Casa') ? 'selected' : ''; ?>>Casa</option>
+                <option value="Cobertura" <?php echo (isset($_GET['type']) && $_GET['type'] == 'Cobertura') ? 'selected' : ''; ?>>Cobertura</option>
+                <option value="Sobrado" <?php echo (isset($_GET['type']) && $_GET['type'] == 'Sobrado') ? 'selected' : ''; ?>>Sobrado</option>
+                <option value="Loft" <?php echo (isset($_GET['type']) && $_GET['type'] == 'Loft') ? 'selected' : ''; ?>>Loft</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <select name="status" id="status" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+                <option value="">Todos os status</option>
+                <option value="available" <?php echo (isset($_GET['status']) && $_GET['status'] == 'available') ? 'selected' : ''; ?>>Disponível</option>
+                <option value="sold" <?php echo (isset($_GET['status']) && $_GET['status'] == 'sold') ? 'selected' : ''; ?>>Vendido</option>
+                <option value="rented" <?php echo (isset($_GET['status']) && $_GET['status'] == 'rented') ? 'selected' : ''; ?>>Alugado</option>
+                <option value="unavailable" <?php echo (isset($_GET['status']) && $_GET['status'] == 'unavailable') ? 'selected' : ''; ?>>Indisponível</option>
+            </select>
+        </div>
+        
+        <div class="flex items-end gap-2">
+            <button type="submit" class="flex-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <i class="fas fa-search mr-1"></i> Filtrar
+            </button>
+            <a href="<?php echo APP_URL; ?>/painel/imoveis" class="rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-300">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </form>
+</div>
+
+
 <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">

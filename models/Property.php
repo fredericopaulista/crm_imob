@@ -7,9 +7,32 @@ class Property {
         $this->conn = Database::getInstance()->getConnection();
     }
 
-    public function getAll() {
-        $stmt = $this->conn->prepare("SELECT * FROM properties ORDER BY created_at DESC");
-        $stmt->execute();
+    public function getAll($filters = []) {
+        $sql = "SELECT * FROM properties WHERE 1=1";
+        $params = [];
+        
+        // Filter by search term (title)
+        if (!empty($filters['search'])) {
+            $sql .= " AND title LIKE :search";
+            $params[':search'] = '%' . $filters['search'] . '%';
+        }
+        
+        // Filter by type
+        if (!empty($filters['type'])) {
+            $sql .= " AND type = :type";
+            $params[':type'] = $filters['type'];
+        }
+        
+        // Filter by status
+        if (!empty($filters['status'])) {
+            $sql .= " AND status = :status";
+            $params[':status'] = $filters['status'];
+        }
+        
+        $sql .= " ORDER BY created_at DESC";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
         return $stmt->fetchAll();
     }
 

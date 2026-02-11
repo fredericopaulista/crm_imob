@@ -3,7 +3,15 @@
 class PropertyController {
     public function index() {
         $propertyModel = new Property();
-        $properties = $propertyModel->getAll();
+        
+        // Collect filter parameters
+        $filters = [
+            'search' => filter_input(INPUT_GET, 'search', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'type' => filter_input(INPUT_GET, 'type', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'status' => filter_input(INPUT_GET, 'status', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+        ];
+        
+        $properties = $propertyModel->getAll($filters);
         
         $pageTitle = 'Gestão de Imóveis';
         require_once 'views/layout/header.php';
