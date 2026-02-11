@@ -1,7 +1,6 @@
 require_once 'config.php';
 require_once 'db.php';
 require_once 'helpers.php';
-require_once 'helpers.php';
 
 // Autoload helper (Simple)
 spl_autoload_register(function ($class_name) {
