@@ -46,6 +46,44 @@ class Property {
         return $stmt->execute($data);
     }
 
+    public function update($id, $data) {
+        $sql = "UPDATE properties SET 
+                title = :title, 
+                type = :type, 
+                purpose = :purpose, 
+                price = :price, 
+                address = :address, 
+                neighborhood = :neighborhood, 
+                city = :city, 
+                area = :area, 
+                bedrooms = :bedrooms, 
+                bathrooms = :bathrooms, 
+                garages = :garages, 
+                description = :description, 
+                status = :status,
+                owner_id = :owner_id
+                WHERE id = :id";
+        
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':title' => $data['title'],
+            ':type' => $data['type'],
+            ':purpose' => $data['purpose'],
+            ':price' => $data['price'],
+            ':address' => $data['address'],
+            ':neighborhood' => $data['neighborhood'],
+            ':city' => $data['city'],
+            ':area' => $data['area'] ?? null,
+            ':bedrooms' => $data['bedrooms'] ?? null,
+            ':bathrooms' => $data['bathrooms'] ?? null,
+            ':garages' => $data['garages'] ?? null,
+            ':description' => $data['description'] ?? null,
+            ':status' => $data['status'],
+            ':owner_id' => $data['owner_id'] ?? null,
+            ':id' => $id
+        ]);
+    }
+
     public function count() {
         $stmt = $this->conn->query("SELECT COUNT(*) FROM properties");
         return $stmt->fetchColumn();

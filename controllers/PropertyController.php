@@ -114,7 +114,8 @@ class PropertyController {
                 'bathrooms' => $_POST['bathrooms'],
                 'garages' => $_POST['garages'],
                 'description' => $_POST['description'],
-                'status' => $_POST['status']
+                'status' => $_POST['status'],
+                'owner_id' => !empty($_POST['owner_id']) ? $_POST['owner_id'] : null
             ];
 
             $propertyModel = new Property();
