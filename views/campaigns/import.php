@@ -36,6 +36,14 @@
                     </div>
                 </div>
                 
+                <div class="mb-6">
+                    <label for="tags" class="block text-sm font-medium leading-6 text-gray-900">Tags / Campanha (Opcional)</label>
+                    <div class="mt-2">
+                        <input type="text" name="tags" id="tags" placeholder="Ex: Importação 2023, Lead Frio (separe por vírgula)" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500">As tags ajudam a filtrar estes contatos para disparos futuros.</p>
+                </div>
+
                 <div class="relative flex items-start mb-6">
                     <div class="flex h-6 items-center">
                         <input id="skip_header" aria-describedby="skip_header-description" name="skip_header" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
