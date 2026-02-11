@@ -60,7 +60,7 @@
         </div>
         <div class="bg-gray-50/50 px-6 py-3 backdrop-blur-sm">
             <div class="text-sm">
-                <a href="<?php echo APP_URL; ?>/propostas" class="font-medium text-yellow-600 hover:text-yellow-500 flex items-center gap-1 group-hover:gap-2 transition-all">Ver Propostas <span aria-hidden="true"> &rarr;</span></a>
+                <a href="<?php echo APP_URL; ?>/painel/propostas" class="font-medium text-yellow-600 hover:text-yellow-500 flex items-center gap-1 group-hover:gap-2 transition-all">Ver Propostas <span aria-hidden="true"> &rarr;</span></a>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
         </div>
         <div class="p-6 bg-white">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                 <a href="<?php echo APP_URL; ?>/imoveis/novo" class="group relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 hover:bg-gray-50 transition-all hover:-translate-y-0.5 hover:shadow-md">
+                 <a href="<?php echo APP_URL; ?>/painel/imoveis/novo" class="group relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 hover:bg-gray-50 transition-all hover:-translate-y-0.5 hover:shadow-md">
                     <div class="flex-shrink-0">
                         <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-700 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                             <i class="fas fa-plus"></i>

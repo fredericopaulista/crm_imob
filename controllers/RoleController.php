@@ -56,7 +56,7 @@ class RoleController {
 
             $roleModel = new Role();
             if ($roleModel->create($name, $description, $permissions)) {
-                header('Location: ' . APP_URL . '/perfis');
+                header('Location: ' . APP_URL . '/painel/perfis');
             } else {
                 echo "Erro ao criar perfil.";
             }
@@ -73,7 +73,7 @@ class RoleController {
         $role = $roleModel->getById($id);
 
         if (!$role) {
-            header('Location: ' . APP_URL . '/perfis');
+            header('Location: ' . APP_URL . '/painel/perfis');
             exit;
         }
 
@@ -100,7 +100,7 @@ class RoleController {
 
             $roleModel = new Role();
             if ($roleModel->update($id, $name, $description, $permissions)) {
-                 header('Location: ' . APP_URL . '/perfis');
+                 header('Location: ' . APP_URL . '/painel/perfis');
             } else {
                  echo "Erro ao atualizar perfil.";
             }

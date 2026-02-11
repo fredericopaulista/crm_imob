@@ -4,7 +4,7 @@
         <p class="mt-2 text-sm text-gray-700">Gerencie leads, proprietários e inquilinos.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="<?php echo APP_URL; ?>/clientes/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <a href="<?php echo APP_URL; ?>/painel/clientes/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             <i class="fas fa-user-plus mr-1"></i> Novo Cliente
         </a>
     </div>
@@ -54,7 +54,7 @@
                                 </span>
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="<?php echo APP_URL; ?>/whatsapp?client_id=<?php echo $client['id']; ?>" class="text-green-600 hover:text-green-900 mr-3" title="WhatsApp"><i class="fab fa-whatsapp"></i><span class="sr-only">WhatsApp</span></a>
+                                <a href="<?php echo APP_URL; ?>/painel/whatsapp?client_id=<?php echo $client['id']; ?>" class="text-green-600 hover:text-green-900 mr-3" title="WhatsApp"><i class="fab fa-whatsapp"></i><span class="sr-only">WhatsApp</span></a>
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar</span></a>
                             </td>
                         </tr>

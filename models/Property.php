@@ -23,4 +23,10 @@ class Property {
         $stmt = $this->conn->query("SELECT COUNT(*) FROM properties");
         return $stmt->fetchColumn();
     }
+
+    public function find($id) {
+        $stmt = $this->conn->prepare("SELECT * FROM properties WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch();
+    }
 }

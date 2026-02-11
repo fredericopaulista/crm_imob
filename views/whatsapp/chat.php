@@ -3,14 +3,14 @@
     <div class="w-1/3 border-r border-gray-100 flex flex-col bg-gray-50/50 backdrop-blur-sm">
         <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-white/80 sticky top-0 z-10 backdrop-blur-md">
             <h2 class="text-lg font-bold text-gray-900 tracking-tight">Atendimento</h2>
-            <a href="<?php echo APP_URL; ?>/whatsapp/configuracoes" class="text-gray-400 hover:text-indigo-600 transition-colors bg-gray-50 hover:bg-indigo-50 p-2 rounded-lg">
+            <a href="<?php echo APP_URL; ?>/painel/whatsapp/configuracoes" class="text-gray-400 hover:text-indigo-600 transition-colors bg-gray-50 hover:bg-indigo-50 p-2 rounded-lg">
                 <i class="fas fa-cog"></i>
             </a>
         </div>
         
         <div class="flex-1 overflow-y-auto custom-scrollbar">
             <?php foreach ($clients as $client): ?>
-            <a href="<?php echo APP_URL; ?>/whatsapp?client_id=<?php echo $client['id']; ?>" class="group block transition-all duration-200 ease-in-out border-b border-gray-100 hover:bg-white <?php echo ($activeClientId == $client['id']) ? 'bg-white border-l-4 border-l-indigo-600 shadow-sm' : 'bg-transparent border-l-4 border-l-transparent'; ?>">
+            <a href="<?php echo APP_URL; ?>/painel/whatsapp?client_id=<?php echo $client['id']; ?>" class="group block transition-all duration-200 ease-in-out border-b border-gray-100 hover:bg-white <?php echo ($activeClientId == $client['id']) ? 'bg-white border-l-4 border-l-indigo-600 shadow-sm' : 'bg-transparent border-l-4 border-l-transparent'; ?>">
                 <div class="flex items-center px-4 py-4">
                     <div class="relative flex-shrink-0">
                         <img class="h-12 w-12 rounded-full bg-gray-200 ring-2 ring-white shadow-sm" src="https://ui-avatars.com/api/?name=<?php echo urlencode($client['name']); ?>&background=random" alt="">
@@ -110,7 +110,7 @@
                 const formData = new FormData(this);
                 // Optimistic UI for immediate feedback
                 
-                fetch('<?php echo APP_URL; ?>/whatsapp/enviar-mensagem', {
+                fetch('<?php echo APP_URL; ?>/painel/whatsapp/enviar', {
                     method: 'POST',
                     body: formData
                 })

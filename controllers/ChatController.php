@@ -47,7 +47,7 @@ class ChatController {
                 $_POST['access_token'],
                 $_POST['webhook_verify_token']
             );
-            header('Location: ' . APP_URL . '/whatsapp/configuracoes');
+            header('Location: ' . APP_URL . '/painel/whatsapp/configuracoes');
             exit;
         }
 

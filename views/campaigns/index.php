@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="min-w-0 flex-1">
-            <a href="<?php echo APP_URL; ?>/marketing/importar" class="focus:outline-none">
+            <a href="<?php echo APP_URL; ?>/painel/marketing/importar" class="focus:outline-none">
                 <span class="absolute inset-0" aria-hidden="true"></span>
                 <p class="text-sm font-medium text-gray-900">Importar Contatos</p>
                 <p class="truncate text-sm text-gray-500">Faça upload de lista CSV.</p>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="min-w-0 flex-1">
-            <a href="<?php echo APP_URL; ?>/marketing/disparo" class="focus:outline-none">
+            <a href="<?php echo APP_URL; ?>/painel/marketing/disparo" class="focus:outline-none">
                 <span class="absolute inset-0" aria-hidden="true"></span>
                 <p class="text-sm font-medium text-gray-900">Disparo em Massa</p>
                 <p class="truncate text-sm text-gray-500">Envie mensagens para todos os clientes.</p>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="min-w-0 flex-1">
-            <a href="<?php echo APP_URL; ?>/marketing/configuracoes" class="focus:outline-none">
+            <a href="<?php echo APP_URL; ?>/painel/marketing/configuracoes" class="focus:outline-none">
                 <span class="absolute inset-0" aria-hidden="true"></span>
                 <p class="text-sm font-medium text-gray-900">Configurações</p>
                 <p class="truncate text-sm text-gray-500">Defina horário de disparo.</p>

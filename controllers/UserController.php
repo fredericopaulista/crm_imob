@@ -45,7 +45,7 @@ class UserController {
 
             $userModel = new User();
             if ($userModel->create($data)) {
-                header('Location: ' . APP_URL . '/usuarios');
+                header('Location: ' . APP_URL . '/painel/usuarios');
             } else {
                 echo "Erro ao criar usuário.";
             }
@@ -62,7 +62,7 @@ class UserController {
         $user = $userModel->getUserById($id);
 
         if (!$user) {
-            header('Location: ' . APP_URL . '/usuarios');
+            header('Location: ' . APP_URL . '/painel/usuarios');
             exit;
         }
 
@@ -86,7 +86,7 @@ class UserController {
 
             $userModel = new User();
             if ($userModel->update($id, $data)) {
-                header('Location: ' . APP_URL . '/usuarios');
+                header('Location: ' . APP_URL . '/painel/usuarios');
             } else {
                  echo "Erro ao atualizar usuário.";
             }
@@ -101,13 +101,13 @@ class UserController {
 
         // Prevent deleting yourself
         if ($id == $_SESSION['user_id']) {
-            header('Location: ' . APP_URL . '/usuarios?error=cannot_delete_self');
+            header('Location: ' . APP_URL . '/painel/usuarios?error=cannot_delete_self');
             exit;
         }
 
         $userModel = new User();
         $userModel->delete($id);
-        header('Location: ' . APP_URL . '/usuarios');
+        header('Location: ' . APP_URL . '/painel/usuarios');
     }
 
     // Helper removed, using global can()

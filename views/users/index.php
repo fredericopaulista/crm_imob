@@ -4,7 +4,7 @@
         <p class="mt-2 text-sm text-gray-700">Lista de usuários com acesso ao sistema.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="<?php echo APP_URL; ?>/usuarios/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <a href="<?php echo APP_URL; ?>/painel/usuarios/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             <i class="fas fa-plus mr-1"></i> Novo Usuário
         </a>
     </div>
@@ -64,9 +64,9 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo date('d/m/Y H:i', strtotime($user['created_at'])); ?></td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="<?php echo APP_URL; ?>/usuarios/editar?id=<?php echo $user['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $user['name']; ?></span></a>
+                                <a href="<?php echo APP_URL; ?>/painel/usuarios/editar?id=<?php echo $user['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $user['name']; ?></span></a>
                                 <?php if ($user['id'] != $_SESSION['user_id']): ?>
-                                <a href="<?php echo APP_URL; ?>/usuarios/excluir?id=<?php echo $user['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?');" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $user['name']; ?></span></a>
+                                <a href="<?php echo APP_URL; ?>/painel/usuarios/excluir?id=<?php echo $user['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?');" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $user['name']; ?></span></a>
                                 <?php else: ?>
                                 <span class="text-gray-300 cursor-not-allowed" title="Você não pode excluir seu próprio usuário"><i class="fas fa-trash"></i></span>
                                 <?php endif; ?>

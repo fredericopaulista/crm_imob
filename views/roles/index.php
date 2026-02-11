@@ -4,7 +4,7 @@
         <p class="mt-2 text-sm text-gray-700">Defina quais funções cada tipo de usuário pode acessar.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="<?php echo APP_URL; ?>/perfis/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <a href="<?php echo APP_URL; ?>/painel/perfis/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             <i class="fas fa-plus mr-1"></i> Novo Perfil
         </a>
     </div>
@@ -32,9 +32,9 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo $role['description']; ?></td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="<?php echo APP_URL; ?>/perfis/editar?id=<?php echo $role['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $role['name']; ?></span></a>
+                                <a href="<?php echo APP_URL; ?>/painel/perfis/editar?id=<?php echo $role['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $role['name']; ?></span></a>
                                 <?php if ($role['name'] !== 'Admin'): // Prevent deleting Admin role ?>
-                                <a href="<?php echo APP_URL; ?>/perfis/excluir?id=<?php echo $role['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir este perfil? Usuários vinculados a ele podem perder acesso.');" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $role['name']; ?></span></a>
+                                <a href="<?php echo APP_URL; ?>/painel/perfis/excluir?id=<?php echo $role['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir este perfil? Usuários vinculados a ele podem perder acesso.');" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $role['name']; ?></span></a>
                                 <?php endif; ?>
                             </td>
                         </tr>
