@@ -41,12 +41,21 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 <div class="flex items-center gap-x-2">
                                     <div class="h-1.5 w-1.5 rounded-full <?php echo $property['status'] == 'available' ? 'bg-emerald-500' : 'bg-gray-400'; ?>"></div>
-                                    <span class="capitalize"><?php echo ucfirst($property['status']); ?></span>
+                                    <span class="capitalize"><?php 
+                                        $statusLabels = [
+                                            'available' => 'Disponível',
+                                            'sold' => 'Vendido',
+                                            'rented' => 'Alugado',
+                                            'reserved' => 'Reservado',
+                                            'unavailable' => 'Indisponível'
+                                        ];
+                                        echo $statusLabels[$property['status']] ?? ucfirst($property['status']);
+                                    ?></span>
                                 </div>
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $property['title']; ?></span></a>
-                                <a href="#" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $property['title']; ?></span></a>
+                                <a href="<?php echo APP_URL; ?>/painel/imoveis/editar?id=<?php echo $property['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $property['title']; ?></span></a>
+                                <a href="<?php echo APP_URL; ?>/painel/imoveis/excluir?id=<?php echo $property['id']; ?>" class="text-red-600 hover:text-red-900" onclick="return confirm('Tem certeza que deseja excluir este imóvel?');"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $property['title']; ?></span></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

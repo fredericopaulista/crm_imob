@@ -5,6 +5,7 @@ define('DB_HOST', '177.136.234.91');
 define('DB_NAME', 'corret_ban');
 define('DB_USER', 'corret_seen');
 define('DB_PASS', '4RmR@dy[*_;s!]n[Dk');
+define('DB_CHARSET', 'utf8mb4');
 
 // App Configuration
 define('APP_URL', 'https://corretapro.com.br');
