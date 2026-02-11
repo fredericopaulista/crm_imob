@@ -1,6 +1,6 @@
 <?php
 
-class WhatsAppController {
+class ChatController {
     
     public function index() {
         // Chat Interface
@@ -47,7 +47,7 @@ class WhatsAppController {
                 $_POST['access_token'],
                 $_POST['webhook_verify_token']
             );
-            header('Location: ' . APP_URL . '/whatsapp/settings');
+            header('Location: ' . APP_URL . '/chat/settings');
             exit;
         }
 

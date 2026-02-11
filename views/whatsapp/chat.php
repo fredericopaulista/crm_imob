@@ -3,14 +3,14 @@
     <div class="w-1/3 border-r border-gray-200 flex flex-col bg-gray-50">
         <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-white sticky top-0 z-10">
             <h2 class="text-lg font-semibold text-gray-800">Conversas</h2>
-            <a href="<?php echo APP_URL; ?>/whatsapp/settings" class="text-gray-400 hover:text-gray-600 transition">
+            <a href="<?php echo APP_URL; ?>/chat/settings" class="text-gray-400 hover:text-gray-600 transition">
                 <i class="fas fa-cog"></i>
             </a>
         </div>
         
         <div class="flex-1 overflow-y-auto">
             <?php foreach ($clients as $client): ?>
-            <a href="<?php echo APP_URL; ?>/whatsapp?client_id=<?php echo $client['id']; ?>" class="block hover:bg-white transition duration-150 ease-in-out border-b border-gray-100 <?php echo ($activeClientId == $client['id']) ? 'bg-white border-l-4 border-l-indigo-500' : 'bg-transparent border-l-4 border-l-transparent'; ?>">
+            <a href="<?php echo APP_URL; ?>/chat?client_id=<?php echo $client['id']; ?>" class="block hover:bg-white transition duration-150 ease-in-out border-b border-gray-100 <?php echo ($activeClientId == $client['id']) ? 'bg-white border-l-4 border-l-indigo-500' : 'bg-transparent border-l-4 border-l-transparent'; ?>">
                 <div class="flex items-center px-4 py-4">
                     <div class="relative flex-shrink-0">
                         <img class="h-10 w-10 rounded-full bg-gray-200" src="https://ui-avatars.com/api/?name=<?php echo urlencode($client['name']); ?>&background=random" alt="">
@@ -100,7 +100,7 @@
                 
                 // Optimistic UI Update (Optional, for now just wait)
                 
-                fetch('<?php echo APP_URL; ?>/whatsapp/sendMessage', {
+                fetch('<?php echo APP_URL; ?>/chat/sendMessage', {
                     method: 'POST',
                     body: formData
                 })

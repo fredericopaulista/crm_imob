@@ -144,7 +144,7 @@
                  <i class="fab fa-whatsapp text-4xl text-green-600"></i>
             </div>
             <p class="text-sm text-gray-500 mb-4">Centralize seu atendimento via API Oficial da Meta.</p>
-            <a href="<?php echo APP_URL; ?>/whatsapp" class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+            <a href="<?php echo APP_URL; ?>/chat" class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
                 Acessar Chat
             </a>
         </div>

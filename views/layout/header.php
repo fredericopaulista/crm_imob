@@ -75,7 +75,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo APP_URL; ?>/whatsapp" class="<?php echo $activeModule == 'whatsapp' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                        <a href="<?php echo APP_URL; ?>/chat" class="<?php echo $activeModule == 'chat' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                             <i class="fab fa-whatsapp h-6 w-6 shrink-0 text-[16px] flex items-center justify-center"></i>
                                             WhatsApp
                                         </a>
@@ -126,7 +126,7 @@
                                 </a>
                             </li>
                              <li>
-                                <a href="<?php echo APP_URL; ?>/whatsapp" class="<?php echo $activeModule == 'whatsapp' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                <a href="<?php echo APP_URL; ?>/chat" class="<?php echo $activeModule == 'chat' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
                                     <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-green-400 group-hover:text-white"><i class="fab fa-whatsapp"></i></span>
                                     <span class="truncate">WhatsApp</span>
                                 </a>
@@ -135,7 +135,7 @@
                     </li>
 
                     <li class="mt-auto">
-                        <a href="<?php echo APP_URL; ?>/whatsapp/settings" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                        <a href="<?php echo APP_URL; ?>/chat/settings" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
                             <i class="fas fa-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
                             Configurações
                         </a>
