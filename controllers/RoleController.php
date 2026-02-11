@@ -8,7 +8,7 @@ class RoleController {
         // However, since we authorized new roles, we should check permissions. 
         // But since we are mid-migration, let's stick to session role check if possible, OR implement checkPermission helper now.
         if (!isset($_SESSION['user_id'])) {
-            header('Location: ' . APP_URL . '/auth/login');
+            header('Location: ' . APP_URL . '/acesso/login');
             exit;
         }
     }
@@ -56,7 +56,7 @@ class RoleController {
 
             $roleModel = new Role();
             if ($roleModel->create($name, $description, $permissions)) {
-                header('Location: ' . APP_URL . '/role');
+                header('Location: ' . APP_URL . '/perfis');
             } else {
                 echo "Erro ao criar perfil.";
             }
@@ -73,7 +73,7 @@ class RoleController {
         $role = $roleModel->getById($id);
 
         if (!$role) {
-            header('Location: ' . APP_URL . '/role');
+            header('Location: ' . APP_URL . '/perfis');
             exit;
         }
 
@@ -100,7 +100,7 @@ class RoleController {
 
             $roleModel = new Role();
             if ($roleModel->update($id, $name, $description, $permissions)) {
-                 header('Location: ' . APP_URL . '/role');
+                 header('Location: ' . APP_URL . '/perfis');
             } else {
                  echo "Erro ao atualizar perfil.";
             }

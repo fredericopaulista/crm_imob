@@ -32,7 +32,7 @@ class ClientController {
 
             $clientModel = new Client();
             if ($clientModel->create($data)) {
-                header('Location: ' . APP_URL . '/client');
+                header('Location: ' . APP_URL . '/clientes');
             } else {
                 echo "Error creating client";
             }

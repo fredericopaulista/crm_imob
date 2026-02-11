@@ -1,7 +1,7 @@
 <div class="bg-white p-6 rounded shadow max-w-2xl mx-auto">
     <h2 class="text-2xl font-bold mb-6">Configurações da API do WhatsApp (Meta)</h2>
 
-    <form action="<?php echo APP_URL; ?>/chat/settings" method="POST">
+    <form action="<?php echo APP_URL; ?>/whatsapp/configuracoes" method="POST">
         <div class="grid grid-cols-1 gap-6">
             
             <div>

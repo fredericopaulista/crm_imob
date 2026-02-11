@@ -114,7 +114,7 @@
             updateLog('Buscando contatos da tag...', 'info');
              document.getElementById('progress-container').classList.remove('hidden');
             
-            fetch('<?php echo APP_URL; ?>/campaign/getClientsByTag?tag_id=' + tagId)
+            fetch('<?php echo APP_URL; ?>/marketing/filtrar-tag?tag_id=' + tagId)
             .then(r => r.json())
             .then(data => {
                 if (data.length === 0) {
@@ -155,7 +155,7 @@
 
         updateLog('Enviando para: ' + client.name + ' (' + client.phone + ')...', 'info');
 
-        fetch('<?php echo APP_URL; ?>/campaign/sendBroadcast', {
+        fetch('<?php echo APP_URL; ?>/marketing/enviar-disparo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

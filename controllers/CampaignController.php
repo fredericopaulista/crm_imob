@@ -4,7 +4,7 @@ class CampaignController {
 
     public function __construct() {
         if (!isset($_SESSION['user_id'])) {
-            header('Location: ' . APP_URL . '/auth/login');
+            header('Location: ' . APP_URL . '/acesso/login');
             exit;
         }
         if (!can('manage_marketing')) {
@@ -29,7 +29,7 @@ class CampaignController {
             $this->saveSetting('business_hours_start', $start);
             $this->saveSetting('business_hours_end', $end);
             
-            header('Location: ' . APP_URL . '/campaign/settings?success=1');
+            header('Location: ' . APP_URL . '/marketing/configuracoes?success=1');
         }
     }
 
@@ -163,7 +163,7 @@ class CampaignController {
                     }
                 }
                 fclose($handle);
-                header('Location: ' . APP_URL . '/campaign/import?success=1&imported=' . $importedCount . '&skipped=' . $skippedCount);
+                header('Location: ' . APP_URL . '/marketing/importar?success=1&imported=' . $importedCount . '&skipped=' . $skippedCount);
             } else {
                  echo "Erro ao ler arquivo.";
             }

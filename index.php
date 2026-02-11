@@ -3,7 +3,7 @@ require_once 'config.php';
 require_once 'db.php';
 require_once 'helpers.php';
 
-// Autoload helper (Simple)
+// Autoload helper
 spl_autoload_register(function ($class_name) {
     if (file_exists('controllers/' . $class_name . '.php')) {
         require_once 'controllers/' . $class_name . '.php';
@@ -12,37 +12,116 @@ spl_autoload_register(function ($class_name) {
     }
 });
 
-$url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : 'dashboard'; // Default to dashboard
-$url = explode('/', $url);
+// Parse URL
+$request = $_SERVER['REQUEST_URI'];
+// Remove subdirectory if exists (e.g. /crm_imob)
+$basePath = parse_url(APP_URL, PHP_URL_PATH);
+if ($basePath && $basePath !== '/') {
+    $request = str_replace($basePath, '', $request);
+}
 
-$controllerName = ucfirst($url[0]) . 'Controller';
-$method = isset($url[1]) ? $url[1] : 'index';
-$params = array_slice($url, 2);
+$request = explode('?', $request)[0];
+$request = rtrim($request, '/');
+if ($request === '') $request = '/';
 
-// Auth Check (Except for login/auth routes)
-if ($controllerName !== 'AuthController' && !isset($_SESSION['user_id'])) {
-    header('Location: ' . APP_URL . '/auth/login');
+// PT-BR Route Map
+$routes = [
+    // Dashboard
+    '/' => 'DashboardController@index',
+    '/painel' => 'DashboardController@index',
+    '/dashboard' => 'DashboardController@index', // fallback
+
+    // Properties (Imóveis)
+    '/imoveis' => 'PropertyController@index',
+    '/imoveis/novo' => 'PropertyController@create',
+    '/imoveis/salvar' => 'PropertyController@store',
+    '/imoveis/editar' => 'PropertyController@edit',
+    '/imoveis/atualizar' => 'PropertyController@update',
+    '/imoveis/excluir' => 'PropertyController@delete',
+
+    // Clients (Clientes)
+    '/clientes' => 'ClientController@index',
+    '/clientes/novo' => 'ClientController@create',
+    '/clientes/salvar' => 'ClientController@store',
+    '/clientes/editar' => 'ClientController@edit',
+    '/clientes/atualizar' => 'ClientController@update',
+    '/clientes/excluir' => 'ClientController@delete',
+
+    // Proposals (Propostas)
+    '/propostas' => 'ProposalController@index',
+    '/propostas/novo' => 'ProposalController@create',
+    '/propostas/salvar' => 'ProposalController@store',
+    '/propostas/editar' => 'ProposalController@edit',
+    '/propostas/atualizar' => 'ProposalController@update',
+    '/propostas/excluir' => 'ProposalController@delete',
+    '/propostas/pdf' => 'ProposalController@pdf',
+
+    // Marketing
+    '/marketing' => 'CampaignController@index',
+    '/marketing/importar' => 'CampaignController@import',
+    '/marketing/processar-importacao' => 'CampaignController@processImport',
+    '/marketing/disparo' => 'CampaignController@broadcast',
+    '/marketing/enviar-disparo' => 'CampaignController@sendBroadcast',
+    '/marketing/filtrar-tag' => 'CampaignController@getClientsByTag',
+    '/marketing/configuracoes' => 'CampaignController@settings',
+    '/marketing/salvar-configuracoes' => 'CampaignController@updateSettings',
+    
+    // Users
+    '/usuarios' => 'UserController@index',
+    '/usuarios/novo' => 'UserController@create',
+    '/usuarios/salvar' => 'UserController@store',
+    '/usuarios/editar' => 'UserController@edit',
+    '/usuarios/atualizar' => 'UserController@update',
+    '/usuarios/excluir' => 'UserController@delete',
+    
+    // Roles (Perfis)
+    '/perfis' => 'RoleController@index',
+    '/perfis/novo' => 'RoleController@create',
+    '/perfis/salvar' => 'RoleController@store',
+    '/perfis/editar' => 'RoleController@edit',
+    '/perfis/atualizar' => 'RoleController@update',
+    '/perfis/excluir' => 'RoleController@delete',
+    
+    // Auth
+    '/acesso/login' => 'AuthController@login',
+    '/acesso/autenticar' => 'AuthController@authenticate',
+    '/acesso/sair' => 'AuthController@logout',
+    
+    // WhatsApp
+    '/whatsapp' => 'ChatController@index',
+    '/whatsapp/conversas' => 'ChatController@getConversations',
+    '/whatsapp/mensagens' => 'ChatController@getMessages',
+    '/whatsapp/enviar' => 'ChatController@sendMessage',
+    '/whatsapp/webhook' => 'ChatController@webhook',
+];
+
+// Fallback logic for legacy routes (optional) if not found in map
+if (!array_key_exists($request, $routes)) {
+    // Try dynamic matching ONLY for IDs if needed (e.g. /imoveis/editar?id=1 uses query param, so exact match works)
+    // If we used /imoveis/1/editar, we'd need regex.
+    // Confirming usage: The system uses query params logic mostly.
+    
+    http_response_code(404);
+    echo "404 - Página não encontrada ($request)";
     exit;
 }
 
-// Routing
+$route = $routes[$request];
+list($controllerName, $method) = explode('@', $route);
+
+// Auth Check
+if ($controllerName !== 'AuthController' && $method !== 'webhook' && !isset($_SESSION['user_id'])) {
+    header('Location: ' . APP_URL . '/acesso/login');
+    exit;
+}
+
 if (file_exists('controllers/' . $controllerName . '.php')) {
     $controller = new $controllerName();
     if (method_exists($controller, $method)) {
-        call_user_func_array([$controller, $method], $params);
+        call_user_func([$controller, $method]);
     } else {
-        // 404 Method not found
-        echo "404 - Method '$method' not found in '$controllerName'";
+        echo "404 - Method '$method' not found";
     }
 } else {
-    // 404 Controller not found OR Default invalid route
-    // If it's 'DashboardController' and it doesn't exist yet, we might want to handle it.
-    // For now, simple 404.
-    if ($url[0] == 'dashboard') {
-         // Redirect to dashboard controller if it exists, logic handled above.
-         // If file doesn't exist:
-         echo "Dashboard Controller not created yet.";
-    } else {
-         echo "404 - Controller '$controllerName' not found";
-    }
+    echo "404 - Controller '$controllerName' not found";
 }

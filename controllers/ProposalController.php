@@ -37,7 +37,7 @@ class ProposalController {
 
             $proposalModel = new Proposal();
             if ($proposalModel->create($data)) {
-                header('Location: ' . APP_URL . '/proposal');
+                header('Location: ' . APP_URL . '/propostas');
             } else {
                 echo "Error creating proposal";
             }

@@ -4,7 +4,7 @@
         <p class="mt-2 text-sm text-gray-700">Histórico de todas as propostas emitidas.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="<?php echo APP_URL; ?>/proposal/create" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <a href="<?php echo APP_URL; ?>/propostas/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             <i class="fas fa-plus mr-1"></i> Nova Proposta
         </a>
     </div>
@@ -44,7 +44,7 @@
                                 </span>
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="<?php echo APP_URL; ?>/proposal/generatePdf/<?php echo $proposal['id']; ?>" target="_blank" class="text-red-600 hover:text-red-900 mr-3" title="PDF"><i class="fas fa-file-pdf"></i></a>
+                                <a href="<?php echo APP_URL; ?>/propostas/pdf?id=<?php echo $proposal['id']; ?>" target="_blank" class="text-red-600 hover:text-red-900 mr-3" title="PDF"><i class="fas fa-file-pdf"></i></a>
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i></a>
                             </td>
                         </tr>

@@ -95,78 +95,78 @@
             <div class="flex h-16 shrink-0 items-center border-b border-gray-800">
                 <span class="text-white text-2xl font-bold tracking-tight">Correta<span class="text-indigo-500">Pro</span></span>
             </div>
-            <nav class="flex flex-1 flex-col">
-                <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                    <li>
-                        <ul role="list" class="-mx-2 space-y-1">
-                            <?php $currentParams = explode('/', isset($_GET['url']) ? $_GET['url'] : 'dashboard'); $activeModule = $currentParams[0]; ?>
-
+                <nav class="flex flex-1 flex-col">
+                        <ul role="list" class="flex flex-1 flex-col gap-y-7">
                             <li>
-                                <a href="<?php echo APP_URL; ?>/dashboard" class="<?php echo $activeModule == 'dashboard' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
-                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">D</span>
-                                    <span class="truncate">Dashboard</span>
+                                <ul role="list" class="-mx-2 space-y-1">
+                                    <?php $currentParams = explode('/', isset($_GET['url']) ? $_GET['url'] : 'dashboard'); $activeModule = $currentParams[0]; ?>
+        
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/painel" class="<?php echo ($activeModule == 'dashboard' || $activeModule == 'painel') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">D</span>
+                                            <span class="truncate">Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/imoveis" class="<?php echo ($activeModule == 'property' || $activeModule == 'imoveis') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-home"></i></span>
+                                            <span class="truncate">Imóveis</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/clientes" class="<?php echo ($activeModule == 'client' || $activeModule == 'clientes') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-users"></i></span>
+                                            <span class="truncate">Clientes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/propostas" class="<?php echo ($activeModule == 'proposal' || $activeModule == 'propostas') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-file-contract"></i></span>
+                                            <span class="truncate">Propostas</span>
+                                        </a>
+                                    </li>
+                                     <li>
+                                        <a href="<?php echo APP_URL; ?>/whatsapp" class="<?php echo ($activeModule == 'chat' || $activeModule == 'whatsapp') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-green-400 group-hover:text-white"><i class="fab fa-whatsapp"></i></span>
+                                            <span class="truncate">WhatsApp</span>
+                                        </a>
+                                    </li>
+                                <?php if (can('manage_marketing')): ?>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/marketing" class="<?php echo ($activeModule == 'campaign' || $activeModule == 'marketing') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-bullhorn"></i></span>
+                                            <span class="truncate">Marketing</span>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                                </ul>
+                            </li>
+        
+                            <li class="mt-auto">
+                                <a href="<?php echo APP_URL; ?>/marketing/configuracoes" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                                    <i class="fas fa-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
+                                    Configurações
+                                </a>
+                                <?php if (can('manage_users')): ?>
+                                <a href="<?php echo APP_URL; ?>/usuarios" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                                    <i class="fas fa-users-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
+                                    Usuários
+                                </a>
+                                <?php endif; ?>
+                                
+                                <?php if (can('manage_roles')): ?>
+                                <a href="<?php echo APP_URL; ?>/perfis" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                                    <i class="fas fa-id-badge h-6 w-6 shrink-0 flex items-center justify-center"></i>
+                                    Perfis e Permissões
+                                </a>
+                                <?php endif; ?>
+                                <a href="<?php echo APP_URL; ?>/acesso/sair" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                                    <i class="fas fa-sign-out-alt h-6 w-6 shrink-0 flex items-center justify-center "></i>
+                                    Sair
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?php echo APP_URL; ?>/property" class="<?php echo $activeModule == 'property' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
-                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-home"></i></span>
-                                    <span class="truncate">Imóveis</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo APP_URL; ?>/client" class="<?php echo $activeModule == 'client' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
-                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-users"></i></span>
-                                    <span class="truncate">Clientes</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo APP_URL; ?>/proposal" class="<?php echo $activeModule == 'proposal' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
-                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-file-contract"></i></span>
-                                    <span class="truncate">Propostas</span>
-                                </a>
-                            </li>
-                             <li>
-                                <a href="<?php echo APP_URL; ?>/chat" class="<?php echo $activeModule == 'chat' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
-                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-green-400 group-hover:text-white"><i class="fab fa-whatsapp"></i></span>
-                                    <span class="truncate">WhatsApp</span>
-                                </a>
-                            </li>
-                        <?php if (can('manage_marketing')): ?>
-                            <li>
-                                <a href="<?php echo APP_URL; ?>/campaign" class="<?php echo $activeModule == 'campaign' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
-                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-bullhorn"></i></span>
-                                    <span class="truncate">Marketing</span>
-                                </a>
-                            </li>
-                        <?php endif; ?>
                         </ul>
-                    </li>
-
-                    <li class="mt-auto">
-                        <a href="<?php echo APP_URL; ?>/chat/settings" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
-                            <i class="fas fa-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
-                            Configurações
-                        </a>
-                        <?php if (can('manage_users')): ?>
-                        <a href="<?php echo APP_URL; ?>/user" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
-                            <i class="fas fa-users-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
-                            Usuários
-                        </a>
-                        <?php endif; ?>
-                        
-                        <?php if (can('manage_roles')): ?>
-                        <a href="<?php echo APP_URL; ?>/role" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
-                            <i class="fas fa-id-badge h-6 w-6 shrink-0 flex items-center justify-center"></i>
-                            Perfis e Permissões
-                        </a>
-                        <?php endif; ?>
-                        <a href="<?php echo APP_URL; ?>/auth/logout" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
-                            <i class="fas fa-sign-out-alt h-6 w-6 shrink-0 flex items-center justify-center "></i>
-                            Sair
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                    </nav>
         </div>
     </div>
 

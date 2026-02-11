@@ -28,7 +28,7 @@
             <div class="mt-2 max-w-xl text-sm text-gray-500">
                 <p>O arquivo deve estar no formato CSV e conter as colunas: <strong>Nome, Telefone, Email</strong> (opcional).</p>
             </div>
-            <form action="<?php echo APP_URL; ?>/campaign/processImport" method="POST" enctype="multipart/form-data" class="mt-5">
+            <form action="<?php echo APP_URL; ?>/marketing/processar-importacao" method="POST" enctype="multipart/form-data" class="mt-5">
                 <div class="mb-4">
                     <label for="csv_file" class="block text-sm font-medium leading-6 text-gray-900">Selecione o arquivo</label>
                     <div class="mt-2">

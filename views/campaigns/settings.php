@@ -27,7 +27,7 @@
             <div class="mt-2 max-w-xl text-sm text-gray-500">
                 <p>Defina o intervalo de horário permitido para envio de mensagens automáticas. Disparos fora deste horário serão bloqueados.</p>
             </div>
-            <form action="<?php echo APP_URL; ?>/campaign/updateSettings" method="POST" class="mt-5">
+            <form action="<?php echo APP_URL; ?>/marketing/salvar-configuracoes" method="POST" class="mt-5">
                 <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="sm:col-span-3">
                         <label for="business_hours_start" class="block text-sm font-medium leading-6 text-gray-900">Horário de Início</label>

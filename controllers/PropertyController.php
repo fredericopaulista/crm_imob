@@ -51,7 +51,7 @@ class PropertyController {
 
             $propertyModel = new Property();
             if ($propertyModel->create($data)) {
-                header('Location: ' . APP_URL . '/property');
+                header('Location: ' . APP_URL . '/imoveis');
             } else {
                 echo "Error creating property";
             }

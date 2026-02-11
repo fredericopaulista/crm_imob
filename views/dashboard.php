@@ -22,7 +22,7 @@
         </div>
         <div class="bg-gray-50 px-6 py-3">
             <div class="text-sm">
-                <a href="<?php echo APP_URL; ?>/property" class="font-medium text-indigo-600 hover:text-indigo-500">Ver todos <span aria-hidden="true"> &rarr;</span></a>
+                <a href="<?php echo APP_URL; ?>/imoveis" class="font-medium text-indigo-600 hover:text-indigo-500">Ver todos <span aria-hidden="true"> &rarr;</span></a>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
         </div>
         <div class="bg-gray-50 px-6 py-3">
             <div class="text-sm">
-                <a href="<?php echo APP_URL; ?>/client" class="font-medium text-indigo-600 hover:text-indigo-500">Gerenciar Leads <span aria-hidden="true"> &rarr;</span></a>
+                <a href="<?php echo APP_URL; ?>/clientes" class="font-medium text-indigo-600 hover:text-indigo-500">Gerenciar Leads <span aria-hidden="true"> &rarr;</span></a>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
         </div>
         <div class="bg-gray-50 px-6 py-3">
             <div class="text-sm">
-                <a href="<?php echo APP_URL; ?>/proposal" class="font-medium text-indigo-600 hover:text-indigo-500">Ver Propostas <span aria-hidden="true"> &rarr;</span></a>
+                <a href="<?php echo APP_URL; ?>/propostas" class="font-medium text-indigo-600 hover:text-indigo-500">Ver Propostas <span aria-hidden="true"> &rarr;</span></a>
             </div>
         </div>
     </div>
@@ -92,7 +92,7 @@
         </div>
         <div class="p-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                 <a href="<?php echo APP_URL; ?>/property/create" class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 hover:bg-gray-50 transition-all">
+                 <a href="<?php echo APP_URL; ?>/imoveis/novo" class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 hover:bg-gray-50 transition-all">
                     <div class="flex-shrink-0">
                         <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-700">
                             <i class="fas fa-plus"></i>
@@ -105,7 +105,7 @@
                     </div>
                 </a>
 
-                <a href="<?php echo APP_URL; ?>/client/create" class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 hover:bg-gray-50 transition-all">
+                <a href="<?php echo APP_URL; ?>/clientes/novo" class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400 hover:bg-gray-50 transition-all">
                     <div class="flex-shrink-0">
                         <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-green-50 text-green-700">
                             <i class="fas fa-user-plus"></i>
@@ -132,7 +132,7 @@
                  <i class="fab fa-whatsapp text-4xl text-green-600"></i>
             </div>
             <p class="text-sm text-gray-500 mb-4">Centralize seu atendimento via API Oficial da Meta.</p>
-            <a href="<?php echo APP_URL; ?>/chat" class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+            <a href="<?php echo APP_URL; ?>/whatsapp" class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
                 Acessar Chat
             </a>
         </div>
