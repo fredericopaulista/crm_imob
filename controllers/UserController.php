@@ -20,7 +20,7 @@ class UserController {
     }
 
     public function create() {
-        if (!$this->can('manage_users')) {
+        if (!can('manage_users')) {
             echo "Acesso negado.";
             exit;
         }
@@ -53,7 +53,7 @@ class UserController {
     }
 
     public function edit($id) {
-        if (!$this->can('manage_users')) {
+        if (!can('manage_users')) {
             echo "Acesso negado.";
             exit;
         }
@@ -94,7 +94,7 @@ class UserController {
     }
 
     public function delete($id) {
-        if (!$this->can('manage_users')) {
+        if (!can('manage_users')) {
             echo "Acesso negado.";
             exit;
         }

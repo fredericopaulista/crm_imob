@@ -14,7 +14,7 @@ class RoleController {
     }
 
     public function index() {
-        if (!$this->can('manage_roles')) {
+        if (!can('manage_roles')) {
             echo "Acesso negado.";
             exit;
         }
@@ -29,7 +29,7 @@ class RoleController {
     }
 
     public function create() {
-        if (!$this->can('manage_roles')) {
+        if (!can('manage_roles')) {
             echo "Acesso negado.";
             exit;
         }
@@ -44,7 +44,7 @@ class RoleController {
     }
 
     public function store() {
-        if (!$this->can('manage_roles')) {
+        if (!can('manage_roles')) {
             echo "Acesso negado.";
             exit;
         }
@@ -64,7 +64,7 @@ class RoleController {
     }
 
     public function edit($id) {
-        if (!$this->can('manage_roles')) {
+        if (!can('manage_roles')) {
             echo "Acesso negado.";
             exit;
         }
@@ -88,7 +88,7 @@ class RoleController {
     }
 
     public function update($id) {
-        if (!$this->can('manage_roles')) {
+        if (!can('manage_roles')) {
             echo "Acesso negado.";
             exit;
         }
