@@ -171,7 +171,7 @@
     </div>
 
     <div class="lg:pl-72">
-        <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+        <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white/80 backdrop-blur-md px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8 transition-all">
             <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" onclick="document.getElementById('mobile-menu').style.display='block'">
                 <span class="sr-only">Abrir menu</span>
                 <i class="fas fa-bars fa-lg"></i>
@@ -183,9 +183,10 @@
                 </div>
                 <div class="flex items-center gap-x-4 lg:gap-x-6">
                     <!-- Notifications -->
-                    <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                    <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 transition-colors relative">
                         <span class="sr-only">Notificações</span>
                         <i class="fas fa-bell fa-lg"></i>
+                        <span class="absolute top-2 right-2 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
                     </button>
 
                     <!-- Separator -->
@@ -193,12 +194,12 @@
 
                     <!-- Profile dropdown -->
                     <div class="relative">
-                        <button type="button" class="-m-1.5 flex items-center p-1.5" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                        <button type="button" class="-m-1.5 flex items-center p-1.5 focus:outline-none" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                             <span class="sr-only">Menu do usuário</span>
-                            <img class="h-8 w-8 rounded-full bg-gray-50" src="https://ui-avatars.com/api/?name=<?php echo isset($_SESSION['user_name']) ? urlencode($_SESSION['user_name']) : 'Admin'; ?>&background=random" alt="">
+                            <img class="h-9 w-9 rounded-full bg-gray-50 ring-2 ring-indigo-100" src="https://ui-avatars.com/api/?name=<?php echo isset($_SESSION['user_name']) ? urlencode($_SESSION['user_name']) : 'Admin'; ?>&background=random" alt="">
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true"><?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Usuário'; ?></span>
-                                <i class="fas fa-chevron-down ml-2 text-gray-400 text-xs"></i>
+                                <i class="fas fa-chevron-down ml-2 text-gray-400 text-xs transition-transform duration-200"></i>
                             </span>
                         </button>
                     </div>

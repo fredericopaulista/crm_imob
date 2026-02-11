@@ -18,7 +18,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Session Start
+// Session Configuration
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_strict_mode', 1);
+ini_set('session.cookie_secure', 1); // Ensure usage over HTTPS
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
