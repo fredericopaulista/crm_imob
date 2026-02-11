@@ -5,7 +5,7 @@ class ProposalController {
         $proposalModel = new Proposal();
         $proposals = $proposalModel->getAll();
         
-        $pageTitle = 'Propostas';
+        $pageTitle = 'Gestão de Propostas';
         require_once 'views/layout/header.php';
         require_once 'views/proposals/index.php';
         require_once 'views/layout/footer.php';
@@ -18,7 +18,7 @@ class ProposalController {
         $propertyModel = new Property();
         $properties = $propertyModel->getAll();
 
-        $pageTitle = 'Nova Proposta';
+        $pageTitle = 'Nova Proposta Comercial';
         require_once 'views/layout/header.php';
         require_once 'views/proposals/create.php';
         require_once 'views/layout/footer.php';

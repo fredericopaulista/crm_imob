@@ -13,7 +13,7 @@ class UserController {
         $userModel = new User();
         $users = $userModel->getAll();
 
-        $pageTitle = 'Gerenciar Usuários';
+        $pageTitle = 'Controle de Usuários';
         require_once 'views/layout/header.php';
         require_once 'views/users/index.php';
         require_once 'views/layout/footer.php';
@@ -28,7 +28,7 @@ class UserController {
         $roleModel = new Role();
         $roles = $roleModel->getAll();
 
-        $pageTitle = 'Novo Usuário';
+        $pageTitle = 'Cadastrar Usuário';
         require_once 'views/layout/header.php';
         require_once 'views/users/create.php';
         require_once 'views/layout/footer.php';

@@ -22,7 +22,7 @@ class RoleController {
         $roleModel = new Role();
         $roles = $roleModel->getAll();
 
-        $pageTitle = 'Gerenciar Perfis';
+        $pageTitle = 'Controle de Perfis';
         require_once 'views/layout/header.php';
         require_once 'views/roles/index.php';
         require_once 'views/layout/footer.php';
@@ -37,7 +37,7 @@ class RoleController {
         $permissionModel = new Permission();
         $permissions = $permissionModel->getAll();
 
-        $pageTitle = 'Novo Perfil';
+        $pageTitle = 'Cadastrar Perfil';
         require_once 'views/layout/header.php';
         require_once 'views/roles/create.php';
         require_once 'views/layout/footer.php';

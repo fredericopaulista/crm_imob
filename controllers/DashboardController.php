@@ -10,7 +10,7 @@ class DashboardController {
         $totalProperties = $propertyModel->count();
         $totalProposals = $proposalModel->count();
 
-        $pageTitle = 'Dashboard';
+        $pageTitle = 'Painel Geral';
         require_once 'views/layout/header.php';
         require_once 'views/dashboard.php';
         require_once 'views/layout/footer.php';

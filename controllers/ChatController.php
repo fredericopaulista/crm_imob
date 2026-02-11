@@ -30,7 +30,7 @@ class ChatController {
             }
         }
 
-        $pageTitle = 'WhatsApp Chat';
+        $pageTitle = 'Atendimento WhatsApp';
         require_once 'views/layout/header.php';
         require_once 'views/whatsapp/chat.php';
         require_once 'views/layout/footer.php';
@@ -51,7 +51,7 @@ class ChatController {
             exit;
         }
 
-        $pageTitle = 'Configurações WhatsApp';
+        $pageTitle = 'Conexão WhatsApp (API)';
         require_once 'views/layout/header.php';
         require_once 'views/whatsapp/settings.php';
         require_once 'views/layout/footer.php';

@@ -15,7 +15,7 @@ class CampaignController {
 
     public function settings() {
         $settings = $this->getAllSettings();
-        $pageTitle = 'Configurações de Campanha';
+        $pageTitle = 'Configurações de Marketing';
         require_once 'views/layout/header.php';
         require_once 'views/campaigns/settings.php';
         require_once 'views/layout/footer.php';
@@ -65,14 +65,14 @@ class CampaignController {
     public function index() {
         $broadcasts = $this->getBroadcastHistory();
         
-        $pageTitle = 'Marketing e Disparos';
+        $pageTitle = 'Campanhas de Marketing';
         require_once 'views/layout/header.php';
         require_once 'views/campaigns/index.php';
         require_once 'views/layout/footer.php';
     }
 
     public function import() {
-        $pageTitle = 'Importar Contatos';
+        $pageTitle = 'Importação de Contatos';
         require_once 'views/layout/header.php';
         require_once 'views/campaigns/import.php';
         require_once 'views/layout/footer.php';
@@ -177,7 +177,7 @@ class CampaignController {
         $tagModel = new Tag();
         $tags = $tagModel->getAll();
 
-        $pageTitle = 'Novo Disparo';
+        $pageTitle = 'Novo Disparo em Massa';
         require_once 'views/layout/header.php';
         require_once 'views/campaigns/broadcast.php';
         require_once 'views/layout/footer.php';

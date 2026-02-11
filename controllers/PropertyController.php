@@ -5,14 +5,14 @@ class PropertyController {
         $propertyModel = new Property();
         $properties = $propertyModel->getAll();
         
-        $pageTitle = 'Imóveis';
+        $pageTitle = 'Gestão de Imóveis';
         require_once 'views/layout/header.php';
         require_once 'views/properties/index.php';
         require_once 'views/layout/footer.php';
     }
 
     public function create() {
-        $pageTitle = 'Novo Imóvel';
+        $pageTitle = 'Cadastrar Imóvel';
         require_once 'views/layout/header.php';
         require_once 'views/properties/create.php';
         require_once 'views/layout/footer.php';

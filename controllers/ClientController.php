@@ -5,14 +5,14 @@ class ClientController {
         $clientModel = new Client();
         $clients = $clientModel->getAll();
         
-        $pageTitle = 'Clientes';
+        $pageTitle = 'Gestão de Clientes';
         require_once 'views/layout/header.php';
         require_once 'views/clients/index.php';
         require_once 'views/layout/footer.php';
     }
 
     public function create() {
-        $pageTitle = 'Novo Cliente';
+        $pageTitle = 'Cadastrar Cliente';
         require_once 'views/layout/header.php';
         require_once 'views/clients/create.php';
         require_once 'views/layout/footer.php';
