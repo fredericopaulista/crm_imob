@@ -99,7 +99,13 @@
                         <ul role="list" class="flex flex-1 flex-col gap-y-7">
                             <li>
                                 <ul role="list" class="-mx-2 space-y-1">
-                                    <?php $currentParams = explode('/', isset($_GET['url']) ? $_GET['url'] : 'dashboard'); $activeModule = $currentParams[0]; ?>
+                                    <?php 
+                                        $currentParams = explode('/', isset($_GET['url']) ? $_GET['url'] : 'dashboard'); 
+                                        // Remove empty elements and get the relevant module
+                                        $currentParams = array_values(array_filter($currentParams));
+                                        // For /painel/module URLs, the module is at index 1
+                                        $activeModule = isset($currentParams[1]) ? $currentParams[1] : (isset($currentParams[0]) ? $currentParams[0] : 'dashboard');
+                                    ?>
         
                                     <li>
                                         <a href="<?php echo APP_URL; ?>/painel" class="<?php echo ($activeModule == 'dashboard' || $activeModule == 'painel') ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
