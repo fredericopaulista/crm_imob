@@ -43,7 +43,10 @@ class CampaignController {
 
     private function saveSetting($key, $value) {
         $conn = Database::getInstance()->getConnection();
-        $stmt = $conn->prepare("INSERT INTO settings (key_name, value) VALUES (:key, :value) ON DUPLICATE KEY UPDATE value = :value");
+        // Use VALUES() function in newer MySQL/MariaDB or bind properly.
+        // Easiest fix: use INSERT ... ON DUPLICATE KEY UPDATE value = VALUES(value)
+        // Or bind parameters again? No, VALUES(value) is standard for this.
+        $stmt = $conn->prepare("INSERT INTO settings (key_name, value) VALUES (:key, :value) ON DUPLICATE KEY UPDATE value = VALUES(value)");
         $stmt->bindParam(':key', $key);
         $stmt->bindParam(':value', $value);
         $stmt->execute();
