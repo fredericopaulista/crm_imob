@@ -6,7 +6,7 @@ if (!function_exists('can')) {
             return true;
         }
         // Fallback for Admin role during migration/maintenance
-        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'Admin') return true; 
+        if (isset($_SESSION['user_role']) && strcasecmp($_SESSION['user_role'], 'Admin') === 0) return true; 
 
         return false;
     }
