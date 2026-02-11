@@ -10,11 +10,11 @@ class Setting {
      * Get a setting value by key
      */
     public function get($key, $default = null) {
-        $stmt = $this->conn->prepare("SELECT setting_value FROM settings WHERE setting_key = ?");
+        $stmt = $this->conn->prepare("SELECT value FROM settings WHERE key_name = ?");
         $stmt->execute([$key]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        return $result ? $result['setting_value'] : $default;
+        return $result ? $result['value'] : $default;
     }
     
     /**
@@ -22,9 +22,9 @@ class Setting {
      */
     public function set($key, $value) {
         $stmt = $this->conn->prepare("
-            INSERT INTO settings (setting_key, setting_value) 
+            INSERT INTO settings (key_name, value) 
             VALUES (?, ?)
-            ON DUPLICATE KEY UPDATE setting_value = ?, updated_at = CURRENT_TIMESTAMP
+            ON DUPLICATE KEY UPDATE value = ?, updated_at = CURRENT_TIMESTAMP
         ");
         return $stmt->execute([$key, $value, $value]);
     }
@@ -33,10 +33,10 @@ class Setting {
      * Get all settings as key-value array
      */
     public function getAll() {
-        $stmt = $this->conn->query("SELECT setting_key, setting_value FROM settings");
+        $stmt = $this->conn->query("SELECT key_name, value FROM settings");
         $settings = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $settings[$row['setting_key']] = $row['setting_value'];
+            $settings[$row['key_name']] = $row['value'];
         }
         return $settings;
     }
@@ -62,7 +62,8 @@ class Setting {
      * Delete a setting
      */
     public function delete($key) {
-        $stmt = $this->conn->prepare("DELETE FROM settings WHERE setting_key = ?");
+        $stmt = $this->conn->prepare("DELETE FROM settings WHERE key_name = ?");
         return $stmt->execute([$key]);
     }
 }
+
