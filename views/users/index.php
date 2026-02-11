@@ -57,8 +57,9 @@
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo $user['email']; ?></td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset <?php echo $user['role'] == 'admin' ? 'bg-purple-50 text-purple-700 ring-purple-600/20' : 'bg-blue-50 text-blue-700 ring-blue-600/20'; ?>">
-                                    <?php echo ucfirst($user['role']); ?>
+                                <?php $roleName = $user['role_name'] ?? 'Sem Perfil'; ?>
+                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset <?php echo strcasecmp($roleName, 'Admin') === 0 ? 'bg-purple-50 text-purple-700 ring-purple-600/20' : 'bg-blue-50 text-blue-700 ring-blue-600/20'; ?>">
+                                    <?php echo htmlspecialchars($roleName); ?>
                                 </span>
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo date('d/m/Y H:i', strtotime($user['created_at'])); ?></td>
