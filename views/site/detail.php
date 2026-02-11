@@ -1,6 +1,13 @@
 <?php
     $images = json_decode($property['images'], true);
     $coverImage = !empty($images) ? APP_URL . '/assets/uploads/' . $images[0] : 'https://placehold.co/600x400?text=Sem+Foto';
+    
+    // SEO Metadata - Dynamic based on property
+    $pageTitle = $property['title'] . ' - ' . $property['neighborhood'] . ', ' . $property['city'] . ' | Correta Pro';
+    $metaTitle = $property['title'] . ' - R$ ' . number_format($property['price'], 2, ',', '.') . ' | Correta Pro';
+    $metaDescription = substr($property['description'], 0, 155) . '... ' . $property['bedrooms'] . ' quartos, ' . $property['bathrooms'] . ' banheiros, ' . $property['area'] . 'm² em ' . $property['neighborhood'] . ', ' . $property['city'] . '. ' . ($property['purpose'] == 'sale' ? 'Venda' : 'Aluguel') . '.';
+    $canonicalUrl = APP_URL . '/imovel/' . $property['id'];
+    $ogImage = $coverImage;
 ?>
 <div class="bg-white">
     <div class="pt-6">

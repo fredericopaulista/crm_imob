@@ -1,3 +1,11 @@
+<?php
+// SEO Metadata
+$pageTitle = 'Catálogo de Imóveis em São Paulo - Venda e Aluguel | Correta Pro';
+$metaTitle = 'Catálogo Completo de Imóveis em SP - Apartamentos, Casas e Mais';
+$metaDescription = 'Explore nosso catálogo completo de imóveis em São Paulo. Apartamentos, casas, coberturas e lofts para venda e aluguel. Filtros avançados para encontrar o imóvel ideal. Confira!';
+$canonicalUrl = APP_URL . '/imoveis';
+$ogImage = APP_URL . '/assets/og-catalog.jpg';
+?>
 <div class="bg-white py-12">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center mb-12">
@@ -30,7 +38,7 @@
             ?>
             <article class="flex flex-col items-start justify-between bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div class="relative w-full">
-                    <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['id']; ?>">
+                    <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>">
                         <img src="<?php echo $coverImage; ?>" alt="<?php echo $property['title']; ?>" class="aspect-[16/9] w-full bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2] hover:scale-105 transition-transform duration-500">
                     </a>
                     <div class="absolute absolute top-0 right-0 rounded-bl-lg bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm">
@@ -44,7 +52,7 @@
                     </div>
                     <div class="group relative">
                         <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-indigo-600 transition-colors">
-                            <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['id']; ?>">
+                            <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>">
                                 <span class="absolute inset-0"></span>
                                 <?php echo $property['title']; ?>
                             </a>
@@ -66,7 +74,7 @@
 
                     <div class="mt-6 flex items-center justify-between w-full">
                         <span class="text-xl font-bold text-indigo-600">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></span>
-                        <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['id']; ?>" class="rounded-md bg-white border border-indigo-200 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 transition-colors">Ver Detalhes</a>
+                        <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>" class="rounded-md bg-white border border-indigo-200 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 transition-colors">Ver Detalhes</a>
                     </div>
                 </div>
             </article>

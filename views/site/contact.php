@@ -1,3 +1,11 @@
+<?php
+// SEO Metadata
+$pageTitle = 'Contato - Fale Conosco | Correta Pro Imóveis';
+$metaTitle = 'Entre em Contato - Correta Pro | Atendimento Personalizado';
+$metaDescription = 'Entre em contato com a Correta Pro. Tire suas dúvidas sobre imóveis em São Paulo. Atendimento via WhatsApp, telefone ou formulário. Estamos prontos para ajudar você a encontrar o imóvel ideal.';
+$canonicalUrl = APP_URL . '/contato';
+$ogImage = APP_URL . '/assets/og-contact.jpg';
+?>
 <div class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl space-y-16 md:flex md:gap-x-10 md:space-y-0">

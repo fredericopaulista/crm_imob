@@ -26,14 +26,20 @@ class SiteController {
     }
 
     public function detail() {
+        // Try slug first, fallback to ID for backwards compatibility
+        $slug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_STRING);
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        if (!$id) {
+        
+        $propertyModel = new Property();
+        
+        if ($slug) {
+            $property = $propertyModel->findBySlug($slug);
+        } elseif ($id) {
+            $property = $propertyModel->find($id);
+        } else {
             header('Location: ' . APP_URL . '/imoveis');
             exit;
         }
-
-        $propertyModel = new Property();
-        $property = $propertyModel->find($id);
 
         if (!$property) {
             header('Location: ' . APP_URL . '/imoveis');

@@ -1,3 +1,11 @@
+<?php
+// SEO Metadata
+$pageTitle = 'Correta Pro - Imóveis em São Paulo | Compra, Venda e Aluguel';
+$metaTitle = 'Imóveis em São Paulo - Apartamentos, Casas e Coberturas | Correta Pro';
+$metaDescription = 'Encontre o imóvel dos seus sonhos em São Paulo. Apartamentos, casas e coberturas nos melhores bairros: Jardins, Pinheiros, Vila Madalena, Brooklin. Venda e aluguel com atendimento personalizado.';
+$canonicalUrl = APP_URL . '/';
+$ogImage = APP_URL . '/assets/og-home.jpg';
+?>
 <!-- Hero Section -->
 <div class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
     <img src="https://images.unsplash.com/photo-1560518883-ce09059ee971?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2073&q=80" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20">
@@ -39,7 +47,7 @@
                     </div>
                     <div class="group relative">
                         <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['id']; ?>">
+                            <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>">
                                 <span class="absolute inset-0"></span>
                                 <?php echo $property['title']; ?>
                             </a>
@@ -61,7 +69,7 @@
 
                     <div class="mt-6 flex items-center justify-between w-full">
                         <span class="text-2xl font-bold text-indigo-600">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></span>
-                        <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['id']; ?>" class="rounded-full bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 transition-colors">Detalhes</a>
+                        <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>" class="rounded-full bg-indigo-50 px-3 py-1.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100 transition-colors">Detalhes</a>
                     </div>
                 </div>
             </article>

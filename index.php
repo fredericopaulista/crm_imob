@@ -95,6 +95,14 @@ $routes = [
     '/painel/perfis/atualizar' => 'RoleController@update',
     '/painel/perfis/excluir' => 'RoleController@delete',
     
+    // Settings (Configurações)
+    '/painel/configuracoes' => 'SettingsController@index',
+    '/painel/configuracoes/atualizar' => 'SettingsController@update',
+    '/painel/configuracoes/sitemap' => 'SettingsController@generateSitemap',
+    '/painel/configuracoes/robots' => 'SettingsController@generateRobots',
+    '/painel/configuracoes/sitemap/download' => 'SettingsController@downloadSitemap',
+    '/painel/configuracoes/robots/download' => 'SettingsController@downloadRobots',
+    
     // Auth (Keep as is, or move to /painel/login?) - Keeping /acesso for now
     '/acesso/login' => 'AuthController@login',
     '/acesso/autenticar' => 'AuthController@authenticate',
@@ -112,9 +120,13 @@ $routes = [
 if (array_key_exists($request, $routes)) {
     $route = $routes[$request];
     list($controllerName, $method) = explode('@', $route);
-} elseif (preg_match('#^/imovel/(\d+)$#', $request, $matches)) {
-    // Regex match for /imovel/{id}
-    $_GET['id'] = $matches[1];
+} elseif (preg_match('#^/imovel/([a-z0-9-]+)$#', $request, $matches)) {
+    // Regex match for /imovel/{slug} or /imovel/{id}
+    if (is_numeric($matches[1])) {
+        $_GET['id'] = $matches[1];
+    } else {
+        $_GET['slug'] = $matches[1];
+    }
     $controllerName = 'SiteController';
     $method = 'detail';
 } else {
