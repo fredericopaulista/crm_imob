@@ -1,44 +1,58 @@
-<div class="bg-white p-6 rounded shadow">
-    <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold">Lista de Imóveis</h2>
-        <a href="<?php echo APP_URL; ?>/property/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Novo Imóvel</a>
+<div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+        <h1 class="text-base font-semibold leading-6 text-gray-900">Imóveis</h1>
+        <p class="mt-2 text-sm text-gray-700">Lista completa de imóveis cadastrados no sistema.</p>
     </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <a href="<?php echo APP_URL; ?>/property/create" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <i class="fas fa-plus mr-1"></i> Novo Imóvel
+        </a>
+    </div>
+</div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full whitespace-no-wrap">
-            <thead>
-                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                    <th class="px-4 py-3">Título</th>
-                    <th class="px-4 py-3">Tipo</th>
-                    <th class="px-4 py-3">Finalidade</th>
-                    <th class="px-4 py-3">Preço</th>
-                    <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Ações</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y">
-                <?php foreach ($properties as $property): ?>
-                <tr class="text-gray-700">
-                    <td class="px-4 py-3"><?php echo $property['title']; ?></td>
-                    <td class="px-4 py-3"><?php echo $property['type']; ?></td>
-                    <td class="px-4 py-3">
-                        <span class="px-2 py-1 font-semibold leading-tight text-white <?php echo $property['purpose'] == 'sale' ? 'bg-green-500' : 'bg-orange-500'; ?> rounded-full text-xs">
-                            <?php echo $property['purpose'] == 'sale' ? 'Venda' : 'Aluguel'; ?>
-                        </span>
-                    </td>
-                    <td class="px-4 py-3">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></td>
-                    <td class="px-4 py-3">
-                         <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full text-xs">
-                            <?php echo ucfirst($property['status']); ?>
-                        </span>
-                    </td>
-                    <td class="px-4 py-3">
-                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-2"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+<div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Título</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Finalidade</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                <span class="sr-only">Ações</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        <?php foreach ($properties as $property): ?>
+                        <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><?php echo $property['title']; ?></td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo $property['type']; ?></td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset <?php echo $property['purpose'] == 'sale' ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-blue-50 text-blue-700 ring-blue-600/20'; ?>">
+                                    <?php echo $property['purpose'] == 'sale' ? 'Venda' : 'Aluguel'; ?>
+                                </span>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <div class="flex items-center gap-x-2">
+                                    <div class="h-1.5 w-1.5 rounded-full <?php echo $property['status'] == 'available' ? 'bg-emerald-500' : 'bg-gray-400'; ?>"></div>
+                                    <span class="capitalize"><?php echo ucfirst($property['status']); ?></span>
+                                </div>
+                            </td>
+                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $property['title']; ?></span></a>
+                                <a href="#" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $property['title']; ?></span></a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

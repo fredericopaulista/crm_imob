@@ -1,67 +1,189 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="h-full bg-gray-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ImobHub CRM</title>
+    <title>Correta Pro - CRM</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5', // Indigo 600
+                        secondary: '#64748b', // Slate 500
+                        sidebar: '#0f172a', // Slate 900
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body class="h-full">
 
-    <div class="flex flex-col md:flex-row">
-        <!-- Sidebar -->
-        <div class="bg-gray-900 shadow-xl h-16 fixed bottom-0 md:relative md:h-screen z-10 w-full md:w-64">
-            <div class="md:mt-12 md:w-64 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
-                <ul class="list-reset flex flex-row md:flex-col py-0 md:py-3 px-1 md:px-2 text-center md:text-left">
-                    <li class="mr-3 flex-1">
-                        <a href="<?php echo APP_URL; ?>/dashboard" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-blue-500">
-                            <i class="fas fa-chart-line pr-0 md:pr-3 text-blue-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 block md:inline-block">Dashboard</span>
-                        </a>
+<div class="min-h-full">
+    
+    <!-- Off-canvas menu for mobile (Hidden by default) -->
+    <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true" style="display: none;" id="mobile-menu">
+        <div class="fixed inset-0 bg-gray-900/80"></div>
+        <div class="fixed inset-0 flex">
+            <div class="relative mr-16 flex w-full max-w-xs flex-1">
+                <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+                    <button type="button" class="-m-2.5 p-2.5" onclick="document.getElementById('mobile-menu').style.display='none'">
+                        <span class="sr-only">Fechar menu</span>
+                        <i class="fas fa-times text-white"></i>
+                    </button>
+                </div>
+                <!-- Mobile Sidebar -->
+                <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-sidebar px-6 pb-4 ring-1 ring-white/10">
+                    <div class="flex h-16 shrink-0 items-center">
+                        <span class="text-white text-xl font-bold tracking-tight">Correta<span class="text-indigo-500">Pro</span></span>
+                    </div>
+                    <nav class="flex flex-1 flex-col">
+                        <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                            <li>
+                                <ul role="list" class="-mx-2 space-y-1">
+                                    <?php $currentParams = explode('/', isset($_GET['url']) ? $_GET['url'] : 'dashboard'); $activeModule = $currentParams[0]; ?>
+                                    
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/dashboard" class="<?php echo $activeModule == 'dashboard' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <i class="fas fa-chart-pie h-6 w-6 shrink-0 text-[16px] flex items-center justify-center"></i>
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/property" class="<?php echo $activeModule == 'property' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <i class="fas fa-home h-6 w-6 shrink-0 text-[16px] flex items-center justify-center"></i>
+                                            Imóveis
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/client" class="<?php echo $activeModule == 'client' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <i class="fas fa-users h-6 w-6 shrink-0 text-[16px] flex items-center justify-center"></i>
+                                            Clientes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/proposal" class="<?php echo $activeModule == 'proposal' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <i class="fas fa-file-contract h-6 w-6 shrink-0 text-[16px] flex items-center justify-center"></i>
+                                            Propostas
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo APP_URL; ?>/whatsapp" class="<?php echo $activeModule == 'whatsapp' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <i class="fab fa-whatsapp h-6 w-6 shrink-0 text-[16px] flex items-center justify-center"></i>
+                                            WhatsApp
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Static sidebar for desktop -->
+    <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-sidebar px-6 pb-4">
+            <div class="flex h-16 shrink-0 items-center border-b border-gray-800">
+                <span class="text-white text-2xl font-bold tracking-tight">Correta<span class="text-indigo-500">Pro</span></span>
+            </div>
+            <nav class="flex flex-1 flex-col">
+                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                    <li>
+                        <ul role="list" class="-mx-2 space-y-1">
+                            <?php $currentParams = explode('/', isset($_GET['url']) ? $_GET['url'] : 'dashboard'); $activeModule = $currentParams[0]; ?>
+
+                            <li>
+                                <a href="<?php echo APP_URL; ?>/dashboard" class="<?php echo $activeModule == 'dashboard' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">D</span>
+                                    <span class="truncate">Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo APP_URL; ?>/property" class="<?php echo $activeModule == 'property' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-home"></i></span>
+                                    <span class="truncate">Imóveis</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo APP_URL; ?>/client" class="<?php echo $activeModule == 'client' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-users"></i></span>
+                                    <span class="truncate">Clientes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo APP_URL; ?>/proposal" class="<?php echo $activeModule == 'proposal' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white"><i class="fas fa-file-contract"></i></span>
+                                    <span class="truncate">Propostas</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="<?php echo APP_URL; ?>/whatsapp" class="<?php echo $activeModule == 'whatsapp' ? 'bg-indigo-700 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-all duration-200">
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-green-400 group-hover:text-white"><i class="fab fa-whatsapp"></i></span>
+                                    <span class="truncate">WhatsApp</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="mr-3 flex-1">
-                        <a href="<?php echo APP_URL; ?>/property" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
-                            <i class="fas fa-home pr-0 md:pr-3 text-purple-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 block md:inline-block">Imóveis</span>
+
+                    <li class="mt-auto">
+                        <a href="<?php echo APP_URL; ?>/whatsapp/settings" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                            <i class="fas fa-cog h-6 w-6 shrink-0 flex items-center justify-center"></i>
+                            Configurações
                         </a>
-                    </li>
-                    <li class="mr-3 flex-1">
-                        <a href="<?php echo APP_URL; ?>/client" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-green-500">
-                            <i class="fas fa-users pr-0 md:pr-3 text-green-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 block md:inline-block">Clientes</span>
-                        </a>
-                    </li>
-                    <li class="mr-3 flex-1">
-                        <a href="<?php echo APP_URL; ?>/proposal" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-yellow-500">
-                            <i class="fas fa-file-contract pr-0 md:pr-3 text-yellow-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 block md:inline-block">Propostas</span>
-                        </a>
-                    </li>
-                    <li class="mr-3 flex-1">
-                        <a href="<?php echo APP_URL; ?>/whatsapp" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-green-400">
-                            <i class="fab fa-whatsapp pr-0 md:pr-3 text-green-400"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 block md:inline-block">WhatsApp</span>
-                        </a>
-                    </li>
-                    <li class="mr-3 flex-1">
-                        <a href="<?php echo APP_URL; ?>/auth/logout" class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
-                            <i class="fas fa-sign-out-alt pr-0 md:pr-3 text-red-500"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 block md:inline-block">Sair</span>
+                        <a href="<?php echo APP_URL; ?>/auth/logout" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white">
+                            <i class="fas fa-sign-out-alt h-6 w-6 shrink-0 flex items-center justify-center "></i>
+                            Sair
                         </a>
                     </li>
                 </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="lg:pl-72">
+        <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+            <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" onclick="document.getElementById('mobile-menu').style.display='block'">
+                <span class="sr-only">Abrir menu</span>
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+                <div class="relative flex flex-1 items-center">
+                    <h1 class="text-xl font-semibold text-gray-900"><?php echo isset($pageTitle) ? $pageTitle : 'Painel'; ?></h1>
+                </div>
+                <div class="flex items-center gap-x-4 lg:gap-x-6">
+                    <!-- Notifications -->
+                    <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                        <span class="sr-only">Notificações</span>
+                        <i class="fas fa-bell fa-lg"></i>
+                    </button>
+
+                    <!-- Separator -->
+                    <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true"></div>
+
+                    <!-- Profile dropdown -->
+                    <div class="relative">
+                        <button type="button" class="-m-1.5 flex items-center p-1.5" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                            <span class="sr-only">Menu do usuário</span>
+                            <img class="h-8 w-8 rounded-full bg-gray-50" src="https://ui-avatars.com/api/?name=<?php echo isset($_SESSION['user_name']) ? urlencode($_SESSION['user_name']) : 'Admin'; ?>&background=random" alt="">
+                            <span class="hidden lg:flex lg:items-center">
+                                <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true"><?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Usuário'; ?></span>
+                                <i class="fas fa-chevron-down ml-2 text-gray-400 text-xs"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Check Session -->
-        <?php if (!isset($_SESSION['user_id'])) { header('Location: ' . APP_URL . '/auth/login'); exit; } ?>
-        
-        <!-- Main Content -->
-        <div class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
-
-            <div class="bg-gray-800 pt-3">
-                <div class="rounded-tl-3xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white">
-                    <h3 class="font-bold pl-2"><?php echo isset($pageTitle) ? $pageTitle : 'Painel de Controle'; ?></h3>
-                </div>
-            </div>
-
-            <div class="p-6">
+        <main class="py-10">
+            <div class="px-4 sm:px-6 lg:px-8">

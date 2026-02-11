@@ -2,13 +2,13 @@
 
 // Database Configuration
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'crm_imob');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_NAME', 'corret_ban');
+define('DB_USER', 'corret_seen');
+define('DB_PASS', '4RmR@dy[*_;s!]n[Dk');
 
 // App Configuration
-define('APP_URL', 'http://localhost/crm_imob');
-define('APP_NAME', 'ImobHub CRM');
+define('APP_URL', 'https://corretapro.com.br');
+define('APP_NAME', 'Correta Pro');
 
 // Timezone
 date_default_timezone_set('America/Sao_Paulo');

@@ -1,56 +1,72 @@
-<div class="bg-white p-6 rounded shadow max-w-2xl mx-auto">
-    <h2 class="text-2xl font-bold mb-6">Cadastrar Novo Cliente</h2>
-
-    <form action="<?php echo APP_URL; ?>/client/store" method="POST">
-        <div class="grid grid-cols-1 gap-6">
-            
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Nome Completo</label>
-                <input type="text" name="name" class="w-full border rounded px-3 py-2" required>
-            </div>
-
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">E-mail</label>
-                <input type="email" name="email" class="w-full border rounded px-3 py-2">
-            </div>
-
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Telefone (WhatsApp)</label>
-                <input type="text" name="phone" class="w-full border rounded px-3 py-2" placeholder="5511999999999" required>
-                <p class="text-xs text-gray-500 mt-1">Formato: 55 + DDD + Número (apenas números)</p>
-            </div>
-
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Tipo de Cliente</label>
-                <select name="type" class="w-full border rounded px-3 py-2 bg-white" required>
-                    <option value="buyer">Comprador</option>
-                    <option value="tenant">Locatário</option>
-                    <option value="owner">Proprietário</option>
-                    <option value="investor">Investidor</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Origem do Lead</label>
-                <select name="origin" class="w-full border rounded px-3 py-2 bg-white">
-                    <option value="site">Site</option>
-                    <option value="indication">Indicação</option>
-                    <option value="social">Redes Sociais</option>
-                    <option value="portal">Portais</option>
-                    <option value="other">Outro</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Observações</label>
-                <textarea name="observations" rows="3" class="w-full border rounded px-3 py-2"></textarea>
-            </div>
-
+<div class="space-y-10 divide-y divide-gray-900/10">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+        <div class="px-4 sm:px-0">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Novo Cliente</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">Cadastre as informações de contato do seu novo lead ou cliente.</p>
         </div>
 
-        <div class="mt-6 flex justify-end">
-            <a href="<?php echo APP_URL; ?>/client" class="bg-gray-500 text-white px-4 py-2 rounded mr-2 hover:bg-gray-600">Cancelar</a>
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-bold">Salvar Cliente</button>
-        </div>
-    </form>
+        <form action="<?php echo APP_URL; ?>/client/store" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <div class="px-4 py-6 sm:p-8">
+                <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    
+                    <div class="col-span-full">
+                        <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Nome Completo</label>
+                        <div class="mt-2">
+                            <input type="text" name="name" id="name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">E-mail</label>
+                        <div class="mt-2">
+                            <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Telefone (WhatsApp)</label>
+                        <div class="mt-2">
+                            <input type="text" name="phone" id="phone" placeholder="5511999999999" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="type" class="block text-sm font-medium leading-6 text-gray-900">Tipo de Cliente</label>
+                        <div class="mt-2">
+                            <select id="type" name="type" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value="buyer">Comprador</option>
+                                <option value="tenant">Locatário</option>
+                                <option value="owner">Proprietário</option>
+                                <option value="investor">Investidor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="origin" class="block text-sm font-medium leading-6 text-gray-900">Origem</label>
+                        <div class="mt-2">
+                            <select id="origin" name="origin" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value="site">Site</option>
+                                <option value="indication">Indicação</option>
+                                <option value="social">Redes Sociais</option>
+                                <option value="portal">Portais Imobiliários</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-span-full">
+                        <label for="observations" class="block text-sm font-medium leading-6 text-gray-900">Observações</label>
+                        <div class="mt-2">
+                            <textarea id="observations" name="observations" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+                <a href="<?php echo APP_URL; ?>/client" type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</a>
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Salvar Cliente</button>
+            </div>
+        </form>
+    </div>
 </div>
