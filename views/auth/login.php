@@ -22,7 +22,7 @@
                 </div>
             <?php endif; ?>
 
-            <form action="<?php echo APP_URL; ?>/auth/verify" method="POST">
+            <form action="<?php echo APP_URL; ?>/acesso/autenticar" method="POST">
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                         E-mail
