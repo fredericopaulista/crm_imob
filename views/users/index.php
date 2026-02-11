@@ -65,7 +65,11 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo date('d/m/Y H:i', strtotime($user['created_at'])); ?></td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <a href="<?php echo APP_URL; ?>/usuarios/editar?id=<?php echo $user['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $user['name']; ?></span></a>
+                                <?php if ($user['id'] != $_SESSION['user_id']): ?>
                                 <a href="<?php echo APP_URL; ?>/usuarios/excluir?id=<?php echo $user['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir este usuário?');" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $user['name']; ?></span></a>
+                                <?php else: ?>
+                                <span class="text-gray-300 cursor-not-allowed" title="Você não pode excluir seu próprio usuário"><i class="fas fa-trash"></i></span>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
