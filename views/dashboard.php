@@ -125,16 +125,27 @@
     <div class="rounded-xl bg-white shadow-sm ring-1 ring-gray-900/5">
          <div class="border-b border-gray-200 px-6 py-4 flex justify-between items-center">
             <h3 class="text-base font-semibold leading-6 text-gray-900">WhatsApp Oficial</h3>
+            <?php if ($whatsappConnected): ?>
             <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Conectado</span>
+            <?php else: ?>
+            <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Desconectado</span>
+            <?php endif; ?>
         </div>
         <div class="p-6 flex flex-col items-center justify-center text-center h-48">
-            <div class="rounded-full bg-green-100 p-4 mb-4">
-                 <i class="fab fa-whatsapp text-4xl text-green-600"></i>
+            <div class="rounded-full <?php echo $whatsappConnected ? 'bg-green-100' : 'bg-gray-100'; ?> p-4 mb-4">
+                 <i class="fab fa-whatsapp text-4xl <?php echo $whatsappConnected ? 'text-green-600' : 'text-gray-400'; ?>"></i>
             </div>
+            <?php if ($whatsappConnected): ?>
             <p class="text-sm text-gray-500 mb-4">Centralize seu atendimento via API Oficial da Meta.</p>
             <a href="<?php echo APP_URL; ?>/whatsapp" class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
                 Acessar Chat
             </a>
+            <?php else: ?>
+            <p class="text-sm text-gray-500 mb-4">Configure a API do WhatsApp para iniciar o atendimento.</p>
+            <a href="<?php echo APP_URL; ?>/whatsapp/configuracoes" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Configurar Agora
+            </a>
+            <?php endif; ?>
         </div>
     </div>
 </div>
