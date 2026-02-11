@@ -34,7 +34,7 @@ class PropertyController {
 
             $data = [
                 'title' => $_POST['title'],
-                'type' => $_POST['type'],
+                'type' => $_POST['title'],
                 'purpose' => $_POST['purpose'],
                 'price' => $_POST['price'],
                 'address' => $_POST['address'],
@@ -55,6 +55,71 @@ class PropertyController {
             } else {
                 echo "Error creating property";
             }
+        }
+    }
+
+    public function edit() {
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            header('Location: ' . APP_URL . '/painel/imoveis');
+            exit;
+        }
+
+        $propertyModel = new Property();
+        $property = $propertyModel->find($id);
+
+        if (!$property) {
+            header('Location: ' . APP_URL . '/painel/imoveis');
+            exit;
+        }
+
+        $pageTitle = 'Editar Imóvel';
+        require_once 'views/layout/header.php';
+        require_once 'views/properties/create.php'; // Reuse create form
+        require_once 'views/layout/footer.php';
+    }
+
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+            
+            $data = [
+                'title' => $_POST['title'],
+                'type' => $_POST['type'],
+                'purpose' => $_POST['purpose'],
+                'price' => $_POST['price'],
+                'address' => $_POST['address'],
+                'neighborhood' => $_POST['neighborhood'],
+                'city' => $_POST['city'],
+                'area' => $_POST['area'],
+                'bedrooms' => $_POST['bedrooms'],
+                'bathrooms' => $_POST['bathrooms'],
+                'garages' => $_POST['garages'],
+                'description' => $_POST['description'],
+                'status' => $_POST['status']
+            ];
+
+            $propertyModel = new Property();
+            if ($propertyModel->update($id, $data)) {
+                header('Location: ' . APP_URL . '/painel/imoveis');
+            } else {
+                echo "Error updating property";
+            }
+        }
+    }
+
+    public function delete() {
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            header('Location: ' . APP_URL . '/painel/imoveis');
+            exit;
+        }
+
+        $propertyModel = new Property();
+        if ($propertyModel->delete($id)) {
+            header('Location: ' . APP_URL . '/painel/imoveis');
+        } else {
+            echo "Error deleting property";
         }
     }
 }
