@@ -57,7 +57,22 @@
                         </div>
                     </div>
 
-                    <div class="col-span-full">
+                     <div class="sm:col-span-3">
+                        <label for="owner_id" class="block text-sm font-medium leading-6 text-gray-900">Proprietário</label>
+                         <div class="mt-2">
+                            <select id="owner_id" name="owner_id" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option value="">Selecione (opcional)</option>
+                                <?php
+                                $clientModel = new Client();
+                                $owners = $clientModel->getOwners();
+                                foreach ($owners as $owner): ?>
+                                    <option value="<?php echo $owner['id']; ?>"><?php echo htmlspecialchars($owner['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-full">
                         <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Endereço Completo</label>
                         <div class="mt-2">
                             <input type="text" name="address" id="address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>
