@@ -39,32 +39,42 @@ class PropertyController {
                      }
                  }
              }
+             
+             $imagesJson = json_encode($images);
+             $owner_id = !empty($_POST['owner_id']) ? $_POST['owner_id'] : null;
+             
+             $sql = "INSERT INTO properties (title, type, purpose, price, address, neighborhood, city, area, bedrooms, bathrooms, garages, description, status, images, owner_id) 
+                     VALUES (:title, :type, :purpose, :price, :address, :neighborhood, :city, :area, :bedrooms, :bathrooms, :garages, :description, :status, :images, :owner_id)";
+             
+             $conn = Database::getInstance()->getConnection();
+             $stmt = $conn->prepare($sql);
+             
+             $success = $stmt->execute([
+                 ':title' => $_POST['title'],
+                 ':type' => $_POST['type'],
+                 ':purpose' => $_POST['purpose'],
+                 ':price' => $_POST['price'],
+                 ':address' => $_POST['address'],
+                 ':neighborhood' => $_POST['neighborhood'],
+                 ':city' => $_POST['city'],
+                 ':area' => $_POST['area'] ?? null,
+                 ':bedrooms' => $_POST['bedrooms'] ?? null,
+                 ':bathrooms' => $_POST['bathrooms'] ?? null,
+                 ':garages' => $_POST['garages'] ?? null,
+                 ':description' => $_POST['description'] ?? null,
+                 ':status' => $_POST['status'],
+                 ':images' => $imagesJson,
+                 ':owner_id' => $owner_id
+             ]);
 
-            $data = [
-                'title' => $_POST['title'],
-                'type' => $_POST['title'],
-                'purpose' => $_POST['purpose'],
-                'price' => $_POST['price'],
-                'address' => $_POST['address'],
-                'neighborhood' => $_POST['neighborhood'],
-                'city' => $_POST['city'],
-                'area' => $_POST['area'],
-                'bedrooms' => $_POST['bedrooms'],
-                'bathrooms' => $_POST['bathrooms'],
-                'garages' => $_POST['garages'],
-                'description' => $_POST['description'],
-                'status' => $_POST['status'],
-                'images' => json_encode($images)
-            ];
-
-            $propertyModel = new Property();
-            if ($propertyModel->create($data)) {
+            if ($success) {
                 header('Location: ' . APP_URL . '/painel/imoveis');
             } else {
-                echo "Error creating property";
+                echo "Erro ao cadastrar imóvel";
             }
         }
     }
+
 
     public function edit() {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
