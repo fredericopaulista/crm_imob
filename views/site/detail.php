@@ -139,7 +139,7 @@
                 <div>
                     <h3 class="sr-only">Descrição</h3>
                     <div class="space-y-6">
-                        <p class="text-base text-gray-900"><?php echo nl2br($property['description']); ?></p>
+                        <p class="text-base text-gray-900"><?php echo html_entity_decode($property['description']); ?></p>
                     </div>
                 </div>
                 
