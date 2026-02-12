@@ -21,6 +21,8 @@ spl_autoload_register(function ($class_name) {
 // Parse URL
 if (isset($_GET['url'])) {
     $request = '/' . $_GET['url'];
+} elseif (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] !== '/') {
+    $request = $_SERVER['PATH_INFO'];
 } else {
     $request = $_SERVER['REQUEST_URI'];
     // Remove subdirectory if exists (e.g. /crm_imob)
