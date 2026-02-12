@@ -17,7 +17,23 @@ class SiteController {
 
     public function catalog() {
         $propertyModel = new Property();
-        $properties = $propertyModel->getAll();
+        
+        // Get filters from GET request
+        $filters = [
+            'search' => filter_input(INPUT_GET, 'search', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'type' => filter_input(INPUT_GET, 'type', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'status' => filter_input(INPUT_GET, 'status', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'city' => filter_input(INPUT_GET, 'city', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'neighborhood' => filter_input(INPUT_GET, 'neighborhood', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+        ];
+        
+        $properties = $propertyModel->getAll($filters);
+        
+        // Get data for dropdowns
+        $cities = $propertyModel->getCities();
+        
+        // Get neighborhoods for selected city, or all if no city selected
+        $neighborhoods = $propertyModel->getNeighborhoods($filters['city'] ?? null);
         
         $pageTitle = 'Imóveis - Correta Pro';
         require_once 'views/site/layout/header.php';
