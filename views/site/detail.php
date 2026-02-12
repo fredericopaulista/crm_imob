@@ -59,11 +59,11 @@
     <div class="pt-6">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-6">
             <!-- Breadcrumb -->
-            <nav class="flex" aria-label="Breadcrumb">
+            <nav class="flex relative z-10" aria-label="Breadcrumb">
               <ol role="list" class="flex items-center space-x-4">
                 <li>
                   <div>
-                    <a href="<?php echo APP_URL; ?>" class="text-gray-400 hover:text-gray-500">
+                    <a href="<?php echo APP_URL; ?>" class="text-gray-500 hover:text-indigo-600 transition-colors">
                       <i class="fas fa-home flex-shrink-0"></i>
                       <span class="sr-only">Home</span>
                     </a>
@@ -72,13 +72,13 @@
                 <li>
                   <div class="flex items-center">
                     <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400"></i>
-                    <a href="<?php echo APP_URL; ?>/imoveis" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Imóveis</a>
+                    <a href="<?php echo APP_URL; ?>/imoveis" class="ml-4 text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors">Imóveis</a>
                   </div>
                 </li>
                 <li>
                   <div class="flex items-center">
                     <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400"></i>
-                    <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" aria-current="page"><?php echo htmlspecialchars($property['title']); ?></a>
+                    <a href="#" class="ml-4 text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors" aria-current="page"><?php echo htmlspecialchars($property['title']); ?></a>
                   </div>
                 </li>
               </ol>
