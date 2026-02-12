@@ -203,5 +203,26 @@ class Property {
         $stmt = $this->conn->prepare("UPDATE properties SET slug = :slug WHERE id = :id");
         return $stmt->execute([':slug' => $slug, ':id' => $id]);
     }
+
+    public function getCities() {
+        $stmt = $this->conn->query("SELECT DISTINCT city FROM properties WHERE status = 'available' AND city IS NOT NULL AND city != '' ORDER BY city ASC");
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function getNeighborhoods($city = null) {
+        $sql = "SELECT DISTINCT neighborhood FROM properties WHERE status = 'available' AND neighborhood IS NOT NULL AND neighborhood != ''";
+        $params = [];
+        
+        if ($city) {
+            $sql .= " AND city = :city";
+            $params[':city'] = $city;
+        }
+        
+        $sql .= " ORDER BY neighborhood ASC";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 }
 
