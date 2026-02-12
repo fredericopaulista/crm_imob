@@ -13,6 +13,26 @@
 <body class="bg-gray-50 flex items-center justify-center h-screen">
     <div class="w-full max-w-md bg-white rounded-lg shadow-md overflow-hidden">
         <div class="px-6 py-8">
+            <!-- Breadcrumb -->
+            <nav class="flex mb-6 justify-center" aria-label="Breadcrumb">
+              <ol role="list" class="flex items-center space-x-4">
+                <li>
+                  <div>
+                    <a href="<?php echo APP_URL; ?>" class="text-gray-400 hover:text-gray-500">
+                      <i class="fas fa-home flex-shrink-0"></i>
+                      <span class="sr-only">Home</span>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400"></i>
+                    <span class="ml-4 text-sm font-medium text-gray-500">Área do Corretor</span>
+                  </div>
+                </li>
+              </ol>
+            </nav>
+
             <h2 class="text-center text-3xl font-extrabold text-gray-900 mb-2">ImobHub</h2>
             <p class="text-center text-gray-600 mb-8">Faça login para acessar o sistema</p>
 
