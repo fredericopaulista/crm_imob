@@ -72,7 +72,7 @@ class ImportController {
                 $bathrooms = (int) $listing->Details->Bathrooms;
                 $garages = (int) $listing->Details->Garage;
                 $area = (float) $listing->Details->LivingArea;
-                $description = (string) $listing->Details->Description;
+                $description = html_entity_decode((string) $listing->Details->Description);
                 
                 // Type Mapping
                 $propertyTypeRaw = (string) $listing->Details->PropertyType;
