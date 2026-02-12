@@ -19,14 +19,18 @@ spl_autoload_register(function ($class_name) {
 });
 
 // Parse URL
-$request = $_SERVER['REQUEST_URI'];
-// Remove subdirectory if exists (e.g. /crm_imob)
-$basePath = parse_url(APP_URL, PHP_URL_PATH);
-if ($basePath && $basePath !== '/') {
-    $request = str_replace($basePath, '', $request);
+if (isset($_GET['url'])) {
+    $request = '/' . $_GET['url'];
+} else {
+    $request = $_SERVER['REQUEST_URI'];
+    // Remove subdirectory if exists (e.g. /crm_imob)
+    $basePath = parse_url(APP_URL, PHP_URL_PATH);
+    if ($basePath && $basePath !== '/') {
+        $request = str_replace($basePath, '', $request);
+    }
+    $request = explode('?', $request)[0];
 }
 
-$request = explode('?', $request)[0];
 $request = rtrim($request, '/');
 if ($request === '') $request = '/';
 
