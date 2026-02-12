@@ -38,12 +38,32 @@ class Property {
 
     public function create($data) {
         // Generate slug from title
-        $slug = $this->generateSlug($data[':title'] ?? $data['title']);
-        $data[':slug'] = $slug;
+        $slug = $this->generateSlug($data['title']);
         
-        $sql = "INSERT INTO properties (title, slug, type, purpose, price, address, neighborhood, city, area, bedrooms, bathrooms, garages, description, status, images) VALUES (:title, :slug, :type, :purpose, :price, :address, :neighborhood, :city, :area, :bedrooms, :bathrooms, :garages, :description, :status, :images)";
+        $sql = "INSERT INTO properties (title, slug, type, purpose, price, address, neighborhood, city, area, bedrooms, bathrooms, garages, description, status, images, owner_id) 
+                VALUES (:title, :slug, :type, :purpose, :price, :address, :neighborhood, :city, :area, :bedrooms, :bathrooms, :garages, :description, :status, :images, :owner_id)";
+        
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute($data);
+        
+        // Map data to parameters
+        return $stmt->execute([
+            ':title' => $data['title'],
+            ':slug' => $slug,
+            ':type' => $data['type'],
+            ':purpose' => $data['purpose'],
+            ':price' => $data['price'],
+            ':address' => $data['address'],
+            ':neighborhood' => $data['neighborhood'],
+            ':city' => $data['city'],
+            ':area' => $data['area'] ?? null,
+            ':bedrooms' => $data['bedrooms'] ?? null,
+            ':bathrooms' => $data['bathrooms'] ?? null,
+            ':garages' => $data['garages'] ?? null,
+            ':description' => $data['description'] ?? null,
+            ':status' => $data['status'],
+            ':images' => $data['images'] ?? '[]',
+            ':owner_id' => $data['owner_id'] ?? null
+        ]);
     }
 
     public function update($id, $data) {
