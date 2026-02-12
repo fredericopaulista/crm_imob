@@ -1,14 +1,60 @@
 <?php
     $images = json_decode($property['images'], true);
     $coverImage = !empty($images) ? APP_URL . '/assets/uploads/' . $images[0] : 'https://placehold.co/600x400?text=Sem+Foto';
+    $allImages = array_map(function($img) { return APP_URL . '/assets/uploads/' . $img; }, $images ?? []);
+    if (empty($allImages)) $allImages = [$coverImage];
     
     // SEO Metadata - Dynamic based on property
     $pageTitle = $property['title'] . ' - ' . $property['neighborhood'] . ', ' . $property['city'] . ' | Correta Pro';
     $metaTitle = $property['title'] . ' - R$ ' . number_format($property['price'], 2, ',', '.') . ' | Correta Pro';
     $metaDescription = substr($property['description'], 0, 155) . '... ' . $property['bedrooms'] . ' quartos, ' . $property['bathrooms'] . ' banheiros, ' . $property['area'] . 'm² em ' . $property['neighborhood'] . ', ' . $property['city'] . '. ' . ($property['purpose'] == 'sale' ? 'Venda' : 'Aluguel') . '.';
-    $canonicalUrl = APP_URL . '/imovel/' . $property['id'];
+    $canonicalUrl = APP_URL . '/imovel/' . ($property['slug'] ?? $property['id']);
     $ogImage = $coverImage;
 ?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "<?php echo addslashes($property['title']); ?>",
+  "image": <?php echo json_encode($allImages); ?>,
+  "description": "<?php echo addslashes(str_replace(["\r", "\n"], ' ', substr($property['description'], 0, 300))); ?>",
+  "sku": "<?php echo $property['id']; ?>",
+  "brand": {
+    "@type": "Brand",
+    "name": "Correta Pro"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "<?php echo $canonicalUrl; ?>",
+    "priceCurrency": "BRL",
+    "price": "<?php echo $property['price']; ?>",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "<?php echo APP_URL; ?>"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Imóveis",
+    "item": "<?php echo APP_URL; ?>/imoveis"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "<?php echo addslashes($property['title']); ?>",
+    "item": "<?php echo $canonicalUrl; ?>"
+  }]
+}
+</script>
 <div class="bg-white">
     <div class="pt-6">
         <!-- Image Gallery (Simple) -->
