@@ -20,11 +20,11 @@ class SiteController {
         
         // Get filters from GET request
         $filters = [
-            'search' => filter_input(INPUT_GET, 'search', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-            'type' => filter_input(INPUT_GET, 'type', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-            'status' => filter_input(INPUT_GET, 'status', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-            'city' => filter_input(INPUT_GET, 'city', FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-            'neighborhood' => filter_input(INPUT_GET, 'neighborhood', FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+            'search' => isset($_GET['search']) ? filter_var($_GET['search'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
+            'type' => isset($_GET['type']) ? filter_var($_GET['type'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
+            'status' => isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
+            'city' => isset($_GET['city']) ? filter_var($_GET['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
+            'neighborhood' => isset($_GET['neighborhood']) ? filter_var($_GET['neighborhood'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null
         ];
         
         $properties = $propertyModel->getAll($filters);
