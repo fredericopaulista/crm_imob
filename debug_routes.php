@@ -8,12 +8,20 @@ echo "REQUEST_URI: " . $_SERVER['REQUEST_URI'] . "\n";
 echo "QUERY_STRING: " . $_SERVER['QUERY_STRING'] . "\n";
 
 // Emulate index.php logic
-$request = $_SERVER['REQUEST_URI'];
-$basePath = parse_url(APP_URL, PHP_URL_PATH);
-if ($basePath && $basePath !== '/') {
-    $request = str_replace($basePath, '', $request);
+if (isset($_GET['url'])) {
+    $request = '/' . $_GET['url'];
+} elseif (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] !== '/') {
+    $request = $_SERVER['PATH_INFO'];
+} else {
+    $request = $_SERVER['REQUEST_URI'];
+    // Remove subdirectory if exists (e.g. /crm_imob)
+    $basePath = parse_url(APP_URL, PHP_URL_PATH);
+    if ($basePath && $basePath !== '/') {
+        $request = str_replace($basePath, '', $request);
+    }
+    $request = explode('?', $request)[0];
 }
-$request = explode('?', $request)[0];
+
 $request = rtrim($request, '/');
 if ($request === '') $request = '/';
 
