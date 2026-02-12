@@ -16,17 +16,38 @@ $ogImage = APP_URL . '/assets/og-catalog.jpg';
         <!-- Filters (Mockup) -->
         <div class="bg-gray-50 rounded-xl p-6 mb-12 shadow-sm border border-gray-100">
             <form class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <input type="text" placeholder="Buscar por título..." class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                <select class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <select name="city" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" onchange="this.form.submit()">
+                    <option value="">Cidade</option>
+                    <?php foreach ($cities as $city): ?>
+                        <option value="<?php echo htmlspecialchars($city); ?>" <?php echo ($filters['city'] ?? '') == $city ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($city); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                
+                <select name="neighborhood" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <option value="">Bairro</option>
+                    <?php foreach ($neighborhoods as $neighborhood): ?>
+                        <option value="<?php echo htmlspecialchars($neighborhood); ?>" <?php echo ($filters['neighborhood'] ?? '') == $neighborhood ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($neighborhood); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <select name="type" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <option value="">Tipo de Imóvel</option>
-                    <option value="Casa">Casa</option>
-                    <option value="Apartamento">Apartamento</option>
+                    <option value="Casa" <?php echo ($filters['type'] ?? '') == 'Casa' ? 'selected' : ''; ?>>Casa</option>
+                    <option value="Apartamento" <?php echo ($filters['type'] ?? '') == 'Apartamento' ? 'selected' : ''; ?>>Apartamento</option>
+                    <option value="Terreno" <?php echo ($filters['type'] ?? '') == 'Terreno' ? 'selected' : ''; ?>>Terreno</option>
+                    <option value="Comercial" <?php echo ($filters['type'] ?? '') == 'Comercial' ? 'selected' : ''; ?>>Comercial</option>
                 </select>
-                <select class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                
+                <select name="purpose" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <option value="">Finalidade</option>
-                    <option value="sale">Venda</option>
-                    <option value="rent">Aluguel</option>
+                    <option value="sale" <?php echo ($filters['status'] ?? '') == 'sale' ? 'selected' : ''; ?>>Venda</option>
+                    <option value="rent" <?php echo ($filters['status'] ?? '') == 'rent' ? 'selected' : ''; ?>>Aluguel</option>
                 </select>
+                
                 <button type="submit" class="bg-indigo-600 text-white rounded-md px-4 py-2 hover:bg-indigo-700 transition-colors">Filtrar</button>
             </form>
         </div>
