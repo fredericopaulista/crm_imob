@@ -151,7 +151,7 @@
                             height="100%" 
                             frameborder="0" 
                             style="border:0" 
-                            src="https://maps.google.com/maps?q=<?php echo urlencode($property['neighborhood'] . ', ' . $property['city']); ?>&output=embed" 
+                            src="https://maps.google.com/maps?q=<?php echo urlencode('Bairro ' . $property['neighborhood'] . ', ' . $property['city']); ?>&z=15&output=embed" 
                             allowfullscreen
                              loading="lazy">
                         </iframe>
