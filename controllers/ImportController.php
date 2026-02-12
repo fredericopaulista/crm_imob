@@ -95,12 +95,18 @@ class ImportController {
                         
                         // Download image
                         $imageName = 'import_' . md5($imageUrl) . '.jpg';
-                        $uploadPath = 'assets/uploads/' . $imageName;
+                        $uploadDir = 'assets/uploads/';
+                        
+                        if (!is_dir($uploadDir)) {
+                            mkdir($uploadDir, 0755, true);
+                        }
+                        
+                        $uploadPath = $uploadDir . $imageName;
                         
                         if (!file_exists($uploadPath)) {
                             $imageContent = @file_get_contents($imageUrl);
                             if ($imageContent) {
-                                file_put_contents($uploadPath, $imageContent);
+                                @file_put_contents($uploadPath, $imageContent);
                                 $images[] = $imageName;
                             }
                         } else {
