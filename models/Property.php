@@ -228,5 +228,13 @@ class Property {
         $stmt = $this->conn->prepare("DELETE FROM properties WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
+
+    public function deleteMany($ids) {
+        if (empty($ids)) return false;
+        
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+        $stmt = $this->conn->prepare("DELETE FROM properties WHERE id IN ($placeholders)");
+        return $stmt->execute($ids);
+    }
 }
 

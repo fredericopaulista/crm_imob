@@ -141,4 +141,19 @@ class PropertyController {
             echo "Error deleting property";
         }
     }
+
+    public function bulkDelete() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selected_ids'])) {
+            $ids = array_map('intval', $_POST['selected_ids']);
+            
+            $propertyModel = new Property();
+            if ($propertyModel->deleteMany($ids)) {
+                 header('Location: ' . APP_URL . '/painel/imoveis');
+            } else {
+                 echo "Erro ao excluir imóveis selecionados";
+            }
+        } else {
+            header('Location: ' . APP_URL . '/painel/imoveis');
+        }
+    }
 }

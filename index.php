@@ -57,6 +57,7 @@ $routes = [
     '/painel/imoveis/editar' => 'PropertyController@edit',
     '/painel/imoveis/atualizar' => 'PropertyController@update',
     '/painel/imoveis/excluir' => 'PropertyController@delete',
+    '/painel/imoveis/excluir-massa' => 'PropertyController@bulkDelete',
     '/painel/imoveis/importar' => 'ImportController@index',
     '/painel/imoveis/processar-importacao' => 'ImportController@process',
 

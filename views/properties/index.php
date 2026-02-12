@@ -58,55 +58,105 @@
 <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-300">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Título</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Finalidade</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
-                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                <span class="sr-only">Ações</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 bg-white">
-                        <?php foreach ($properties as $property): ?>
-                        <tr>
-                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><?php echo $property['title']; ?></td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo $property['type']; ?></td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset <?php echo $property['purpose'] == 'sale' ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-blue-50 text-blue-700 ring-blue-600/20'; ?>">
-                                    <?php echo $property['purpose'] == 'sale' ? 'Venda' : 'Aluguel'; ?>
-                                </span>
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                <div class="flex items-center gap-x-2">
-                                    <div class="h-1.5 w-1.5 rounded-full <?php echo $property['status'] == 'available' ? 'bg-emerald-500' : 'bg-gray-400'; ?>"></div>
-                                    <span class="capitalize"><?php 
-                                        $statusLabels = [
-                                            'available' => 'Disponível',
-                                            'sold' => 'Vendido',
-                                            'rented' => 'Alugado',
-                                            'reserved' => 'Reservado',
-                                            'unavailable' => 'Indisponível'
-                                        ];
-                                        echo $statusLabels[$property['status']] ?? ucfirst($property['status']);
-                                    ?></span>
-                                </div>
-                            </td>
-                            <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                <a href="<?php echo APP_URL; ?>/painel/imoveis/editar?id=<?php echo $property['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $property['title']; ?></span></a>
-                                <a href="<?php echo APP_URL; ?>/painel/imoveis/excluir?id=<?php echo $property['id']; ?>" class="text-red-600 hover:text-red-900" onclick="return confirm('Tem certeza que deseja excluir este imóvel?');"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $property['title']; ?></span></a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+            <form action="<?php echo APP_URL; ?>/painel/imoveis/excluir-massa" method="POST" id="bulkDeleteForm">
+                <div class="mb-4 flex items-center gap-4" id="bulkActions" style="display: none;">
+                    <button type="submit" class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500" onclick="return confirm('Tem certeza que deseja excluir os imóveis selecionados?');">
+                        <i class="fas fa-trash"></i> Excluir Selecionados
+                    </button>
+                    <span class="text-sm text-gray-500" id="selectedCount">0 selecionados</span>
+                </div>
+
+                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
+                                    <input type="checkbox" id="selectAll" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                </th>
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Título</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Finalidade</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                    <span class="sr-only">Ações</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            <?php foreach ($properties as $property): ?>
+                            <tr>
+                                <td class="relative px-7 sm:w-12 sm:px-6">
+                                    <input type="checkbox" name="selected_ids[]" value="<?php echo $property['id']; ?>" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 property-checkbox">
+                                </td>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><?php echo $property['title']; ?></td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo $property['type']; ?></td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset <?php echo $property['purpose'] == 'sale' ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-blue-50 text-blue-700 ring-blue-600/20'; ?>">
+                                        <?php echo $property['purpose'] == 'sale' ? 'Venda' : 'Aluguel'; ?>
+                                    </span>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    <div class="flex items-center gap-x-2">
+                                        <div class="h-1.5 w-1.5 rounded-full <?php echo $property['status'] == 'available' ? 'bg-emerald-500' : 'bg-gray-400'; ?>"></div>
+                                        <span class="capitalize"><?php 
+                                            $statusLabels = [
+                                                'available' => 'Disponível',
+                                                'sold' => 'Vendido',
+                                                'rented' => 'Alugado',
+                                                'reserved' => 'Reservado',
+                                                'unavailable' => 'Indisponível'
+                                            ];
+                                            echo $statusLabels[$property['status']] ?? ucfirst($property['status']);
+                                        ?></span>
+                                    </div>
+                                </td>
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <a href="<?php echo APP_URL; ?>/painel/imoveis/editar?id=<?php echo $property['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $property['title']; ?></span></a>
+                                    <a href="<?php echo APP_URL; ?>/painel/imoveis/excluir?id=<?php echo $property['id']; ?>" class="text-red-600 hover:text-red-900" onclick="return confirm('Tem certeza que deseja excluir este imóvel?');"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $property['title']; ?></span></a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectAll = document.getElementById('selectAll');
+        const checkboxes = document.querySelectorAll('.property-checkbox');
+        const bulkActions = document.getElementById('bulkActions');
+        const selectedCount = document.getElementById('selectedCount');
+
+        function updateBulkActions() {
+            const count = document.querySelectorAll('.property-checkbox:checked').length;
+            if (count > 0) {
+                bulkActions.style.display = 'flex';
+                selectedCount.textContent = count + ' selecionados';
+            } else {
+                bulkActions.style.display = 'none';
+            }
+        }
+
+        selectAll.addEventListener('change', function() {
+            checkboxes.forEach(cb => {
+                cb.checked = selectAll.checked;
+            });
+            updateBulkActions();
+        });
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                updateBulkActions();
+                if (!this.checked) {
+                    selectAll.checked = false;
+                }
+            });
+        });
+    });
+</script>
