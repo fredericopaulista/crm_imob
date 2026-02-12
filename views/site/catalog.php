@@ -67,42 +67,71 @@ foreach ($properties as $property) {
             <p class="mt-2 text-lg leading-8 text-gray-600">Explore nossa seleção completa de imóveis.</p>
         </div>
 
-        <!-- Filters (Mockup) -->
-        <div class="bg-gray-50 rounded-xl p-6 mb-12 shadow-sm border border-gray-100">
-            <form class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <select name="city" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" onchange="this.form.submit()">
-                    <option value="">Cidade</option>
-                    <?php foreach ($cities as $city): ?>
-                        <option value="<?php echo htmlspecialchars($city); ?>" <?php echo ($filters['city'] ?? '') == $city ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($city); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+        <!-- Filters (Redesigned) -->
+        <div class="bg-white rounded-2xl p-6 mb-12 shadow-lg border border-gray-100">
+            <form class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 
-                <select name="neighborhood" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                    <option value="">Bairro</option>
-                    <?php foreach ($neighborhoods as $neighborhood): ?>
-                        <option value="<?php echo htmlspecialchars($neighborhood); ?>" <?php echo ($filters['neighborhood'] ?? '') == $neighborhood ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($neighborhood); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <!-- City Filter -->
+                <div class="relative group">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fas fa-city text-gray-400 group-hover:text-indigo-500 transition-colors"></i>
+                    </div>
+                    <select name="city" class="block w-full rounded-lg border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all shadow-sm group-hover:ring-indigo-200" onchange="this.form.submit()">
+                        <option value="">Cidade</option>
+                        <?php foreach ($cities as $city): ?>
+                            <option value="<?php echo htmlspecialchars($city); ?>" <?php echo ($filters['city'] ?? '') == $city ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($city); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                
+                <!-- Neighborhood Filter -->
+                <div class="relative group">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fas fa-map-marker-alt text-gray-400 group-hover:text-indigo-500 transition-colors"></i>
+                    </div>
+                    <select name="neighborhood" class="block w-full rounded-lg border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all shadow-sm group-hover:ring-indigo-200">
+                        <option value="">Bairro</option>
+                        <?php foreach ($neighborhoods as $neighborhood): ?>
+                            <option value="<?php echo htmlspecialchars($neighborhood); ?>" <?php echo ($filters['neighborhood'] ?? '') == $neighborhood ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($neighborhood); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
-                <select name="type" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                    <option value="">Tipo de Imóvel</option>
-                    <option value="Casa" <?php echo ($filters['type'] ?? '') == 'Casa' ? 'selected' : ''; ?>>Casa</option>
-                    <option value="Apartamento" <?php echo ($filters['type'] ?? '') == 'Apartamento' ? 'selected' : ''; ?>>Apartamento</option>
-                    <option value="Terreno" <?php echo ($filters['type'] ?? '') == 'Terreno' ? 'selected' : ''; ?>>Terreno</option>
-                    <option value="Comercial" <?php echo ($filters['type'] ?? '') == 'Comercial' ? 'selected' : ''; ?>>Comercial</option>
-                </select>
+                <!-- Type Filter -->
+                <div class="relative group">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fas fa-home text-gray-400 group-hover:text-indigo-500 transition-colors"></i>
+                    </div>
+                    <select name="type" class="block w-full rounded-lg border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all shadow-sm group-hover:ring-indigo-200">
+                        <option value="">Tipo de Imóvel</option>
+                        <option value="Casa" <?php echo ($filters['type'] ?? '') == 'Casa' ? 'selected' : ''; ?>>Casa</option>
+                        <option value="Apartamento" <?php echo ($filters['type'] ?? '') == 'Apartamento' ? 'selected' : ''; ?>>Apartamento</option>
+                        <option value="Terreno" <?php echo ($filters['type'] ?? '') == 'Terreno' ? 'selected' : ''; ?>>Terreno</option>
+                        <option value="Comercial" <?php echo ($filters['type'] ?? '') == 'Comercial' ? 'selected' : ''; ?>>Comercial</option>
+                    </select>
+                </div>
                 
-                <select name="purpose" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                    <option value="">Finalidade</option>
-                    <option value="sale" <?php echo ($filters['status'] ?? '') == 'sale' ? 'selected' : ''; ?>>Venda</option>
-                    <option value="rent" <?php echo ($filters['status'] ?? '') == 'rent' ? 'selected' : ''; ?>>Aluguel</option>
-                </select>
+                <!-- Purpose Filter -->
+                <div class="relative group">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fas fa-tag text-gray-400 group-hover:text-indigo-500 transition-colors"></i>
+                    </div>
+                    <select name="purpose" class="block w-full rounded-lg border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all shadow-sm group-hover:ring-indigo-200">
+                        <option value="">Finalidade</option>
+                        <option value="sale" <?php echo ($filters['status'] ?? '') == 'sale' ? 'selected' : ''; ?>>Venda</option>
+                        <option value="rent" <?php echo ($filters['status'] ?? '') == 'rent' ? 'selected' : ''; ?>>Aluguel</option>
+                    </select>
+                </div>
                 
-                <button type="submit" class="bg-indigo-600 text-white rounded-md px-4 py-2 hover:bg-indigo-700 transition-colors">Filtrar</button>
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-indigo-600 text-white rounded-lg px-4 py-3 font-semibold hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    <i class="fas fa-filter"></i> 
+                    <span>Filtrar</span>
+                </button>
             </form>
         </div>
 
