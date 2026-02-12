@@ -57,6 +57,33 @@
 </script>
 <div class="bg-white">
     <div class="pt-6">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-6">
+            <!-- Breadcrumb -->
+            <nav class="flex" aria-label="Breadcrumb">
+              <ol role="list" class="flex items-center space-x-4">
+                <li>
+                  <div>
+                    <a href="<?php echo APP_URL; ?>" class="text-gray-400 hover:text-gray-500">
+                      <i class="fas fa-home flex-shrink-0"></i>
+                      <span class="sr-only">Home</span>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400"></i>
+                    <a href="<?php echo APP_URL; ?>/imoveis" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Imóveis</a>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400"></i>
+                    <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" aria-current="page"><?php echo htmlspecialchars($property['title']); ?></a>
+                  </div>
+                </li>
+              </ol>
+            </nav>
+        </div>
         <!-- Image Gallery (Simple) -->
         <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
