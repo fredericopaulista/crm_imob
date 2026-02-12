@@ -28,6 +28,18 @@ class Property {
             $sql .= " AND status = :status";
             $params[':status'] = $filters['status'];
         }
+
+        // Filter by city
+        if (!empty($filters['city'])) {
+            $sql .= " AND city = :city";
+            $params[':city'] = $filters['city'];
+        }
+
+        // Filter by neighborhood
+        if (!empty($filters['neighborhood'])) {
+            $sql .= " AND neighborhood = :neighborhood";
+            $params[':neighborhood'] = $filters['neighborhood'];
+        }
         
         $sql .= " ORDER BY created_at DESC";
         
