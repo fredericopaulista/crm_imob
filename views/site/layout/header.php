@@ -79,7 +79,9 @@
                     </a>
                     <div class="ml-10 hidden space-x-8 lg:block">
                         <a href="<?php echo APP_URL; ?>/" class="text-base font-medium text-gray-500 hover:text-indigo-600 transition-colors">Home</a>
-                        <a href="<?php echo APP_URL; ?>/imoveis" class="text-base font-medium text-gray-500 hover:text-indigo-600 transition-colors">Imóveis</a>
+                        <a href="<?php echo APP_URL; ?>/imoveis" class="text-base font-medium text-gray-500 hover:text-indigo-600 transition-colors">Todos os Imóveis</a>
+                        <a href="<?php echo APP_URL; ?>/imoveis?status=sale" class="text-base font-medium text-gray-500 hover:text-indigo-600 transition-colors">À Venda</a>
+                        <a href="<?php echo APP_URL; ?>/imoveis?status=rent" class="text-base font-medium text-gray-500 hover:text-indigo-600 transition-colors">Para Alugar</a>
                         <a href="<?php echo APP_URL; ?>/contato" class="text-base font-medium text-gray-500 hover:text-indigo-600 transition-colors">Contato</a>
                     </div>
                 </div>
