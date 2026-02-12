@@ -56,10 +56,10 @@ class ImportController {
 
                 // Map Details
                 $price = 0;
-                if (isset($listing->TransactionDetails->SalePrice)) {
-                    $price = (float) $listing->TransactionDetails->SalePrice;
-                } elseif (isset($listing->TransactionDetails->RentPrice)) {
-                    $price = (float) $listing->TransactionDetails->RentPrice;
+                if (isset($listing->Details->ListPrice)) {
+                    $price = (float) $listing->Details->ListPrice;
+                } elseif (isset($listing->Details->RentalPrice)) {
+                    $price = (float) $listing->Details->RentalPrice;
                 }
 
                 // Location
