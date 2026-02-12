@@ -33,16 +33,11 @@ class SiteController {
         $propertyModel = new Property();
         
         if ($slug) {
-            // DEBUG
-            echo "Searching for slug: " . htmlspecialchars($slug) . "<br>";
             $property = $propertyModel->findBySlug($slug);
-            var_dump($property);
         } elseif ($id) {
             $property = $propertyModel->find($id);
         } else {
-            // DEBUG
-            echo "No slug or ID provided<br>";
-             // header('Location: ' . APP_URL . '/imoveis');
+             header('Location: ' . APP_URL . '/imoveis');
             exit;
         }
 
