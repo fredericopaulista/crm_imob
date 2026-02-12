@@ -47,8 +47,12 @@ class Property {
     }
 
     public function update($id, $data) {
+        // Generate slug from title if title is being updated
+        $slug = $this->generateSlug($data['title'], $id);
+        
         $sql = "UPDATE properties SET 
-                title = :title, 
+                title = :title,
+                slug = :slug,
                 type = :type, 
                 purpose = :purpose, 
                 price = :price, 
@@ -67,6 +71,7 @@ class Property {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
             ':title' => $data['title'],
+            ':slug' => $slug,
             ':type' => $data['type'],
             ':purpose' => $data['purpose'],
             ':price' => $data['price'],
