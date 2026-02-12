@@ -5,7 +5,42 @@ $metaTitle = 'Catálogo Completo de Imóveis em SP - Apartamentos, Casas e Mais'
 $metaDescription = 'Explore nosso catálogo completo de imóveis em São Paulo. Apartamentos, casas, coberturas e lofts para venda e aluguel. Filtros avançados para encontrar o imóvel ideal. Confira!';
 $canonicalUrl = APP_URL . '/imoveis';
 $ogImage = APP_URL . '/assets/og-catalog.jpg';
+
+// Generate ItemList Schema
+$itemListElement = [];
+$position = 1;
+foreach ($properties as $property) {
+    $itemListElement[] = [
+        "@type" => "ListItem",
+        "position" => $position++,
+        "url" => APP_URL . '/imovel/' . ($property['slug'] ?? $property['id'])
+    ];
+}
 ?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": <?php echo json_encode($itemListElement); ?>
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "<?php echo APP_URL; ?>"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Imóveis",
+    "item": "<?php echo APP_URL; ?>/imoveis"
+  }]
+}
+</script>
 <div class="bg-white py-12">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center mb-12">
