@@ -224,5 +224,9 @@ class Property {
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
+    public function delete($id) {
+        $stmt = $this->conn->prepare("DELETE FROM properties WHERE id = :id");
+        return $stmt->execute([':id' => $id]);
+    }
 }
 
