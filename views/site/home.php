@@ -22,6 +22,26 @@ $ogImage = APP_URL . '/assets/og-home.jpg';
 </div>
 
 <!-- Featured Properties -->
+<?php
+// Generate ItemList Schema for Featured Properties
+$itemListElement = [];
+$position = 1;
+foreach ($recentProperties as $property) {
+    $itemListElement[] = [
+        "@type" => "ListItem",
+        "position" => $position++,
+        "url" => APP_URL . '/imovel/' . ($property['slug'] ?? $property['id'])
+    ];
+}
+?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Imóveis em Destaque",
+  "itemListElement": <?php echo json_encode($itemListElement); ?>
+}
+</script>
 <div class="bg-white py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
