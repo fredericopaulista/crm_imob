@@ -26,9 +26,9 @@ class SiteController {
     }
 
     public function detail() {
-        // Try slug first, fallback to ID for backwards compatibility
-        $slug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        // Use $_GET directly because filter_input doesn't see values set in index.php
+        $slug = isset($_GET['slug']) ? filter_var($_GET['slug'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
+        $id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : null;
         
         $propertyModel = new Property();
         
