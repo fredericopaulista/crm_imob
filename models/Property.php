@@ -113,19 +113,34 @@ class Property {
      * Generate SEO-friendly slug from title
      */
     public function generateSlug($title, $id = null) {
-        // Convert to lowercase and remove accents
-        $slug = iconv('UTF-8', 'ASCII//TRANSLIT', $title);
-        $slug = strtolower($slug);
+        // Convert to lowercase
+        $slug = mb_strtolower($title, 'UTF-8');
         
-        // Replace spaces and special characters with hyphens
-        $slug = preg_replace('/[^a-z0-9]+/', '-', $slug);
+        // Remove accents and special characters manually for better compatibility
+        $replacements = [
+            '/[áàâãä]/u' => 'a',
+            '/[éèêë]/u' => 'e',
+            '/[íìîï]/u' => 'i',
+            '/[óòôõö]/u' => 'o',
+            '/[úùûü]/u' => 'u',
+            '/[ç]/u' => 'c',
+            '/[ñ]/u' => 'n',
+            '/[^a-z0-9\s-]/' => '', // Remove unwanted chars
+            '/[\s-]+/' => '-'       // Convert spaces and repeated hyphens to single hyphen
+        ];
+        
+        $slug = preg_replace(array_keys($replacements), array_values($replacements), $slug);
         
         // Remove leading/trailing hyphens
         $slug = trim($slug, '-');
         
+        if (empty($slug)) {
+            $slug = 'imovel-' . time();
+        }
+        
         // Check if slug exists
-        $originalSlug = $slug;
         $counter = 1;
+        $originalSlug = $slug;
         
         while ($this->slugExists($slug, $id)) {
             $slug = $originalSlug . '-' . $counter;

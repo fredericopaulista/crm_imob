@@ -10,14 +10,11 @@ echo "🔄 Gerando slugs para imóveis existentes...\n\n";
 
 $count = 0;
 foreach ($properties as $prop) {
-    if (empty($prop['slug'])) {
-        $slug = $property->generateSlug($prop['title'], $prop['id']);
-        $property->updateSlug($prop['id'], $slug);
-        echo "✅ #{$prop['id']}: {$prop['title']} → /{$slug}\n";
-        $count++;
-    } else {
-        echo "ℹ️  #{$prop['id']}: {$prop['title']} → /{$prop['slug']} (já existe)\n";
-    }
+    // Force update all slugs to fix encoding issues
+    $slug = $property->generateSlug($prop['title'], $prop['id']);
+    $property->updateSlug($prop['id'], $slug);
+    echo "✅ #{$prop['id']}: {$prop['title']} → /{$slug}\n";
+    $count++;
 }
 
 echo "\n========================================\n";
