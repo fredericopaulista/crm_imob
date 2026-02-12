@@ -145,11 +145,16 @@
                 
                 <div class="mt-10 border-t border-gray-200 pt-10">
                     <h3 class="text-sm font-medium text-gray-900">Localização</h3>
-                    <div class="mt-4">
-                        <p class="text-sm text-gray-600">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-1.5"></i>
-                            <?php echo $property['address']; ?> - <?php echo $property['neighborhood']; ?>, <?php echo $property['city']; ?>
-                        </p>
+                    <div class="mt-4 h-64 w-full rounded-lg overflow-hidden shadow-sm border border-gray-200">
+                        <iframe 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            style="border:0" 
+                            src="https://maps.google.com/maps?q=<?php echo urlencode($property['neighborhood'] . ', ' . $property['city']); ?>&output=embed" 
+                            allowfullscreen
+                             loading="lazy">
+                        </iframe>
                     </div>
                 </div>
             </div>
