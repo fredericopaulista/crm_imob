@@ -6,9 +6,9 @@ class LeadController {
         $leads = $clientModel->getLeads();
         
         $pageTitle = 'Gestão de Leads';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/leads/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function create() {

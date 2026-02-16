@@ -66,9 +66,9 @@ class CampaignController {
         $broadcasts = $this->getBroadcastHistory();
         
         $pageTitle = 'Campanhas de Marketing';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/campaigns/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function import() {

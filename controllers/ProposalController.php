@@ -6,9 +6,9 @@ class ProposalController {
         $proposals = $proposalModel->getAll();
         
         $pageTitle = 'Gestão de Propostas';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/proposals/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function create() {

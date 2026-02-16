@@ -1,28 +1,33 @@
 <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900">Imóveis</h1>
-        <p class="mt-2 text-sm text-gray-700">Lista completa de imóveis cadastrados no sistema.</p>
+        <h1 class="text-xl font-bold leading-6 text-gray-900">Imóveis</h1>
+        <p class="mt-2 text-sm text-gray-500">Lista completa de imóveis cadastrados no sistema.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="<?php echo APP_URL; ?>/painel/imoveis/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            <i class="fas fa-plus mr-1"></i> Novo Imóvel
+        <a href="<?php echo APP_URL; ?>/painel/imoveis/novo" class="block rounded-xl bg-brand-600 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-brand-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 transition-all hover:-translate-y-0.5 pointer-events-auto cursor-pointer flex items-center justify-center gap-2">
+            <i class="fas fa-plus"></i> Novo Imóvel
         </a>
     </div>
 </div>
 
 <!-- Search Filter -->
-<div class="mt-6 bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-lg p-4">
-    <form method="GET" action="<?php echo APP_URL; ?>/painel/imoveis" class="grid grid-cols-1 gap-4 sm:grid-cols-4">
+<div class="mt-8 bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-2xl p-6">
+    <form method="GET" action="<?php echo APP_URL; ?>/painel/imoveis" class="grid grid-cols-1 gap-6 sm:grid-cols-4">
         <div>
-            <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Buscar por Nome</label>
-            <input type="text" name="search" id="search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" 
-                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border" 
+            <label for="search" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Buscar por Nome</label>
+            <div class="relative">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input type="text" name="search" id="search" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" 
+                   class="block w-full rounded-lg border-0 py-2.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brand-500 sm:text-sm sm:leading-6 bg-gray-50/50" 
                    placeholder="Digite o título...">
+            </div>
         </div>
         
         <div>
-            <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
-            <select name="type" id="type" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+            <label for="type" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Tipo</label>
+            <select name="type" id="type" class="block w-full rounded-lg border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-200 focus:ring-2 focus:ring-inset focus:ring-brand-500 sm:text-sm sm:leading-6 bg-gray-50/50">
                 <option value="">Todos os tipos</option>
                 <option value="Apartamento" <?php echo (isset($_GET['type']) && $_GET['type'] == 'Apartamento') ? 'selected' : ''; ?>>Apartamento</option>
                 <option value="Casa" <?php echo (isset($_GET['type']) && $_GET['type'] == 'Casa') ? 'selected' : ''; ?>>Casa</option>
@@ -33,8 +38,8 @@
         </div>
         
         <div>
-            <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select name="status" id="status" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 border">
+            <label for="status" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Status</label>
+             <select name="status" id="status" class="block w-full rounded-lg border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-200 focus:ring-2 focus:ring-inset focus:ring-brand-500 sm:text-sm sm:leading-6 bg-gray-50/50">
                 <option value="">Todos os status</option>
                 <option value="available" <?php echo (isset($_GET['status']) && $_GET['status'] == 'available') ? 'selected' : ''; ?>>Disponível</option>
                 <option value="sold" <?php echo (isset($_GET['status']) && $_GET['status'] == 'sold') ? 'selected' : ''; ?>>Vendido</option>
@@ -43,11 +48,11 @@
             </select>
         </div>
         
-        <div class="flex items-end gap-2">
-            <button type="submit" class="flex-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                <i class="fas fa-search mr-1"></i> Filtrar
+        <div class="flex items-end gap-3">
+            <button type="submit" class="flex-1 rounded-xl bg-brand-600 px-3 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 transition-all hover:-translate-y-0.5">
+                <i class="fas fa-filter mr-1"></i> Filtrar
             </button>
-            <a href="<?php echo APP_URL; ?>/painel/imoveis" class="rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-300">
+            <a href="<?php echo APP_URL; ?>/painel/imoveis" class="rounded-xl bg-white px-3 py-2.5 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-all">
                 <i class="fas fa-times"></i>
             </a>
         </div>
@@ -59,47 +64,58 @@
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <form action="<?php echo APP_URL; ?>/painel/imoveis/excluir-massa" method="POST" id="bulkDeleteForm">
-                <div class="mb-4 flex items-center gap-4" id="bulkActions" style="display: none;">
-                    <button type="submit" class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500" onclick="return confirm('Tem certeza que deseja excluir os imóveis selecionados?');">
-                        <i class="fas fa-trash"></i> Excluir Selecionados
+                <div class="mb-4 flex items-center gap-4 bg-brand-50 p-4 rounded-xl border border-brand-100" id="bulkActions" style="display: none;">
+                    <button type="submit" class="rounded-lg bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 transition-colors" onclick="return confirm('Tem certeza que deseja excluir os imóveis selecionados?');">
+                        <i class="fas fa-trash mr-1"></i> Excluir Selecionados
                     </button>
-                    <span class="text-sm text-gray-500" id="selectedCount">0 selecionados</span>
+                    <span class="text-sm font-medium text-brand-700" id="selectedCount">0 selecionados</span>
                 </div>
 
-                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-300">
-                        <thead class="bg-gray-50">
+                <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5 sm:rounded-2xl bg-white">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50/50">
                             <tr>
                                 <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
-                                    <input type="checkbox" id="selectAll" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                    <input type="checkbox" id="selectAll" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-600">
                                 </th>
-                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Título</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Finalidade</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Valor</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-xs font-bold uppercase tracking-wide text-gray-500 sm:pl-6">Título</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-gray-500">Tipo</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-gray-500">Finalidade</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-gray-500">Valor</th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-gray-500">Status</th>
                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                     <span class="sr-only">Ações</span>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200 bg-white">
+                        <tbody class="divide-y divide-gray-100 bg-white">
                             <?php foreach ($properties as $property): ?>
-                            <tr>
+                            <tr class="hover:bg-gray-50/50 transition-colors">
                                 <td class="relative px-7 sm:w-12 sm:px-6">
-                                    <input type="checkbox" name="selected_ids[]" value="<?php echo $property['id']; ?>" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 property-checkbox">
+                                    <input type="checkbox" name="selected_ids[]" value="<?php echo $property['id']; ?>" class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-600 property-checkbox">
                                 </td>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><?php echo $property['title']; ?></td>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900 sm:pl-6">
+                                    <?php echo $property['title']; ?>
+                                    <div class="text-xs font-normal text-gray-500 mt-0.5"><?php echo $property['city']; ?></div>
+                                </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><?php echo $property['type']; ?></td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset <?php echo $property['purpose'] == 'sale' ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-blue-50 text-blue-700 ring-blue-600/20'; ?>">
                                         <?php echo $property['purpose'] == 'sale' ? 'Venda' : 'Aluguel'; ?>
                                     </span>
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <div class="flex items-center gap-x-2">
-                                        <div class="h-1.5 w-1.5 rounded-full <?php echo $property['status'] == 'available' ? 'bg-emerald-500' : 'bg-gray-400'; ?>"></div>
+                                        <div class="h-1.5 w-1.5 rounded-full <?php 
+                                            echo match($property['status']) {
+                                                'available' => 'bg-emerald-500',
+                                                'sold' => 'bg-gray-500',
+                                                'rented' => 'bg-blue-500',
+                                                'unavailable' => 'bg-red-500',
+                                                default => 'bg-gray-300'
+                                            };
+                                        ?>"></div>
                                         <span class="capitalize"><?php 
                                             $statusLabels = [
                                                 'available' => 'Disponível',
@@ -113,8 +129,14 @@
                                     </div>
                                 </td>
                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <a href="<?php echo APP_URL; ?>/painel/imoveis/editar?id=<?php echo $property['id']; ?>" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i><span class="sr-only">Editar, <?php echo $property['title']; ?></span></a>
-                                    <a href="<?php echo APP_URL; ?>/painel/imoveis/excluir?id=<?php echo $property['id']; ?>" class="text-red-600 hover:text-red-900" onclick="return confirm('Tem certeza que deseja excluir este imóvel?');"><i class="fas fa-trash"></i><span class="sr-only">Excluir, <?php echo $property['title']; ?></span></a>
+                                    <div class="flex items-center justify-end gap-2">
+                                        <a href="<?php echo APP_URL; ?>/painel/imoveis/editar?id=<?php echo $property['id']; ?>" class="rounded-lg p-1.5 text-gray-400 hover:bg-gray-50 hover:text-brand-600 transition-colors" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="<?php echo APP_URL; ?>/painel/imoveis/excluir?id=<?php echo $property['id']; ?>" class="rounded-lg p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" onclick="return confirm('Tem certeza que deseja excluir este imóvel?');" title="Excluir">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

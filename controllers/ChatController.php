@@ -31,9 +31,9 @@ class ChatController {
         }
 
         $pageTitle = 'Atendimento WhatsApp';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/whatsapp/chat.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function settings() {
@@ -52,9 +52,9 @@ class ChatController {
         }
 
         $pageTitle = 'Conexão WhatsApp (API)';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/whatsapp/settings.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function sendMessage() {

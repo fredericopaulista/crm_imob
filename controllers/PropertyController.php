@@ -14,9 +14,9 @@ class PropertyController {
         $properties = $propertyModel->getAll($filters);
         
         $pageTitle = 'Gestão de Imóveis';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/properties/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function create() {

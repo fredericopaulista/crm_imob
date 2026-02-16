@@ -23,9 +23,9 @@ class RoleController {
         $roles = $roleModel->getAll();
 
         $pageTitle = 'Controle de Perfis';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/roles/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function create() {

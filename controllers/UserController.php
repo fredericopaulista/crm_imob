@@ -14,9 +14,9 @@ class UserController {
         $users = $userModel->getAll();
 
         $pageTitle = 'Controle de Usuários';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/users/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function create() {

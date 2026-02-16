@@ -6,9 +6,9 @@ class ClientController {
         $clients = $clientModel->getClients(); // Only buyers and tenants
         
         $pageTitle = 'Gestão de Clientes';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/clients/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function create() {

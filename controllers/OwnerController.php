@@ -6,9 +6,9 @@ class OwnerController {
         $owners = $clientModel->getOwners();
         
         $pageTitle = 'Gestão de Proprietários';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/owners/index.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function create() {
