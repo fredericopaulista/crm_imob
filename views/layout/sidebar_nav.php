@@ -3,7 +3,8 @@
         <?php 
             $currentParams = explode('/', isset($_GET['url']) ? $_GET['url'] : 'dashboard'); 
             $currentParams = array_values(array_filter($currentParams));
-            $activeModule = isset($currentParams[0]) && $currentParams[0] == 'painel' && isset($currentParams[1]) ? $currentParams[1] : (isset($currentParams[0]) ? $currentParams[0] : 'dashboard');
+            // Adjust logic for /painel/module URLs
+            $activeModule = isset($currentParams[1]) ? $currentParams[1] : (isset($currentParams[0]) ? $currentParams[0] : 'dashboard');
             if ($activeModule == 'painel') $activeModule = 'dashboard';
         ?>
 
@@ -23,9 +24,15 @@
             <div class="text-xs font-semibold leading-6 text-gray-400 uppercase tracking-wider mb-2 mt-6 px-2">Gestão</div>
             <ul role="list" class="-mx-2 space-y-1">
                 <li>
-                    <a href="<?php echo APP_URL; ?>/painel/imoveis" class="<?php echo ($activeModule == 'imoveis') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
+                    <a href="<?php echo APP_URL; ?>/painel/imoveis" class="<?php echo ($activeModule == 'imoveis' && !isset($currentParams[2])) ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
                         <i class="fas fa-building w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
                         Imóveis
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo APP_URL; ?>/painel/imoveis/importar" class="<?php echo ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
+                        <i class="fas fa-file-import w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
+                        Importar XML
                     </a>
                 </li>
                 <li>
@@ -77,13 +84,35 @@
 
         <li class="mt-auto">
              <div class="h-px bg-white/5 my-4 mx-2"></div>
+             
+             <!-- System & Settings -->
+             <div class="text-xs font-semibold leading-6 text-gray-500 uppercase tracking-wider mb-2 px-2">Sistema</div>
              <ul role="list" class="-mx-2 space-y-1">
+                <?php if (can('manage_users')): ?>
+                <li>
+                    <a href="<?php echo APP_URL; ?>/painel/usuarios" class="<?php echo ($activeModule == 'usuarios') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
+                        <i class="fas fa-users-cog w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
+                        Usuários
+                    </a>
+                </li>
+                <?php endif; ?>
+                
+                <?php if (can('manage_roles')): ?>
+                <li>
+                    <a href="<?php echo APP_URL; ?>/painel/perfis" class="<?php echo ($activeModule == 'perfis') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
+                        <i class="fas fa-id-badge w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
+                        Perfis e Permissões
+                    </a>
+                </li>
+                <?php endif; ?>
+
                 <li>
                     <a href="<?php echo APP_URL; ?>/painel/configuracoes" class="<?php echo ($activeModule == 'configuracoes') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
                         <i class="fas fa-cog w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
-                        Configurações
+                        Configurações SEO
                     </a>
                 </li>
+
                 <li>
                     <a href="<?php echo APP_URL; ?>/acesso/sair" class="text-gray-400 hover:text-white hover:bg-red-500/10 hover:text-red-400 group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
                         <i class="fas fa-sign-out-alt w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
