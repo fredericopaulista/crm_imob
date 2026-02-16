@@ -36,9 +36,9 @@ class SiteController {
         $neighborhoods = $propertyModel->getNeighborhoods($filters['city'] ?? null);
         
         $pageTitle = 'Imóveis - Correta Pro';
-        require_once 'views/site/layout/header.php';
+        require_once 'views/layout/header_public.php';
         require_once 'views/site/catalog.php';
-        require_once 'views/site/layout/footer.php';
+        require_once 'views/layout/footer_public.php';
     }
 
     public function detail() {
@@ -63,16 +63,16 @@ class SiteController {
         }
         
         $pageTitle = $property['title'] . ' - Correta Pro';
-        require_once 'views/site/layout/header.php';
+        require_once 'views/layout/header_public.php';
         require_once 'views/site/detail.php';
-        require_once 'views/site/layout/footer.php';
+        require_once 'views/layout/footer_public.php';
     }
 
     public function contact() {
         $pageTitle = 'Contato - Correta Pro';
-        require_once 'views/site/layout/header.php';
+        require_once 'views/layout/header_public.php';
         require_once 'views/site/contact.php';
-        require_once 'views/site/layout/footer.php';
+        require_once 'views/layout/footer_public.php';
     }
     
     public function sendContact() {
