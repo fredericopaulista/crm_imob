@@ -6,7 +6,10 @@ class AuthController {
             header('Location: ' . APP_URL . '/painel');
             exit;
         }
+        $pageTitle = 'Login';
+        require_once 'views/layout/header_public.php';
         require_once 'views/auth/login.php';
+        require_once 'views/layout/footer_public.php';
     }
 
     public function authenticate() {

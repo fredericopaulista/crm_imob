@@ -1,0 +1,8 @@
+[Fri Feb 13 16:58:04 2026] PHP Warning:  PHP Startup: Unable to load dynamic library 'intl' (tried: /usr/local/lib/php/pecl/20230831/intl (dlopen(/usr/local/lib/php/pecl/20230831/intl, 0x0009): tried: '/usr/local/lib/php/pecl/20230831/intl' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/usr/local/lib/php/pecl/20230831/intl' (no such file), '/usr/local/lib/php/pecl/20230831/intl' (no such file)), /usr/local/lib/php/pecl/20230831/intl.so (dlopen(/usr/local/lib/php/pecl/20230831/intl.so, 0x0009): tried: '/usr/local/lib/php/pecl/20230831/intl.so' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/usr/local/lib/php/pecl/20230831/intl.so' (no such file), '/usr/local/lib/php/pecl/20230831/intl.so' (no such file))) in Unknown on line 0
+[Fri Feb 13 16:58:05 2026] PHP 8.3.25 Development Server (http://127.0.0.1:8000) started
+[Fri Feb 13 16:58:49 2026] 127.0.0.1:49701 Accepted
+[Fri Feb 13 16:58:50 2026] 127.0.0.1:49701 [200]: HEAD /
+[Fri Feb 13 16:58:50 2026] 127.0.0.1:49701 Closing
+[Fri Feb 13 16:59:28 2026] 127.0.0.1:49712 Accepted
+[Fri Feb 13 16:59:28 2026] 127.0.0.1:49712 Closed without sending a request; it was probably just an unused speculative preconnection
+[Fri Feb 13 16:59:28 2026] 127.0.0.1:49712 Closing

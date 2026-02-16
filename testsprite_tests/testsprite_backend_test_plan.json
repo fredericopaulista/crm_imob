@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC001",
+    "title": "test_user_login_with_valid_credentials",
+    "description": "Verify that a user can successfully log in. Use POST request to '/acesso/autenticar' with 'email' (admin@imobhub.com) and 'password' (password) fields. Expect a redirect (302) to '/painel' or a successful session creation."
+  },
+  {
+    "id": "TC002",
+    "title": "test_create_property_with_valid_data",
+    "description": "Verify that a property can be created. First, login as admin. Then use POST request to '/painel/imoveis/salvar'. Payload must include: 'title' (Test Property), 'type' (Casa), 'purpose' (sale), 'price' (500000), 'address' (Rua Teste), 'neighborhood' (Centro), 'city' (São Paulo), 'status' (available), 'owner_id' (1), and valid 'images' array (mock file upload). Expect redirect to '/painel/imoveis'."
+  },
+  {
+    "id": "TC003",
+    "title": "test_import_clients_with_valid_csv",
+    "description": "Verify that clients can be imported. First, login as admin. Then use POST request to '/painel/marketing/processar-importacao' with a 'csv_file' upload containing 'Name,Phone,Email'. Expect redirect with success parameter."
+  },
+  {
+    "id": "TC004",
+    "title": "test_create_proposal_for_available_property",
+    "description": "Verify that a new proposal can be created. First, login as admin. Then use POST request to '/painel/propostas/salvar' with: 'client_id' (1), 'property_id' (1), 'value' (450000), 'conditions' (Cash), 'observations' (Test). Expect redirect to '/painel/propostas'."
+  },
+  {
+    "id": "TC005",
+    "title": "test_send_whatsapp_campaign_with_valid_recipients",
+    "description": "Verify that a WhatsApp campaign can be created. First, login as admin. Then use POST request to '/painel/marketing/enviar-disparo'. This is a JSON endpoint. Send JSON body: {'client_id': 1, 'message': 'Test Message'}. IMPORTANT: Mock the time or ensure test runs within business hours (08:00-18:00) as checked in controller. Expect JSON response {'status': 'success'}."
+  },
+  {
+    "id": "TC006",
+    "title": "test_public_site_property_search_with_filters",
+    "description": "Verify that the public site property catalogue can be filtered. Use GET request to '/imoveis?city=São%20Paulo&type=Casa'. Check if the response status is 200. No authentication required."
+  },
+  {
+    "id": "TC007",
+    "title": "test_admin_role_creation_and_permission_assignment",
+    "description": "Verify that an admin user can create a new role. First, login as admin. Then use POST request to '/painel/perfis/salvar' with 'name' (New Role), 'description' (Test Role) and 'permissions' array (e.g. ['view_dashboard']). Expect redirect to '/painel/perfis'."
+  }
+]

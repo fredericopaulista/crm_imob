@@ -16,8 +16,8 @@ class DashboardController {
         $whatsappConnected = !empty($waSettings['waba_id']) && !empty($waSettings['phone_number_id']) && !empty($waSettings['access_token']);
 
         $pageTitle = 'Painel Geral';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/dashboard.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 }

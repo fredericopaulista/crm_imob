@@ -1,0 +1,63 @@
+{
+    "tech_stack": [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "HTML",
+        "CSS"
+    ],
+    "features": [
+        {
+            "name": "Authentication",
+            "description": "User login, registration, and role management.",
+            "files": [
+                "controllers/AuthController.php",
+                "models/User.php",
+                "controllers/UserController.php",
+                "controllers/RoleController.php",
+                "models/Role.php"
+            ]
+        },
+        {
+            "name": "Property Management",
+            "description": "CRUD operations for properties, including image management.",
+            "files": [
+                "controllers/PropertyController.php",
+                "models/Property.php"
+            ]
+        },
+        {
+            "name": "Client Management",
+            "description": "CRM functionality for managing clients and leads.",
+            "files": [
+                "controllers/ClientController.php",
+                "models/Client.php",
+                "controllers/LeadController.php"
+            ]
+        },
+        {
+            "name": "Proposals",
+            "description": "Managing sales and rental proposals.",
+            "files": [
+                "controllers/ProposalController.php",
+                "models/Proposal.php"
+            ]
+        },
+        {
+            "name": "Marketing & WhatsApp",
+            "description": "Campaign management and WhatsApp integration.",
+            "files": [
+                "controllers/CampaignController.php",
+                "models/WhatsAppService.php",
+                "controllers/ChatController.php"
+            ]
+        },
+        {
+            "name": "Public Site",
+            "description": "Public facing website for listing properties.",
+            "files": [
+                "controllers/SiteController.php"
+            ]
+        }
+    ]
+}

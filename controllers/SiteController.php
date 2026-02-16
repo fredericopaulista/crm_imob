@@ -10,9 +10,9 @@ class SiteController {
         $recentProperties = array_slice($allProperties, 0, 6);
         
         $pageTitle = 'Home - Correta Pro';
-        require_once 'views/site/layout/header.php';
+        require_once 'views/layout/header_public.php';
         require_once 'views/site/home.php';
-        require_once 'views/site/layout/footer.php';
+        require_once 'views/layout/footer_public.php';
     }
 
     public function catalog() {
