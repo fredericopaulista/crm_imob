@@ -31,16 +31,20 @@ class User {
     }
 
     public function update($id, $data) {
-        $sql = "UPDATE users SET name = :name, email = :email, role_id = :role_id WHERE id = :id";
+        $sql = "UPDATE users SET name = :name, email = :email, role_id = :role_id, bio = :bio, avatar = :avatar, social_linkedin = :social_linkedin, social_instagram = :social_instagram WHERE id = :id";
         
         if (!empty($data['password'])) {
-            $sql = "UPDATE users SET name = :name, email = :email, role_id = :role_id, password = :password WHERE id = :id";
+            $sql = "UPDATE users SET name = :name, email = :email, role_id = :role_id, password = :password, bio = :bio, avatar = :avatar, social_linkedin = :social_linkedin, social_instagram = :social_instagram WHERE id = :id";
         }
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':name', $data['name']);
         $stmt->bindParam(':email', $data['email']);
         $stmt->bindParam(':role_id', $data['role_id']);
+        $stmt->bindParam(':bio', $data['bio']);
+        $stmt->bindParam(':avatar', $data['avatar']);
+        $stmt->bindParam(':social_linkedin', $data['social_linkedin']);
+        $stmt->bindParam(':social_instagram', $data['social_instagram']);
         $stmt->bindParam(':id', $id);
 
         if (!empty($data['password'])) {
@@ -75,7 +79,7 @@ class User {
     }
 
     public function getUserById($id) {
-        $stmt = $this->conn->prepare("SELECT id, name, email, role_id, role as old_role FROM users WHERE id = :id");
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();

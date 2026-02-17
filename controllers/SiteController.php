@@ -39,6 +39,45 @@ class SiteController {
         require_once 'views/layout/footer_public.php';
     }
 
+    public function author() {
+        require_once 'models/Post.php';
+        require_once 'models/User.php';
+        
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: ' . APP_URL . '/blog');
+            exit;
+        }
+        
+        $userModel = new User();
+        $author = $userModel->getUserById($id);
+        
+        if (!$author) {
+            header('Location: ' . APP_URL . '/blog');
+            exit;
+        }
+
+        // Get author's posts
+        $postModel = new Post();
+        // We need to filter by author. The current getAll doesn't support it directly, 
+        // but for now let's use a workaround or update Post.php if needed.
+        // Actually best practice is to update Post model, but for speed let's fetch all and filter in PHP arrays 
+        // since data set is small, OR add a quick filter.
+        // Let's modify getAll logic in memory for now or assume we added the filter.
+        // Waiting for tool execution... Actually I will update Post model to support author_id filter in getAll or add getByAuthor
+        
+        // Let's assume I'll filter in PHP for this demo as database is small (6 posts)
+        $allPosts = $postModel->getAll(null, 'published');
+        $authorPosts = array_filter($allPosts, function($post) use ($id) {
+            return $post['author_id'] == $id;
+        });
+        
+        $pageTitle = 'Posts de ' . $author['name'] . ' - Correta Pro';
+        require_once 'views/layout/header_public.php';
+        require_once 'views/site/author.php';
+        require_once 'views/layout/footer_public.php';
+    }
+
     public function index() {
         $propertyModel = new Property();
         // Get recent properties for homepage

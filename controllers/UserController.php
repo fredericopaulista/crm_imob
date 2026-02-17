@@ -94,17 +94,37 @@ class UserController {
                 exit;
             }
 
+            // Handle Avatar Upload
+            $userModel = new User();
+            $currentUser = $userModel->getUserById($id);
+            $avatar = $currentUser['avatar'] ?? null;
+
+            if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = 'assets/uploads/avatars/';
+                if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+                
+                $ext = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+                $filename = 'avatar_' . $id . '_' . time() . '.' . $ext;
+                
+                if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadDir . $filename)) {
+                    $avatar = $filename;
+                }
+            }
+
             $data = [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
-                'role_id' => $_POST['role_id']
+                'role_id' => $_POST['role_id'],
+                'bio' => $_POST['bio'] ?? null,
+                'avatar' => $avatar,
+                'social_linkedin' => $_POST['social_linkedin'] ?? null,
+                'social_instagram' => $_POST['social_instagram'] ?? null
             ];
 
             if (!empty($_POST['password'])) {
                 $data['password'] = $_POST['password'];
             }
 
-            $userModel = new User();
             if ($userModel->update($id, $data)) {
                 header('Location: ' . APP_URL . '/painel/usuarios');
             } else {

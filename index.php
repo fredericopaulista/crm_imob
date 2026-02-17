@@ -180,6 +180,11 @@ if (array_key_exists($request, $routes)) {
     $_GET['slug'] = $matches[1];
     $controllerName = 'SiteController';
     $method = 'post';
+} elseif (preg_match('#^/blog/autor/([0-9]+)$#', $request, $matches)) {
+    // Regex match for /blog/autor/{id}
+    $_GET['id'] = $matches[1];
+    $controllerName = 'SiteController';
+    $method = 'author';
 } else {
     http_response_code(404);
     echo "Página não encontrada ($request)";
