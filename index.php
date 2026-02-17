@@ -48,7 +48,12 @@ $routes = [
     '/imoveis' => 'SiteController@catalog',
     '/imovel' => 'SiteController@detail', // regex handled below for slugs
     '/contato' => 'SiteController@contact',
-    '/enviar-contato' => 'SiteController@sendContact',
+    '/enviar-contato' => 'ContactController@send',
+    
+    // Pages
+    '/termos-de-uso' => 'SiteController@page',
+    '/politica-de-privacidade' => 'SiteController@page',
+    '/cookies' => 'SiteController@page',
 
     // --- ADMIN ROUTES (/painel) ---
     // Dashboard
@@ -136,6 +141,11 @@ $routes = [
     '/painel/configuracoes/robots/download' => 'SettingsController@downloadRobots',
     '/painel/configuracoes/empresa' => 'SettingsController@company',
     '/painel/configuracoes/empresa/salvar' => 'SettingsController@updateCompany',
+
+    // Pages ( Conteúdo )
+    '/painel/paginas' => 'PageController@index',
+    '/painel/paginas/editar' => 'PageController@edit',
+    '/painel/paginas/atualizar' => 'PageController@update',
 
     // Blog (Admin)
     '/painel/blog' => 'BlogController@index',

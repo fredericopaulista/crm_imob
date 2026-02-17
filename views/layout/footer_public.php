@@ -90,9 +90,9 @@
                     &copy; <?php echo date('Y'); ?> <?php echo company_name(); ?>. Todos os direitos reservados.
                 </p>
                 <div class="flex gap-6 text-xs text-gray-500">
-                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
-                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
-                    <a href="#" class="hover:text-white transition-colors">Cookies</a>
+                    <a href="<?php echo APP_URL; ?>/termos-de-uso" class="hover:text-white transition-colors">Termos de Uso</a>
+                    <a href="<?php echo APP_URL; ?>/politica-de-privacidade" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="<?php echo APP_URL; ?>/cookies" class="hover:text-white transition-colors">Cookies</a>
                     <a href="<?php echo APP_URL; ?>/sitemap" class="hover:text-white transition-colors">Sitemap</a>
                 </div>
             </div>

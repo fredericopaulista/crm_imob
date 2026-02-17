@@ -151,6 +151,23 @@ class SiteController {
         require_once 'views/site/contact.php';
         require_once 'views/layout/footer_public.php';
     }
+
+    public function page($slug) {
+        require_once 'models/Page.php'; // Assuming Page model exists
+        $pageModel = new Page();
+        $page = $pageModel->getBySlug($slug);
+        
+        if (!$page) {
+            header("HTTP/1.0 404 Not Found");
+            require_once 'views/404.php'; // Ensure you have a 404 view or redirect
+            exit;
+        }
+        
+        $pageTitle = $page['title'] . ' - ' . company_name();
+        require_once 'views/layout/header_public.php';
+        require_once 'views/site/page.php';
+        require_once 'views/layout/footer_public.php';
+    }
     
     public function sendContact() {
         // Handle contact form submission
