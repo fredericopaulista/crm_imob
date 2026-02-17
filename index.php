@@ -133,7 +133,21 @@ $routes = [
     '/painel/configuracoes/sitemap' => 'SettingsController@generateSitemap',
     '/painel/configuracoes/robots' => 'SettingsController@generateRobots',
     '/painel/configuracoes/sitemap/download' => 'SettingsController@downloadSitemap',
+    '/painel/configuracoes/sitemap/download' => 'SettingsController@downloadSitemap',
     '/painel/configuracoes/robots/download' => 'SettingsController@downloadRobots',
+
+    // Blog (Admin)
+    '/painel/blog' => 'BlogController@index',
+    '/painel/blog/novo' => 'BlogController@create',
+    '/painel/blog/salvar' => 'BlogController@store',
+    '/painel/blog/editar' => 'BlogController@edit',
+    '/painel/blog/atualizar' => 'BlogController@update',
+    '/painel/blog/excluir' => 'BlogController@delete',
+
+    // Blog (Public)
+    '/blog' => 'SiteController@blog',
+    '/blog/post' => 'SiteController@post', // This likely won't be hit due to regex below, but good to have
+
     
     // Auth (Keep as is, or move to /painel/login?) - Keeping /acesso for now
     '/acesso/login' => 'AuthController@login',
@@ -161,6 +175,11 @@ if (array_key_exists($request, $routes)) {
     }
     $controllerName = 'SiteController';
     $method = 'detail';
+} elseif (preg_match('#^/blog/([a-z0-9-]+)$#', $request, $matches)) {
+    // Regex match for /blog/{slug}
+    $_GET['slug'] = $matches[1];
+    $controllerName = 'SiteController';
+    $method = 'post';
 } else {
     http_response_code(404);
     echo "Página não encontrada ($request)";

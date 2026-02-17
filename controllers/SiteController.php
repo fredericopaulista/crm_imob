@@ -2,6 +2,43 @@
 
 class SiteController {
     
+    public function blog() {
+        require_once 'models/Post.php';
+        $postModel = new Post();
+        $posts = $postModel->getAll(null, 'published');
+        
+        $pageTitle = 'Blog - Correta Pro';
+        require_once 'views/layout/header_public.php';
+        require_once 'views/site/blog.php';
+        require_once 'views/layout/footer_public.php';
+    }
+
+    public function post() {
+        require_once 'models/Post.php';
+        $slug = $_GET['slug'] ?? null;
+        
+        if (!$slug) {
+            header('Location: ' . APP_URL . '/blog');
+            exit;
+        }
+        
+        $postModel = new Post();
+        $post = $postModel->findBySlug($slug);
+        
+        if (!$post || $post['status'] !== 'published') {
+            header('Location: ' . APP_URL . '/blog');
+            exit;
+        }
+        
+        $pageTitle = $post['title'] . ' - Correta Pro';
+        
+        // SEO meta tags could be injected here if header supports it
+        
+        require_once 'views/layout/header_public.php';
+        require_once 'views/site/post.php';
+        require_once 'views/layout/footer_public.php';
+    }
+
     public function index() {
         $propertyModel = new Property();
         // Get recent properties for homepage
