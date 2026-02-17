@@ -136,6 +136,11 @@
                                 <i class="fas fa-building w-4 mr-2 text-xs"></i> Dados da Empresa
                             </a>
                         </li>
+                        <li>
+                            <a href="<?php echo APP_URL; ?>/painel/paginas" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'paginas') ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
+                                <i class="fas fa-file-alt w-4 mr-2 text-xs"></i> Páginas Legais
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
