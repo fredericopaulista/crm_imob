@@ -168,6 +168,19 @@ class SiteController {
         require_once 'views/site/page.php';
         require_once 'views/layout/footer_public.php';
     }
+
+    // Wrapper methods for static routes
+    public function terms() {
+        $this->page('termos-de-uso');
+    }
+
+    public function privacy() {
+        $this->page('politica-de-privacidade');
+    }
+
+    public function cookies() {
+        $this->page('cookies');
+    }
     
     public function sendContact() {
         // Handle contact form submission

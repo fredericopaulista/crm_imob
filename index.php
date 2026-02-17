@@ -51,9 +51,9 @@ $routes = [
     '/enviar-contato' => 'ContactController@send',
     
     // Pages
-    '/termos-de-uso' => 'SiteController@page',
-    '/politica-de-privacidade' => 'SiteController@page',
-    '/cookies' => 'SiteController@page',
+    '/termos-de-uso' => 'SiteController@terms',
+    '/politica-de-privacidade' => 'SiteController@privacy',
+    '/cookies' => 'SiteController@cookies',
 
     // --- ADMIN ROUTES (/painel) ---
     // Dashboard
