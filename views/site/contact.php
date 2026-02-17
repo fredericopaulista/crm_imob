@@ -39,7 +39,7 @@ $ogImage = APP_URL . '/assets/og-contact.jpg';
                 </div>
                 <div>
                      <p class="font-semibold text-gray-900">Email</p>
-                     <p class="text-gray-500 hover:text-brand-600 transition-colors">contato@corretapro.com.br</p>
+                     <p class="text-gray-500 hover:text-brand-600 transition-colors"><?php echo get_setting('company_email', 'contato@corretapro.com.br'); ?></p>
                 </div>
             </div>
              <div class="flex items-center gap-4 group">
@@ -48,7 +48,7 @@ $ogImage = APP_URL . '/assets/og-contact.jpg';
                 </div>
                 <div>
                     <p class="font-semibold text-gray-900">Telefone</p>
-                    <p class="text-gray-500 hover:text-brand-600 transition-colors">(11) 99999-9999</p>
+                    <p class="text-gray-500 hover:text-brand-600 transition-colors"><?php echo get_setting('company_phone', '(11) 99999-9999'); ?></p>
                 </div>
             </div>
              <div class="flex items-center gap-4 group">
@@ -57,7 +57,7 @@ $ogImage = APP_URL . '/assets/og-contact.jpg';
                 </div>
                 <div>
                      <p class="font-semibold text-gray-900">Endereço</p>
-                     <p class="text-gray-500">Av. Paulista, 1000 - São Paulo, SP</p>
+                     <p class="text-gray-500"><?php echo get_setting('company_address', 'Av. Paulista, 1000 - São Paulo, SP'); ?></p>
                 </div>
             </div>
         </div>

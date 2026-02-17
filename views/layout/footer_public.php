@@ -10,7 +10,7 @@
                         <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white text-sm">
                             <i class="fas fa-home"></i>
                         </div>
-                        <span class="text-xl font-bold text-white tracking-tight">Correta<span class="text-brand-500">Pro</span></span>
+                        <span class="text-xl font-bold text-white tracking-tight"><?php echo company_name(); ?></span>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed mb-6">
                         Transformando sonhos em realidade com transparência, tecnologia e atendimento personalizado. Encontre hoje o seu lugar no mundo.
@@ -61,19 +61,25 @@
                     <ul class="space-y-4">
                         <li class="flex items-start gap-3 text-gray-400 text-sm">
                             <i class="fas fa-map-marker-alt mt-1 text-brand-500"></i>
-                            <span>Av. Paulista, 1000 - Bela Vista<br>São Paulo - SP</span>
+                            <span><?php echo get_setting('company_address', 'Av. Paulista, 1000 - Bela Vista, São Paulo - SP'); ?></span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-400 text-sm">
                             <i class="fas fa-phone-alt text-brand-500"></i>
-                            <span>(11) 99999-9999</span>
+                            <span><?php echo get_setting('company_phone', '(11) 99999-9999'); ?></span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-400 text-sm">
                             <i class="fas fa-envelope text-brand-500"></i>
-                            <span>contato@corretapro.com.br</span>
+                            <span><?php echo get_setting('company_email', 'contato@corretapro.com.br'); ?></span>
                         </li>
+                        <?php if (get_setting('company_creci')): ?>
+                        <li class="flex items-center gap-3 text-gray-400 text-sm">
+                            <i class="fas fa-id-card text-brand-500"></i>
+                            <span>CRECI: <?php echo get_setting('company_creci'); ?></span>
+                        </li>
+                        <?php endif; ?>
                         <li class="flex items-center gap-3 text-gray-400 text-sm">
                             <i class="fas fa-clock text-brand-500"></i>
-                            <span>Seg - Sex: 09:00 - 18:00</span>
+                            <span><?php echo get_setting('company_hours', 'Seg - Sex: 09:00 - 18:00'); ?></span>
                         </li>
                     </ul>
                 </div>
