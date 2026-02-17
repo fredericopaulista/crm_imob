@@ -126,6 +126,18 @@ class UserController {
             }
 
             if ($userModel->update($id, $data)) {
+                // Determine the new role name for session update if changed
+                // (Optional, but good for consistency)
+                
+                // Refresh Session if updating self
+                if ($id == $_SESSION['user_id']) {
+                    $_SESSION['user_name'] = $data['name'];
+                    if (!empty($data['avatar'])) {
+                        $_SESSION['user_avatar'] = $data['avatar']; // We might need to add this to AuthController/header too
+                    }
+                    // We don't easily have role_name here without querying, but name is the most visible one.
+                }
+
                 header('Location: ' . APP_URL . '/painel/usuarios');
             } else {
                 echo "Erro ao atualizar usuário.";

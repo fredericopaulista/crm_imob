@@ -101,7 +101,12 @@
                     <div class="relative">
                         <button type="button" class="-m-1.5 flex items-center p-1.5 focus:outline-none group" id="user-menu-button">
                             <span class="sr-only">Menu do usuário</span>
-                            <img class="h-10 w-10 rounded-full bg-gray-50 ring-2 ring-brand-100 object-cover group-hover:ring-brand-500 transition-all" src="https://ui-avatars.com/api/?name=<?php echo isset($_SESSION['user_name']) ? urlencode($_SESSION['user_name']) : 'Admin'; ?>&background=random&color=fff" alt="">
+                             <?php 
+                                $avatar = isset($_SESSION['user_avatar']) && !empty($_SESSION['user_avatar']) 
+                                    ? APP_URL . '/assets/uploads/avatars/' . $_SESSION['user_avatar'] 
+                                    : 'https://ui-avatars.com/api/?name=' . urlencode($_SESSION['user_name'] ?? 'Admin') . '&background=random&color=fff';
+                            ?>
+                            <img class="h-10 w-10 rounded-full bg-gray-50 ring-2 ring-brand-100 object-cover group-hover:ring-brand-500 transition-all" src="<?php echo $avatar; ?>" alt="">
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900 group-hover:text-brand-600 transition-colors" aria-hidden="true">
                                     <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Usuário'; ?>
