@@ -133,8 +133,9 @@ $routes = [
     '/painel/configuracoes/sitemap' => 'SettingsController@generateSitemap',
     '/painel/configuracoes/robots' => 'SettingsController@generateRobots',
     '/painel/configuracoes/sitemap/download' => 'SettingsController@downloadSitemap',
-    '/painel/configuracoes/sitemap/download' => 'SettingsController@downloadSitemap',
     '/painel/configuracoes/robots/download' => 'SettingsController@downloadRobots',
+    '/painel/configuracoes/empresa' => 'SettingsController@company',
+    '/painel/configuracoes/empresa/salvar' => 'SettingsController@updateCompany',
 
     // Blog (Admin)
     '/painel/blog' => 'BlogController@index',

@@ -156,4 +156,42 @@ class SettingsController {
             exit;
         }
     }
+    /**
+     * Display company settings page
+     */
+    public function company() {
+        $settings = $this->setting->getAll();
+        $pageTitle = 'Dados da Empresa';
+        require_once 'views/layout/header_admin.php';
+        require_once 'views/settings/company.php';
+        require_once 'views/layout/footer_admin.php';
+    }
+
+    /**
+     * Update company settings
+     */
+    public function updateCompany() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ' . APP_URL . '/painel/configuracoes/empresa');
+            exit;
+        }
+
+        $settingsToUpdate = [
+            'company_name' => $_POST['company_name'] ?? '',
+            'company_creci' => $_POST['company_creci'] ?? '',
+            'company_address' => $_POST['company_address'] ?? '',
+            'company_phone' => $_POST['company_phone'] ?? '',
+            'company_email' => $_POST['company_email'] ?? '',
+            'company_hours' => $_POST['company_hours'] ?? ''
+        ];
+
+        if ($this->setting->updateMultiple($settingsToUpdate)) {
+            $_SESSION['success'] = 'Dados da empresa atualizados com sucesso!';
+        } else {
+            $_SESSION['error'] = 'Erro ao atualizar dados.';
+        }
+
+        header('Location: ' . APP_URL . '/painel/configuracoes/empresa');
+        exit;
+    }
 }
