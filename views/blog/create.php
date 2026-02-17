@@ -59,7 +59,7 @@
         <!-- Content -->
         <div>
             <label for="content" class="block text-sm font-medium text-gray-700 mb-1">Conteúdo</label>
-            <textarea name="content" id="content" rows="15" class="w-full rounded-lg border-gray-300 focus:border-brand-500 focus:ring-brand-500 font-mono text-sm" placeholder="Escreva seu artigo aqui... (Aceita HTML básico)"></textarea>
+            <textarea name="content" id="content" rows="15" class="wysiwyg w-full rounded-lg border-gray-300 focus:border-brand-500 focus:ring-brand-500 font-mono text-sm" placeholder="Escreva seu artigo aqui..."></textarea>
         </div>
 
         <div class="pt-4 border-t border-gray-100 flex justify-end">

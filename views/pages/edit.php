@@ -21,8 +21,8 @@
 
         <div class="mb-6">
             <label for="content" class="block text-sm font-medium text-gray-700 mb-2">Conteúdo</label>
-            <div class="text-xs text-gray-500 mb-2">Use tags HTML básicas para formatar (h2, p, ul, strong, etc).</div>
-            <textarea name="content" id="content" rows="20" class="w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm p-2.5 border font-mono text-sm"><?php echo htmlspecialchars($page['content']); ?></textarea>
+            <div class="text-xs text-gray-500 mb-2">Use o editor abaixo para formatar o conteúdo.</div>
+            <textarea name="content" id="content" rows="20" class="wysiwyg w-full rounded-md border-gray-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 sm:text-sm p-2.5 border font-mono text-sm"><?php echo htmlspecialchars($page['content']); ?></textarea>
         </div>
 
         <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">

@@ -85,7 +85,7 @@ $schema = [
         <?php endif; ?>
         
         <div class="blog-content">
-            <?php echo nl2br($post['content']); ?>
+            <?php echo $post['content']; // Raw HTML from TinyMCE ?>
         </div>
     </div>
     

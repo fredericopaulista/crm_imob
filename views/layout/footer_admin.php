@@ -9,5 +9,38 @@
     </div>
 </div>
 
+<!-- TinyMCE (WYSIWYG Editor) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.wysiwyg',
+        height: 500,
+        menubar: false,
+        plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+            'insertdatetime', 'media', 'table', 'help', 'wordcount'
+        ],
+        toolbar: 'undo redo | blocks | ' +
+            'bold italic forecolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        content_style: 'body { font-family:Manrope,Helvetica,Arial,sans-serif; font-size:14px }',
+        branding: false,
+        promotion: false
+    });
+</script>
+
+<script>
+    // Toggle User Menu
+    document.getElementById('user-menu-button').addEventListener('click', function() {
+        var menu = document.getElementById('user-menu');
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('transform');
+        menu.classList.toggle('opacity-0');
+        menu.classList.toggle('scale-95');
+    });
+</script>
+
 </body>
 </html>
