@@ -1,6 +1,6 @@
 <?php
 // SEO Metadata
-$pageTitle = 'Catálogo de Imóveis em São Paulo - Venda e Aluguel | Correta Pro';
+$pageTitle = 'Catálogo de Imóveis em São Paulo - Venda e Aluguel | ' . company_name();
 $metaTitle = 'Catálogo Completo de Imóveis em SP - Apartamentos, Casas e Mais';
 $metaDescription = 'Explore nosso catálogo completo de imóveis em São Paulo. Apartamentos, casas, coberturas e lofts para venda e aluguel. Filtros avançados para encontrar o imóvel ideal. Confira!';
 $canonicalUrl = APP_URL . '/imoveis';

@@ -7,7 +7,7 @@ class SiteController {
         $postModel = new Post();
         $posts = $postModel->getAll(null, 'published');
         
-        $pageTitle = 'Blog - Correta Pro';
+        $pageTitle = 'Blog - ' . company_name();
         require_once 'views/layout/header_public.php';
         require_once 'views/site/blog.php';
         require_once 'views/layout/footer_public.php';
@@ -30,7 +30,7 @@ class SiteController {
             exit;
         }
         
-        $pageTitle = $post['title'] . ' - Correta Pro';
+        $pageTitle = $post['title'] . ' - ' . company_name();
         
         // SEO meta tags could be injected here if header supports it
         
@@ -72,7 +72,7 @@ class SiteController {
             return $post['author_id'] == $id;
         });
         
-        $pageTitle = 'Posts de ' . $author['name'] . ' - Correta Pro';
+        $pageTitle = 'Posts de ' . $author['name'] . ' - ' . company_name();
         require_once 'views/layout/header_public.php';
         require_once 'views/site/author.php';
         require_once 'views/layout/footer_public.php';
@@ -85,7 +85,8 @@ class SiteController {
         $allProperties = $propertyModel->getAll();
         $recentProperties = array_slice($allProperties, 0, 6);
         
-        $pageTitle = 'Home - Correta Pro';
+        $pageTitle = 'Home - ' . company_name();
+        $metaTitle = 'Imóveis em São Paulo - Apartamentos, Casas e Coberturas | ' . company_name();
         require_once 'views/layout/header_public.php';
         require_once 'views/site/home.php';
         require_once 'views/layout/footer_public.php';
@@ -111,7 +112,7 @@ class SiteController {
         // Get neighborhoods for selected city, or all if no city selected
         $neighborhoods = $propertyModel->getNeighborhoods($filters['city'] ?? null);
         
-        $pageTitle = 'Imóveis - Correta Pro';
+        $pageTitle = 'Imóveis - ' . company_name();
         require_once 'views/layout/header_public.php';
         require_once 'views/site/catalog.php';
         require_once 'views/layout/footer_public.php';
@@ -138,14 +139,14 @@ class SiteController {
             exit;
         }
         
-        $pageTitle = $property['title'] . ' - Correta Pro';
+        $pageTitle = $property['title'] . ' - ' . company_name();
         require_once 'views/layout/header_public.php';
         require_once 'views/site/detail.php';
         require_once 'views/layout/footer_public.php';
     }
 
     public function contact() {
-        $pageTitle = 'Contato - Correta Pro';
+        $pageTitle = 'Contato - ' . company_name();
         require_once 'views/layout/header_public.php';
         require_once 'views/site/contact.php';
         require_once 'views/layout/footer_public.php';

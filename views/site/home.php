@@ -1,7 +1,7 @@
 <?php
 // SEO Metadata
-$pageTitle = 'Correta Pro - Imóveis em São Paulo | Compra, Venda e Aluguel';
-$metaTitle = 'Imóveis em São Paulo - Apartamentos, Casas e Coberturas | Correta Pro';
+$pageTitle = company_name() . ' - Imóveis em São Paulo | Compra, Venda e Aluguel';
+$metaTitle = 'Imóveis em São Paulo - Apartamentos, Casas e Coberturas | ' . company_name();
 $metaDescription = 'Encontre o imóvel dos seus sonhos em São Paulo. Apartamentos, casas e coberturas nos melhores bairros: Jardins, Pinheiros, Vila Madalena, Brooklin. Venda e aluguel com atendimento personalizado.';
 $canonicalUrl = APP_URL . '/';
 $ogImage = APP_URL . '/assets/og-home.jpg';

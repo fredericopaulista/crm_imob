@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($pageTitle) ? $pageTitle . ' | Painel Correta Pro' : 'Painel Administrativo'; ?></title>
+    <title><?php echo isset($pageTitle) ? $pageTitle . ' | Painel ' . company_name() : 'Painel Administrativo'; ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,7 +51,7 @@
                         <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white text-sm shadow-lg shadow-brand-500/30">
                             <i class="fas fa-home"></i>
                         </div>
-                        <span class="text-xl font-bold text-white tracking-tight">Correta<span class="text-brand-500">Pro</span></span>
+                        <span class="text-xl font-bold text-white tracking-tight"><?php echo company_name(); ?></span>
                     </div>
                     <?php include 'views/layout/sidebar_nav.php'; ?>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white text-lg shadow-lg shadow-brand-500/30">
                     <i class="fas fa-home"></i>
                 </div>
-                <span class="text-2xl font-bold text-white tracking-tight">Correta<span class="text-brand-500">Pro</span></span>
+                <span class="text-2xl font-bold text-white tracking-tight"><?php echo company_name(); ?></span>
             </div>
             <?php include 'views/layout/sidebar_nav.php'; ?>
         </div>

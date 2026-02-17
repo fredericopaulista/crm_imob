@@ -5,7 +5,7 @@
     if (empty($allImages)) $allImages = [$coverImage];
     
     // SEO Metadata
-    $pageTitle = $property['title'] . ' | Correta Pro';
+    $pageTitle = $property['title'] . ' | ' . company_name();
     $metaTitle = $property['title'] . ' - R$ ' . number_format($property['price'], 2, ',', '.');
     // Ensure description is safe
     $cleanDesc = strip_tags($property['description']);
@@ -155,7 +155,7 @@
                         <div class="flex items-center gap-4 mb-6">
                             <img src="https://ui-avatars.com/api/?name=Correta+Pro&background=random" alt="Agent" class="w-14 h-14 rounded-full border-2 border-brand-100">
                             <div>
-                                <h4 class="font-bold text-gray-900">Correta Pro</h4>
+                                <h4 class="font-bold text-gray-900"><?php echo company_name(); ?></h4>
                                 <p class="text-xs text-gray-500">Consultoria Imobiliária</p>
                                 <div class="flex text-yellow-400 text-xs mt-1">
                                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>

@@ -40,7 +40,7 @@ $schema = [
     ],
     "publisher" => [
         "@type" => "Organization",
-        "name" => "Correta Pro",
+        "name" => company_name(),
         "logo" => [
             "@type" => "ImageObject",
             "url" => APP_URL . "/assets/logo.png" // Ensure this asset exists or use a placeholder

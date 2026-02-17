@@ -81,7 +81,7 @@
 
             <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-xs">
-                    &copy; <?php echo date('Y'); ?> Correta Pro. Todos os direitos reservados.
+                    &copy; <?php echo date('Y'); ?> <?php echo company_name(); ?>. Todos os direitos reservados.
                 </p>
                 <div class="flex gap-6 text-xs text-gray-500">
                     <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>

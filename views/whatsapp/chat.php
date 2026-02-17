@@ -134,7 +134,7 @@
                 <div class="bg-gray-50 rounded-full p-8 mb-6 shadow-inner ring-1 ring-gray-100">
                     <i class="fab fa-whatsapp text-6xl text-gray-300"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-gray-800 tracking-tight">Correta Pro Web</h3>
+                <h3 class="text-2xl font-bold text-gray-800 tracking-tight"><?php echo company_name(); ?> Web</h3>
                 <p class="text-gray-500 mt-3 max-w-sm leading-relaxed">Envie e receba mensagens diretamente do seu CRM sem precisar manter o celular conectado.</p>
                 <div class="mt-8 border-t border-gray-200/60 w-64 pt-6">
                     <p class="text-xs text-gray-400 flex items-center justify-center gap-1"><i class="fas fa-lock text-[10px]"></i> Protegido com criptografia de ponta a ponta</p>

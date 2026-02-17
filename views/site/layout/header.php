@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title><?php echo isset($pageTitle) ? $pageTitle : 'Correta Pro - Encontre o Imóvel dos Seus Sonhos em São Paulo'; ?></title>
-    <meta name="title" content="<?php echo isset($metaTitle) ? $metaTitle : 'Correta Pro - Imóveis em São Paulo | Compra, Venda e Aluguel'; ?>">
+    <title><?php echo isset($pageTitle) ? $pageTitle : company_name() . ' - Encontre o Imóvel dos Seus Sonhos em São Paulo'; ?></title>
+    <meta name="title" content="<?php echo isset($metaTitle) ? $metaTitle : company_name() . ' - Imóveis em São Paulo | Compra, Venda e Aluguel'; ?>">
     <meta name="description" content="<?php echo isset($metaDescription) ? $metaDescription : 'Encontre apartamentos, casas e coberturas em São Paulo. Imóveis para venda e aluguel nos melhores bairros. Atendimento personalizado e as melhores ofertas do mercado.'; ?>">
     <meta name="keywords" content="imóveis são paulo, apartamentos venda, casas aluguel, imobiliária sp, corretora imóveis, jardins, pinheiros, vila madalena, brooklin, moema">
-    <meta name="author" content="Correta Pro">
+    <meta name="author" content="<?php echo company_name(); ?>">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?php echo isset($canonicalUrl) ? $canonicalUrl : APP_URL; ?>">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?php echo isset($canonicalUrl) ? $canonicalUrl : APP_URL; ?>">
-    <meta property="og:title" content="<?php echo isset($metaTitle) ? $metaTitle : 'Correta Pro - Imóveis em São Paulo'; ?>">
+    <meta property="og:title" content="<?php echo isset($metaTitle) ? $metaTitle : company_name() . ' - Imóveis em São Paulo'; ?>">
     <meta property="og:description" content="<?php echo isset($metaDescription) ? $metaDescription : 'Encontre o imóvel perfeito em São Paulo. Apartamentos, casas e coberturas para venda e aluguel.'; ?>">
     <meta property="og:image" content="<?php echo isset($ogImage) ? $ogImage : APP_URL . '/assets/og-image.jpg'; ?>">
     <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Correta Pro">
+    <meta property="og:site_name" content="<?php echo company_name(); ?>">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="<?php echo isset($canonicalUrl) ? $canonicalUrl : APP_URL; ?>">
-    <meta property="twitter:title" content="<?php echo isset($metaTitle) ? $metaTitle : 'Correta Pro - Imóveis em São Paulo'; ?>">
+    <meta property="twitter:title" content="<?php echo isset($metaTitle) ? $metaTitle : company_name() . ' - Imóveis em São Paulo'; ?>">
     <meta property="twitter:description" content="<?php echo isset($metaDescription) ? $metaDescription : 'Encontre o imóvel perfeito em São Paulo.'; ?>">
     <meta property="twitter:image" content="<?php echo isset($ogImage) ? $ogImage : APP_URL . '/assets/og-image.jpg'; ?>">
     
@@ -40,7 +40,7 @@
     {
         "@context": "https://schema.org",
         "@type": "RealEstateAgent",
-        "name": "Correta Pro",
+        "name": "<?php echo company_name(); ?>",
         "description": "Imobiliária especializada em imóveis de alto padrão em São Paulo",
         "url": "<?php echo APP_URL; ?>",
         "telephone": "+55-11-99999-9999",
@@ -73,7 +73,7 @@
             <div class="flex w-full items-center justify-between border-b border-indigo-500 py-6 lg:border-none">
                 <div class="flex items-center">
                     <a href="<?php echo APP_URL; ?>/" class="flex items-center gap-2">
-                        <span class="sr-only">Correta Pro</span>
+                        <span class="sr-only"><?php echo company_name(); ?></span>
                         <i class="fas fa-home text-indigo-600 text-2xl"></i>
                         <span class="text-xl font-bold text-gray-900 tracking-tight">Correta<span class="text-indigo-600">Pro</span></span>
                     </a>
