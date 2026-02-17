@@ -1,9 +1,7 @@
-<?php require_once 'views/layout/header.php'; ?>
-
-<div class="container mx-auto px-4 py-8">
+<div class="space-y-6">
     <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900">Configurações SEO</h1>
-        <p class="text-gray-600 mt-2">Gerencie as configurações de SEO e otimização do site</p>
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Configurações SEO</h2>
+        <p class="mt-1 text-sm leading-6 text-gray-600">Gerencie as configurações de SEO e otimização do site.</p>
     </div>
 
     <?php if (isset($_SESSION['success'])): ?>
@@ -223,4 +221,4 @@ function showTab(tabName) {
 }
 </script>
 
-<?php require_once 'views/layout/footer.php'; ?>
+

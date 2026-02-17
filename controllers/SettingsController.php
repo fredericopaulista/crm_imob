@@ -18,7 +18,10 @@ class SettingsController {
      */
     public function index() {
         $settings = $this->setting->getAll();
+        $pageTitle = 'Configurações SEO';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/settings/index.php';
+        require_once 'views/layout/footer_admin.php';
     }
     
     /**
