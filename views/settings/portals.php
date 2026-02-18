@@ -84,4 +84,29 @@
             </div>
         </div>
     </div>
+    
+    <!-- Cron Instruction -->
+    <div class="rounded-lg bg-gray-50 shadow ring-1 ring-gray-900/5 mt-8">
+        <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
+            <h3 class="text-base font-semibold leading-6 text-gray-900">Atualização Automática (Opcional, mas Recomendado)</h3>
+        </div>
+        <div class="px-4 py-5 sm:p-6">
+            <p class="text-sm text-gray-500 mb-4">
+                Para melhorar a performance e garantir que os feeds sejam gerados mesmo com muitos imóveis, configure uma tarefa Cron no seu servidor (cPanel ou Terminal) para rodar toda noite (ex: 01:00 AM).
+            </p>
+            
+            <div class="bg-gray-800 rounded-md p-4 relative group">
+                <code class="text-sm text-green-400 font-mono break-all" id="cron-command">
+                    /usr/local/bin/php <?php echo BASE_PATH; ?>/cron/update_feeds.php
+                </code>
+                 <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('cron-command').innerText.trim()); alert('Comando copiado!');" class="absolute top-2 right-2 hidden group-hover:flex items-center rounded bg-gray-700 px-2 py-1 text-xs font-medium text-gray-300 hover:text-white">
+                    Copiar
+                </button>
+            </div>
+            
+            <p class="mt-4 text-xs text-gray-400">
+                * O caminho do PHP (/usr/local/bin/php) pode variar conforme sua hospedagem. Consulte o suporte se tiver dúvidas.
+            </p>
+        </div>
+    </div>
 </div>

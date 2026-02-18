@@ -3,7 +3,7 @@
 class PortalsController {
 
     public function __construct() {
-        if (!isset($_SESSION['user_id']) && strpos($_SERVER['REQUEST_URI'], '/feed/') === false) {
+        if (php_sapi_name() !== 'cli' && !isset($_SESSION['user_id']) && strpos($_SERVER['REQUEST_URI'], '/feed/') === false) {
              header('Location: ' . APP_URL . '/acesso/login');
              exit;
         }
@@ -22,6 +22,12 @@ class PortalsController {
     public function feedZap() {
         header('Content-Type: application/xml; charset=utf-8');
         
+        $cachedFile = BASE_PATH . '/assets/feeds/zap.xml';
+        if (file_exists($cachedFile)) {
+            readfile($cachedFile);
+            return;
+        }
+
         $propertyModel = new Property();
         // Fetch all available properties
         $properties = $propertyModel->getAll(['status' => 'available']);
@@ -78,6 +84,14 @@ class PortalsController {
     }
 
     public function feedOlx() {
+        header('Content-Type: application/xml; charset=utf-8');
+        
+        $cachedFile = BASE_PATH . '/assets/feeds/olx.xml';
+        if (file_exists($cachedFile)) {
+            readfile($cachedFile);
+            return;
+        }
+
         // OLX often accepts standard Zap format, but let's create a specific one if needed.
         // For now, we reuse Zap format as it's the market standard.
         $this->feedZap();
