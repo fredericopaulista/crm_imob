@@ -1,11 +1,17 @@
-<div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900">Leads</h1>
-        <p class="mt-2 text-sm text-gray-700">Gerencie prospects e interessados em imóveis.</p>
-    </div>
-    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <a href="<?php echo APP_URL; ?>/painel/leads/novo" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            <i class="fas fa-user-plus mr-1"></i> Novo Lead
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Gestão de Leads</h2>
+    <div class="flex gap-2">
+        <a href="<?php echo APP_URL; ?>/painel/leads?view=list" class="px-3 py-2 bg-brand-50 border border-brand-200 text-brand-700 rounded-lg text-sm font-medium">
+            <i class="fas fa-list mr-2"></i> Lista
+        </a>
+        <a href="<?php echo APP_URL; ?>/painel/leads?view=kanban" class="px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm font-medium">
+            <i class="fas fa-columns mr-2"></i> Kanban
+        </a>
+        <a href="<?php echo APP_URL; ?>/painel/leads?view=settings" class="px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm font-medium">
+            <i class="fas fa-cog mr-2"></i> Etapas
+        </a>
+        <a href="<?php echo APP_URL; ?>/painel/leads/novo" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+            <i class="fas fa-plus"></i> Novo Lead
         </a>
     </div>
 </div>

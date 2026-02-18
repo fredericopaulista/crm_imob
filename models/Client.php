@@ -14,7 +14,13 @@ class Client {
     }
 
     public function getLeads() {
-        $stmt = $this->conn->prepare("SELECT * FROM clients WHERE type = 'lead' ORDER BY created_at DESC");
+        $stmt = $this->conn->prepare("
+            SELECT c.*, s.name as stage_name, s.color as stage_color 
+            FROM clients c 
+            LEFT JOIN lead_stages s ON c.stage_id = s.id 
+            WHERE c.type = 'lead' 
+            ORDER BY c.created_at DESC
+        ");
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -38,9 +44,22 @@ class Client {
     }
 
     public function create($data) {
-        $sql = "INSERT INTO clients (name, email, phone, type, origin, observations, status) VALUES (:name, :email, :phone, :type, :origin, :observations, :status)";
+        // If stage_id is not set, set default to first stage
+        if (!isset($data[':stage_id'])) {
+            $stmt = $this->conn->query("SELECT id FROM lead_stages ORDER BY order_index ASC LIMIT 1");
+            $defaultStage = $stmt->fetchColumn();
+            $data[':stage_id'] = $defaultStage;
+        }
+
+        $sql = "INSERT INTO clients (name, email, phone, type, origin, observations, status, stage_id) VALUES (:name, :email, :phone, :type, :origin, :observations, :status, :stage_id)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($data);
+    }
+    
+    public function updateStage($leadId, $stageId) {
+        $sql = "UPDATE clients SET stage_id = :stage_id WHERE id = :id AND type = 'lead'";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([':stage_id' => $stageId, ':id' => $leadId]);
     }
 
     public function getById($id) {

@@ -32,24 +32,22 @@
                        class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
                        placeholder="Ex: Site, Indicação, WhatsApp">
             </div>
-
+            <!-- Stage -->
             <div>
-                <label for="status" class="block text-sm font-medium leading-6 text-gray-900">Status *</label>
-                <select name="status" id="status" required
-                        class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3">
-                    <option value="new" <?php echo ($lead['status'] == 'new') ? 'selected' : ''; ?>>Novo</option>
-                    <option value="contacted" <?php echo ($lead['status'] == 'contacted') ? 'selected' : ''; ?>>Contatado</option>
-                    <option value="negotiation" <?php echo ($lead['status'] == 'negotiation') ? 'selected' : ''; ?>>Negociação</option>
-                    <option value="closed" <?php echo ($lead['status'] == 'closed') ? 'selected' : ''; ?>>Fechado</option>
-                    <option value="lost" <?php echo ($lead['status'] == 'lost') ? 'selected' : ''; ?>>Perdido</option>
+                <label for="stage_id" class="block text-sm font-medium text-gray-700 mb-1">Etapa do Funil</label>
+                <select name="stage_id" id="stage_id" class="w-full rounded-lg border-gray-300 focus:border-brand-500 focus:ring-brand-500">
+                    <?php foreach ($stages as $stage): ?>
+                        <option value="<?php echo $stage['id']; ?>" <?php echo ($lead['stage_id'] == $stage['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($stage['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
+        </div>
 
-            <div class="sm:col-span-2">
-                <label for="observations" class="block text-sm font-medium leading-6 text-gray-900">Observações</label>
-                <textarea name="observations" id="observations" rows="4"
-                          class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"><?php echo htmlspecialchars($lead['observations'] ?? ''); ?></textarea>
-            </div>
+        <div class="mt-6">
+            <label for="observations" class="block text-sm font-medium text-gray-700 mb-1">Observações</label>
+            <textarea name="observations" id="observations" rows="4" class="w-full rounded-lg border-gray-300 focus:border-brand-500 focus:ring-brand-500"><?php echo htmlspecialchars($lead['observations'] ?? ''); ?></textarea>
         </div>
 
         <div class="flex items-center justify-end gap-x-6">

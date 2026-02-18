@@ -2,20 +2,79 @@
 
 class LeadController {
     public function index() {
+        $view = $_GET['view'] ?? 'kanban'; // Default to kanban
+
+        if ($view === 'settings') {
+            // Redirect to stage controller logic or handle here
+             header('Location: ' . APP_URL . '/painel/leads/etapas');
+             exit;
+        }
+
         $clientModel = new Client();
         $leads = $clientModel->getLeads();
         
-        $pageTitle = 'Gestão de Leads';
-        require_once 'views/layout/header_admin.php';
-        require_once 'views/leads/index.php';
-        require_once 'views/layout/footer_admin.php';
+        if ($view === 'kanban') {
+            require_once 'models/LeadStage.php';
+            $stageModel = new LeadStage();
+            $stages = $stageModel->getAll();
+            
+            // Group leads by stage
+            $leadsByStage = [];
+            foreach ($stages as $stage) {
+                $leadsByStage[$stage['id']] = [];
+            }
+            foreach ($leads as $lead) {
+                if (isset($leadsByStage[$lead['stage_id']])) {
+                    $leadsByStage[$lead['stage_id']][] = $lead;
+                } elseif (!empty($leadsByStage)) {
+                     // Fallback for leads with deleted stages or null
+                     // Put in first stage? Or a "Uncategorized" bucket?
+                     // For now, put in first stage if exists
+                     $firstStageId = array_key_first($leadsByStage);
+                     $leadsByStage[$firstStageId][] = $lead;
+                }
+            }
+            
+            $pageTitle = 'Funil de Vendas (Kanban)';
+            require_once 'views/layout/header_admin.php';
+            require_once 'views/leads/kanban.php';
+            require_once 'views/layout/footer_admin.php';
+        } else {
+            $pageTitle = 'Lista de Leads';
+            require_once 'views/layout/header_admin.php';
+            require_once 'views/leads/index.php';
+            require_once 'views/layout/footer_admin.php';
+        }
     }
 
+    public function updateStage() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $leadId = $input['lead_id'] ?? null;
+            $stageId = $input['stage_id'] ?? null;
+
+            if ($leadId && $stageId) {
+                $clientModel = new Client();
+                if ($clientModel->updateStage($leadId, $stageId)) {
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => false]);
+                }
+                exit;
+            }
+        }
+    }
+    
+    // ... existing create, store, edit, update, delete, convert methods ...
     public function create() {
+        require_once 'models/LeadStage.php';
+        $stageModel = new LeadStage();
+        $stages = $stageModel->getAll();
+
         $pageTitle = 'Novo Lead';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php'; // Updated to admin header
         require_once 'views/leads/create.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php'; // Updated to admin footer
     }
 
     public function store() {
@@ -27,7 +86,8 @@ class LeadController {
                 ':type' => 'lead',
                 ':origin' => $_POST['origin'] ?? null,
                 ':observations' => $_POST['observations'] ?? null,
-                ':status' => $_POST['status'] ?? 'new'
+                ':status' => 'new', // Legacy compatibility
+                ':stage_id' => $_POST['stage_id'] ?? null
             ];
 
             $clientModel = new Client();
@@ -38,7 +98,7 @@ class LeadController {
             }
         }
     }
-
+    
     public function edit() {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         if (!$id) {
@@ -54,17 +114,23 @@ class LeadController {
             exit;
         }
 
+        require_once 'models/LeadStage.php';
+        $stageModel = new LeadStage();
+        $stages = $stageModel->getAll();
+
         $pageTitle = 'Editar Lead';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/leads/edit.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+            $stageId = filter_input(INPUT_POST, 'stage_id', FILTER_VALIDATE_INT);
             
-            $sql = "UPDATE clients SET name = :name, email = :email, phone = :phone, origin = :origin, observations = :observations, status = :status WHERE id = :id AND type = 'lead'";
+            // Fix: include stage_id in update
+            $sql = "UPDATE clients SET name = :name, email = :email, phone = :phone, origin = :origin, observations = :observations, stage_id = :stage_id WHERE id = :id AND type = 'lead'";
             
             $conn = Database::getInstance()->getConnection();
             $stmt = $conn->prepare($sql);
@@ -75,7 +141,7 @@ class LeadController {
                 ':phone' => $_POST['phone'],
                 ':origin' => $_POST['origin'] ?? null,
                 ':observations' => $_POST['observations'] ?? null,
-                ':status' => $_POST['status'],
+                ':stage_id' => $stageId,
                 ':id' => $id
             ]);
 

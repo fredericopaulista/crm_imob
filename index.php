@@ -87,6 +87,12 @@ $routes = [
     '/painel/leads/atualizar' => 'LeadController@update',
     '/painel/leads/excluir' => 'LeadController@delete',
     '/painel/leads/converter' => 'LeadController@convert',
+    '/painel/leads/atualizar-etapa' => 'LeadController@updateStage',
+    '/painel/leads/etapas' => 'LeadStageController@index',
+    '/painel/leads/etapas/salvar' => 'LeadStageController@store',
+    '/painel/leads/etapas/atualizar' => 'LeadStageController@update',
+    '/painel/leads/etapas/excluir' => 'LeadStageController@delete',
+    '/painel/leads/etapas/reordenar' => 'LeadStageController@reorder',
 
     // Proprietários (Owners)
     '/painel/proprietarios' => 'OwnerController@index',
