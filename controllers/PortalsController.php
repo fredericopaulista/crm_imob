@@ -14,9 +14,9 @@ class PortalsController {
         $feedZapUrl = APP_URL . '/feed/zap';
         $feedOlxUrl = APP_URL . '/feed/olx';
         
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/settings/portals.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function feedZap() {
