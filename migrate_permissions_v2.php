@@ -87,8 +87,10 @@ $modules = [
 // Simplificação: Dar TODAS as permissões para o Admin.
 // E para outros perfis, vamos ter que reconfigurar manualmente ou tentar adivinhar.
 
-$conn->exec("DELETE FROM role_permissions");
+$conn->exec("SET FOREIGN_KEY_CHECKS = 0");
+$conn->exec("TRUNCATE TABLE role_permissions");
 $conn->exec("TRUNCATE TABLE permissions");
+$conn->exec("SET FOREIGN_KEY_CHECKS = 1");
 
 echo "Tabela de permissões limpa.\n";
 
