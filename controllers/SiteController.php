@@ -183,7 +183,8 @@ class SiteController {
         $typeLabel = $dbType . 's'; // Pluralize roughly for display, or use mapped label
         if ($dbType === 'Comercial') $typeLabel = 'Imóveis Comerciais';
         
-        $pageTitle = "$typeLabel $purposeLabel - " . company_name();
+        $heading = "$typeLabel $purposeLabel";
+        $pageTitle = "$heading - " . company_name();
         
         // Pass data to view
         require_once 'views/layout/header_public.php';
