@@ -5,7 +5,7 @@
             <p class="mt-1 text-sm leading-6 text-gray-600">Crie um novo perfil e defina suas permissões.</p>
         </div>
 
-        <form action="<?php echo APP_URL; ?>/perfis/salvar" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+        <form action="<?php echo APP_URL; ?>/painel/perfis/salvar" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
             <div class="px-4 py-6 sm:p-8">
                 <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     
@@ -27,18 +27,12 @@
                         <fieldset>
                             <legend class="text-sm font-semibold leading-6 text-gray-900">Permissões</legend>
                             <p class="mt-1 text-sm leading-6 text-gray-600">Selecione o que este perfil pode acessar.</p>
-                            <div class="mt-6 space-y-6">
-                                <?php foreach ($permissions as $perm): ?>
-                                <div class="relative flex gap-x-3">
-                                    <div class="flex h-6 items-center">
-                                        <input id="perm_<?php echo $perm['id']; ?>" name="permissions[]" value="<?php echo $perm['id']; ?>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                    </div>
-                                    <div class="text-sm leading-6">
-                                        <label for="perm_<?php echo $perm['id']; ?>" class="font-medium text-gray-900"><?php echo $perm['name']; ?></label>
-                                        <p class="text-gray-500"><?php echo $perm['description']; ?></p>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
+                            <div class="mt-6">
+                                <?php 
+                                    $allPermissions = $permissions; // Alias for partial 
+                                    $rolePermissions = []; // Empty for create
+                                    require 'views/roles/form_fields.php'; 
+                                ?>
                             </div>
                         </fieldset>
                     </div>

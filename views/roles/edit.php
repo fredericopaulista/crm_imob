@@ -28,18 +28,8 @@
                         <fieldset>
                             <legend class="text-sm font-semibold leading-6 text-gray-900">Permissões</legend>
                             <p class="mt-1 text-sm leading-6 text-gray-600">Selecione o que este perfil pode acessar.</p>
-                            <div class="mt-6 space-y-6">
-                                <?php foreach ($allPermissions as $perm): ?>
-                                <div class="relative flex gap-x-3">
-                                    <div class="flex h-6 items-center">
-                                        <input id="perm_<?php echo $perm['id']; ?>" name="permissions[]" value="<?php echo $perm['id']; ?>" type="checkbox" <?php echo in_array($perm['id'], $rolePermissions) ? 'checked' : ''; ?> class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
-                                    </div>
-                                    <div class="text-sm leading-6">
-                                        <label for="perm_<?php echo $perm['id']; ?>" class="font-medium text-gray-900"><?php echo $perm['name']; ?></label>
-                                        <p class="text-gray-500"><?php echo $perm['description']; ?></p>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
+                            <div class="mt-6">
+                                <?php require 'views/roles/form_fields.php'; ?>
                             </div>
                         </fieldset>
                     </div>
