@@ -222,6 +222,29 @@ if (array_key_exists($request, $routes)) {
     $_GET['id'] = $matches[1];
     $controllerName = 'SiteController';
     $method = 'author';
+} elseif (preg_match('#^(venda|aluguel)/(.+)$#', $request, $matches)) {
+    // CATCH-ALL for the new advanced URL structure
+    // Patterns:
+    // venda/apartamentos/mg+belo-horizonte++sion/3-quartos-{id}
+    // OR just a property slug that looks like that.
+    
+    // We treat the FULL MATCH as the slug to search for.
+    // However, our slugs might have IDs appended.
+    // Let's try to extract ID from the end if possible, or just pass the full slug line.
+    
+    $fullPath = $matches[0]; // e.g. venda/apartamentos/...
+    
+    // Check if it ends with -{id} (numeric)
+    if (preg_match('/-(\d+)$/', $fullPath, $idMatch)) {
+         $_GET['id'] = $idMatch[1];
+         $_GET['slug'] = $fullPath; // Pass full path just in case
+    } else {
+         $_GET['slug'] = $fullPath;
+    }
+    
+    $controllerName = 'SiteController';
+    $method = 'detail';
+    
 } else {
     http_response_code(404);
     echo "Página não encontrada ($request)";

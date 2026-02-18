@@ -1,0 +1,1 @@
+ALTER TABLE properties ADD COLUMN state VARCHAR(2) DEFAULT 'MG' AFTER city;

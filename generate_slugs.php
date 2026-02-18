@@ -10,8 +10,11 @@ echo "🔄 Gerando slugs para imóveis existentes...\n\n";
 
 $count = 0;
 foreach ($properties as $prop) {
-    // Force update all slugs to fix encoding issues
-    $slug = $property->generateSlug($prop['title'], $prop['id']);
+    // Generate new advanced slug
+    // Ensure state defaults to MG if missing (should be handled by migration default though)
+    $prop['state'] = $prop['state'] ?? 'MG';
+    
+    $slug = $property->generateAdvancedSlug($prop, $prop['id']);
     $property->updateSlug($prop['id'], $slug);
     echo "✅ #{$prop['id']}: {$prop['title']} → /{$slug}\n";
     $count++;
