@@ -61,9 +61,9 @@
                                     </div>
                                     <?php endif; ?>
 
-                                    <?php if (!empty($lead['origin'])): ?>
+                                    <?php if (!empty($lead['origin_name'])): ?>
                                     <div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-800">
-                                        <?php echo htmlspecialchars($lead['origin']); ?>
+                                        <?php echo htmlspecialchars($lead['origin_name']); ?>
                                     </div>
                                     <?php endif; ?>
 

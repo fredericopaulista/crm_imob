@@ -147,6 +147,10 @@ $routes = [
     '/painel/configuracoes/robots/download' => 'SettingsController@downloadRobots',
     '/painel/configuracoes/empresa' => 'SettingsController@company',
     '/painel/configuracoes/empresa/salvar' => 'SettingsController@updateCompany',
+    '/painel/configuracoes/origens' => 'LeadOriginController@index',
+    '/painel/configuracoes/origens/salvar' => 'LeadOriginController@store',
+    '/painel/configuracoes/origens/atualizar' => 'LeadOriginController@update',
+    '/painel/configuracoes/origens/excluir' => 'LeadOriginController@delete',
 
     // Pages ( Conteúdo )
     '/painel/paginas' => 'PageController@index',

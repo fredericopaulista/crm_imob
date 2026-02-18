@@ -71,6 +71,10 @@ class LeadController {
         $stageModel = new LeadStage();
         $stages = $stageModel->getAll();
 
+        require_once 'models/LeadOrigin.php';
+        $originModel = new LeadOrigin();
+        $origins = $originModel->getAll();
+
         $pageTitle = 'Novo Lead';
         require_once 'views/layout/header_admin.php'; // Updated to admin header
         require_once 'views/leads/create.php';
@@ -84,7 +88,7 @@ class LeadController {
                 ':email' => $_POST['email'] ?? null,
                 ':phone' => $_POST['phone'],
                 ':type' => 'lead',
-                ':origin' => $_POST['origin'] ?? null,
+                ':origin_id' => $_POST['origin_id'] ?? null,
                 ':observations' => $_POST['observations'] ?? null,
                 ':status' => 'new', // Legacy compatibility
                 ':stage_id' => $_POST['stage_id'] ?? null
@@ -118,6 +122,10 @@ class LeadController {
         $stageModel = new LeadStage();
         $stages = $stageModel->getAll();
 
+        require_once 'models/LeadOrigin.php';
+        $originModel = new LeadOrigin();
+        $origins = $originModel->getAll();
+
         $pageTitle = 'Editar Lead';
         require_once 'views/layout/header_admin.php';
         require_once 'views/leads/edit.php';
@@ -128,9 +136,10 @@ class LeadController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
             $stageId = filter_input(INPUT_POST, 'stage_id', FILTER_VALIDATE_INT);
+            $originId = filter_input(INPUT_POST, 'origin_id', FILTER_VALIDATE_INT);
             
-            // Fix: include stage_id in update
-            $sql = "UPDATE clients SET name = :name, email = :email, phone = :phone, origin = :origin, observations = :observations, stage_id = :stage_id WHERE id = :id AND type = 'lead'";
+            // Fix: include stage_id and origin_id in update
+            $sql = "UPDATE clients SET name = :name, email = :email, phone = :phone, origin_id = :origin_id, observations = :observations, stage_id = :stage_id WHERE id = :id AND type = 'lead'";
             
             $conn = Database::getInstance()->getConnection();
             $stmt = $conn->prepare($sql);
@@ -139,7 +148,7 @@ class LeadController {
                 ':name' => $_POST['name'],
                 ':email' => $_POST['email'] ?? null,
                 ':phone' => $_POST['phone'],
-                ':origin' => $_POST['origin'] ?? null,
+                ':origin_id' => $originId,
                 ':observations' => $_POST['observations'] ?? null,
                 ':stage_id' => $stageId,
                 ':id' => $id

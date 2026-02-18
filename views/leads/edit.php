@@ -27,10 +27,15 @@
             </div>
 
             <div>
-                <label for="origin" class="block text-sm font-medium leading-6 text-gray-900">Origem</label>
-                <input type="text" name="origin" id="origin" value="<?php echo htmlspecialchars($lead['origin'] ?? ''); ?>"
-                       class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
-                       placeholder="Ex: Site, Indicação, WhatsApp">
+                <label for="origin_id" class="block text-sm font-medium leading-6 text-gray-900">Origem</label>
+                <select name="origin_id" id="origin_id" class="w-full rounded-lg border-gray-300 focus:border-brand-500 focus:ring-brand-500">
+                    <option value="">Selecione...</option>
+                    <?php foreach ($origins as $origin): ?>
+                        <option value="<?php echo $origin['id']; ?>" <?php echo ($lead['origin_id'] == $origin['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($origin['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <!-- Stage -->
             <div>

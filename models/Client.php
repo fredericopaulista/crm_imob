@@ -15,9 +15,10 @@ class Client {
 
     public function getLeads() {
         $stmt = $this->conn->prepare("
-            SELECT c.*, s.name as stage_name, s.color as stage_color 
+            SELECT c.*, s.name as stage_name, s.color as stage_color, o.name as origin_name 
             FROM clients c 
             LEFT JOIN lead_stages s ON c.stage_id = s.id 
+            LEFT JOIN lead_origins o ON c.origin_id = o.id
             WHERE c.type = 'lead' 
             ORDER BY c.created_at DESC
         ");
@@ -51,7 +52,7 @@ class Client {
             $data[':stage_id'] = $defaultStage;
         }
 
-        $sql = "INSERT INTO clients (name, email, phone, type, origin, observations, status, stage_id) VALUES (:name, :email, :phone, :type, :origin, :observations, :status, :stage_id)";
+        $sql = "INSERT INTO clients (name, email, phone, type, origin_id, observations, status, stage_id) VALUES (:name, :email, :phone, :type, :origin_id, :observations, :status, :stage_id)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($data);
     }
