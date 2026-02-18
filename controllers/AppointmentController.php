@@ -27,6 +27,27 @@ class AppointmentController {
         if (isset($_GET['user_id'])) $filters['user_id'] = $_GET['user_id'];
 
         $appointments = $this->appointmentModel->getAll($filters);
+        $appointments = $this->appointmentModel->getAll($filters);
+        
+        // Prepare events for FullCalendar
+        $calendarEvents = [];
+        foreach ($appointments as $appt) {
+            $color = '#3b82f6'; // Scheduled (Blue)
+            if ($appt['status'] == 'completed') $color = '#10b981'; // Green
+            if ($appt['status'] == 'cancelled') $color = '#ef4444'; // Red
+
+            $calendarEvents[] = [
+                'title' => $appt['lead_name'] . ' - ' . $appt['property_title'],
+                'start' => $appt['visit_date'],
+                'url' => APP_URL . '/painel/agenda/editar?id=' . $appt['id'],
+                'color' => $color,
+                'extendedProps' => [
+                    'status' => $appt['status'],
+                    'user' => $appt['user_name']
+                ]
+            ];
+        }
+
         $users = $this->userModel->getAll();
 
         $pageTitle = 'Agenda de Visitas';
