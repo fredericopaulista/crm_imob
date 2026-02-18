@@ -73,6 +73,24 @@
 </div>
 
 <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <!-- Sales Funnel Chart -->
+    <div class="rounded-2xl bg-white shadow-sm ring-1 ring-gray-900/5 p-6">
+        <h3 class="text-base font-bold leading-6 text-gray-900 mb-4">Funil de Vendas</h3>
+        <div class="relative h-64">
+            <canvas id="funnelChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Lead Origins Chart -->
+    <div class="rounded-2xl bg-white shadow-sm ring-1 ring-gray-900/5 p-6">
+        <h3 class="text-base font-bold leading-6 text-gray-900 mb-4">Origem dos Leads</h3>
+        <div class="relative h-64">
+            <canvas id="originsChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
     <!-- Quick Actions -->
     <div class="rounded-2xl bg-white shadow-sm ring-1 ring-gray-900/5 overflow-hidden">
         <div class="border-b border-gray-100 bg-white px-6 py-5">
@@ -144,4 +162,96 @@
             <?php endif; ?>
         </div>
     </div>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Funnel Chart
+    const funnelCtx = document.getElementById('funnelChart').getContext('2d');
+    const funnelData = <?php echo json_encode($leadsByStage); ?>;
+    
+    new Chart(funnelCtx, {
+        type: 'bar',
+        data: {
+            labels: funnelData.map(item => item.name),
+            datasets: [{
+                label: 'Leads',
+                data: funnelData.map(item => item.count),
+                backgroundColor: funnelData.map(item => {
+                    // Map tailwind colors to hex or use simplistic mapping
+                    const colorMap = {
+                        'blue': '#3b82f6',
+                        'yellow': '#eab308',
+                        'green': '#22c55e',
+                        'purple': '#a855f7',
+                        'red': '#ef4444',
+                        'gray': '#6b7280',
+                        'indigo': '#6366f1',
+                        'pink': '#ec4899'
+                    };
+                    return colorMap[item.color] || '#cbd5e1';
+                }),
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+
+    // Origins Chart
+    const originsCtx = document.getElementById('originsChart').getContext('2d');
+    const originsData = <?php echo json_encode($leadsByOrigin); ?>;
+    
+    new Chart(originsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: originsData.map(item => item.name),
+            datasets: [{
+                data: originsData.map(item => item.count),
+                backgroundColor: [
+                    '#3b82f6', '#10b981', '#f59e0b', '#ef4444', 
+                    '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        usePointStyle: true,
+                        boxWidth: 6
+                    }
+                }
+            },
+            cutout: '70%'
+        }
+    });
+});
+</script>

@@ -10,6 +10,10 @@ class DashboardController {
         $totalProperties = $propertyModel->count();
         $totalProposals = $proposalModel->count();
 
+        // Charts Data
+        $leadsByStage = $clientModel->getLeadsByStageCount();
+        $leadsByOrigin = $clientModel->getLeadsByOriginCount();
+
         // Check WhatsApp Connection
         $waService = new WhatsAppService();
         $waSettings = $waService->getSettings();

@@ -111,6 +111,32 @@ class Client {
         return $stmt->fetchAll();
     }
 
+    public function getLeadsByStageCount() {
+        $stmt = $this->conn->prepare("
+            SELECT s.name, s.color, COUNT(c.id) as count
+            FROM lead_stages s
+            LEFT JOIN clients c ON s.id = c.stage_id AND c.type = 'lead'
+            GROUP BY s.id, s.name, s.color
+            ORDER BY s.order_index ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getLeadsByOriginCount() {
+        $stmt = $this->conn->prepare("
+            SELECT o.name, COUNT(c.id) as count
+            FROM lead_origins o
+            LEFT JOIN clients c ON o.id = c.origin_id AND c.type = 'lead'
+            WHERE o.active = 1
+            GROUP BY o.id, o.name
+            HAVING count > 0
+            ORDER BY count DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function count() {
         $stmt = $this->conn->query("SELECT COUNT(*) FROM clients");
         return $stmt->fetchColumn();
