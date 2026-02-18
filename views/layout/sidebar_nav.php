@@ -152,6 +152,11 @@
                                 <i class="fas fa-tag w-4 mr-2 text-xs"></i> Origens de Leads
                             </a>
                         </li>
+                        <li>
+                            <a href="<?php echo APP_URL; ?>/painel/configuracoes/portais" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'configuracoes' && isset($currentParams[2]) && $currentParams[2] == 'portais') ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
+                                <i class="fas fa-rss w-4 mr-2 text-xs"></i> Portais
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

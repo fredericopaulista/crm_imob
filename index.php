@@ -161,6 +161,11 @@ $routes = [
     '/painel/configuracoes/origens/salvar' => 'LeadOriginController@store',
     '/painel/configuracoes/origens/atualizar' => 'LeadOriginController@update',
     '/painel/configuracoes/origens/excluir' => 'LeadOriginController@delete',
+    '/painel/configuracoes/portais' => 'PortalsController@index', // Portals Config
+    
+    // Feeds (Public but validated)
+    '/feed/zap' => 'PortalsController@feedZap',
+    '/feed/olx' => 'PortalsController@feedOlx',
 
     // Pages ( Conteúdo )
     '/painel/paginas' => 'PageController@index',
