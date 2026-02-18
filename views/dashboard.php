@@ -165,14 +165,35 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </div>
+</div>
+
+<!-- Chart.js UMD for browser support -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Debugging
+    console.log('Initializing Dashboard Charts...');
+    
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js library not loaded!');
+        alert('Erro ao carregar gráficos: Biblioteca Chart.js não encontrada.');
+        return;
+    }
     // Funnel Chart
     const funnelCtx = document.getElementById('funnelChart').getContext('2d');
-    const funnelData = <?php echo json_encode($leadsByStage); ?>;
+    const funnelData = <?php echo json_encode($leadsByStage ?? []); ?>;
     
-    new Chart(funnelCtx, {
+    console.log('Funnel Data:', funnelData);
+
+    if (!funnelData || funnelData.length === 0) {
+        // Render empty state if no data
+        funnelCtx.font = "14px Manrope";
+        funnelCtx.fillStyle = "#9ca3af";
+        funnelCtx.textAlign = "center";
+        funnelCtx.fillText("Sem dados no funil", 150, 75);
+    } else {
+        new Chart(funnelCtx, {
         type: 'bar',
         data: {
             labels: funnelData.map(item => item.name),
@@ -221,11 +242,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    });
+    }
+
     // Origins Chart
     const originsCtx = document.getElementById('originsChart').getContext('2d');
-    const originsData = <?php echo json_encode($leadsByOrigin); ?>;
-    
-    new Chart(originsCtx, {
+    const originsData = <?php echo json_encode($leadsByOrigin ?? []); ?>;
+
+    console.log('Origins Data:', originsData);
+
+    if (!originsData || originsData.length === 0) {
+        originsCtx.font = "14px Manrope";
+        originsCtx.fillStyle = "#9ca3af";
+        originsCtx.textAlign = "center";
+        originsCtx.fillText("Sem dados de origem", 150, 75);
+    } else {
+        new Chart(originsCtx, {
         type: 'doughnut',
         data: {
             labels: originsData.map(item => item.name),
@@ -253,5 +285,6 @@ document.addEventListener('DOMContentLoaded', function() {
             cutout: '70%'
         }
     });
+    }
 });
 </script>
