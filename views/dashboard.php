@@ -169,120 +169,114 @@
 </div>
 
 <!-- Chart.js UMD for browser support -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Debugging
-    console.log('Initializing Dashboard Charts...');
-    
-    if (typeof Chart === 'undefined') {
-        console.error('Chart.js library not loaded!');
-        alert('Erro ao carregar gráficos: Biblioteca Chart.js não encontrada.');
-        return;
-    }
-    // Funnel Chart
-    const funnelCtx = document.getElementById('funnelChart').getContext('2d');
-    const funnelData = <?php echo json_encode($leadsByStage ?? []); ?>;
-    
-    console.log('Funnel Data:', funnelData);
+    console.log('Initializing Dashboard Charts (ApexCharts)...');
 
-    if (!funnelData || funnelData.length === 0) {
-        // Render empty state if no data
-        funnelCtx.font = "14px Manrope";
-        funnelCtx.fillStyle = "#9ca3af";
-        funnelCtx.textAlign = "center";
-        funnelCtx.fillText("Sem dados no funil", 150, 75);
+    // --- FUNNEL CHART ---
+    const funnelDataRaw = <?php echo json_encode($leadsByStage ?? []); ?>;
+    
+    // Sort data for funnel effect (Standard Funnel is Descending)
+    // If the stages are sequential, we might want to keep stage order, 
+    // but a visual funnel usually implies sorting by count. 
+    // However, for a CRM, stage order is more important than count size usually.
+    // The user's image shows a perfect funnel (big to small), but real data might vary.
+    // I will keep the stage order (index from DB) but render as horizontal bars.
+    
+    // Prepare data
+    const funnelCategories = funnelDataRaw.map(item => item.name);
+    const funnelSeriesData = funnelDataRaw.map(item => item.count);
+    const funnelColors = [
+        '#84cc16', // Lime (Top)
+        '#22c55e', // Green
+        '#0ea5e9', // Sky Blue
+        '#3b82f6', // Blue
+        '#6366f1', // Indigo
+        '#a855f7', // Purple
+        '#eab308', // Yellow
+        '#f97316', // Orange
+        '#ef4444'  // Red (Bottom)
+    ];
+
+    if (!funnelDataRaw || funnelDataRaw.length === 0) {
+        document.getElementById('funnelChart').innerHTML = '<div class="flex items-center justify-center h-full text-gray-400 text-sm">Sem dados no funil</div>';
     } else {
-        new Chart(funnelCtx, {
-        type: 'bar',
-        data: {
-            labels: funnelData.map(item => item.name),
-            datasets: [{
-                label: 'Leads',
-                data: funnelData.map(item => item.count),
-                backgroundColor: funnelData.map(item => {
-                    // Map tailwind colors to hex or use simplistic mapping
-                    const colorMap = {
-                        'blue': '#3b82f6',
-                        'yellow': '#eab308',
-                        'green': '#22c55e',
-                        'purple': '#a855f7',
-                        'red': '#ef4444',
-                        'gray': '#6b7280',
-                        'indigo': '#6366f1',
-                        'pink': '#ec4899'
-                    };
-                    return colorMap[item.color] || '#cbd5e1';
-                }),
-                borderRadius: 4
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
+        var optionsFunnel = {
+            series: [{
+                name: "Leads",
+                data: funnelSeriesData
+            }],
+            chart: {
+                type: 'bar',
+                height: 300,
+                toolbar: { show: false }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    horizontal: true,
+                    barHeight: '70%',
+                    isFunnel: true,
+                    distributed: true // Multi-color bars
                 }
             },
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    grid: {
-                        display: false
-                    }
+            colors: funnelColors,
+            dataLabels: {
+                enabled: true,
+                formatter: function (val, opt) {
+                    return opt.w.globals.labels[opt.dataPointIndex] + ": " + val;
                 },
-                y: {
-                    grid: {
-                        display: false
+                dropShadow: { enabled: true },
+                style: { colors: ['#fff'] }
+            },
+            title: { text: undefined },
+            xaxis: {
+                categories: funnelCategories,
+            },
+            legend: { show: false }
+        };
+
+        var chartFunnel = new ApexCharts(document.querySelector("#funnelChart"), optionsFunnel);
+        chartFunnel.render();
+    }
+
+    // --- ORIGINS CHART ---
+    const originsDataRaw = <?php echo json_encode($leadsByOrigin ?? []); ?>;
+    const originsLabels = originsDataRaw.map(item => item.name);
+    const originsSeries = originsDataRaw.map(item => parseInt(item.count));
+
+    if (!originsDataRaw || originsDataRaw.length === 0) {
+        document.getElementById('originsChart').innerHTML = '<div class="flex items-center justify-center h-full text-gray-400 text-sm">Sem dados de origem</div>';
+    } else {
+        var optionsOrigins = {
+            series: originsSeries,
+            chart: {
+                type: 'donut',
+                height: 300,
+            },
+            labels: originsLabels,
+            colors: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'],
+            legend: {
+                position: 'bottom'
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val) {
+                    return val.toFixed(1) + "%"
+                }
+            },
+             plotOptions: {
+                pie: {
+                    donut: {
+                        size: '65%'
                     }
                 }
             }
-        }
-    });
-    }
+        };
 
-    // Origins Chart
-    const originsCtx = document.getElementById('originsChart').getContext('2d');
-    const originsData = <?php echo json_encode($leadsByOrigin ?? []); ?>;
-
-    console.log('Origins Data:', originsData);
-
-    if (!originsData || originsData.length === 0) {
-        originsCtx.font = "14px Manrope";
-        originsCtx.fillStyle = "#9ca3af";
-        originsCtx.textAlign = "center";
-        originsCtx.fillText("Sem dados de origem", 150, 75);
-    } else {
-        new Chart(originsCtx, {
-        type: 'doughnut',
-        data: {
-            labels: originsData.map(item => item.name),
-            datasets: [{
-                data: originsData.map(item => item.count),
-                backgroundColor: [
-                    '#3b82f6', '#10b981', '#f59e0b', '#ef4444', 
-                    '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'right',
-                    labels: {
-                        usePointStyle: true,
-                        boxWidth: 6
-                    }
-                }
-            },
-            cutout: '70%'
-        }
-    });
+        var chartOrigins = new ApexCharts(document.querySelector("#originsChart"), optionsOrigins);
+        chartOrigins.render();
     }
 });
 </script>
