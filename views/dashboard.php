@@ -76,16 +76,16 @@
     <!-- Sales Funnel Chart -->
     <div class="rounded-2xl bg-white shadow-sm ring-1 ring-gray-900/5 p-6">
         <h3 class="text-base font-bold leading-6 text-gray-900 mb-4">Funil de Vendas</h3>
-        <div class="relative h-64">
-            <canvas id="funnelChart"></canvas>
+        <div class="h-64">
+            <div id="funnelChart" class="h-full"></div>
         </div>
     </div>
 
     <!-- Lead Origins Chart -->
     <div class="rounded-2xl bg-white shadow-sm ring-1 ring-gray-900/5 p-6">
         <h3 class="text-base font-bold leading-6 text-gray-900 mb-4">Origem dos Leads</h3>
-        <div class="relative h-64">
-            <canvas id="originsChart"></canvas>
+        <div class="h-64">
+            <div id="originsChart" class="h-full"></div>
         </div>
     </div>
 </div>
