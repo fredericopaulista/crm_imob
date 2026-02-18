@@ -63,9 +63,15 @@ class RoleController {
         }
     }
 
-    public function edit($id) {
+    public function edit() {
         if (!can('manage_roles')) {
             echo "Acesso negado.";
+            exit;
+        }
+
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            header('Location: ' . APP_URL . '/painel/perfis');
             exit;
         }
 
@@ -87,13 +93,20 @@ class RoleController {
         require_once 'views/layout/footer.php';
     }
 
-    public function update($id) {
+    public function update() {
         if (!can('manage_roles')) {
             echo "Acesso negado.";
             exit;
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+            if (!$id) {
+                // handle error or redirect
+                header('Location: ' . APP_URL . '/painel/perfis');
+                exit;
+            }
+
             $name = $_POST['name'];
             $description = $_POST['description'];
             $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
@@ -104,6 +117,34 @@ class RoleController {
             } else {
                  echo "Erro ao atualizar perfil.";
             }
+        }
+    }
+
+    public function delete() {
+        if (!can('manage_roles')) {
+            echo "Acesso negado.";
+            exit;
+        }
+
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!$id) {
+            header('Location: ' . APP_URL . '/painel/perfis');
+            exit;
+        }
+
+        $roleModel = new Role();
+        $role = $roleModel->getById($id);
+        
+        // Safety check
+        if ($role && $role['name'] === 'Admin') {
+            header('Location: ' . APP_URL . '/painel/perfis');
+            exit;
+        }
+
+        if ($roleModel->delete($id)) {
+            header('Location: ' . APP_URL . '/painel/perfis');
+        } else {
+            echo "Erro ao excluir perfil. Verifique se existem usuários vinculados.";
         }
     }
 

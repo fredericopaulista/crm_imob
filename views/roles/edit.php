@@ -5,7 +5,8 @@
             <p class="mt-1 text-sm leading-6 text-gray-600">Atualize as permissões deste perfil.</p>
         </div>
 
-        <form action="<?php echo APP_URL; ?>/role/update/<?php echo $role['id']; ?>" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+        <form action="<?php echo APP_URL; ?>/painel/perfis/atualizar" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <input type="hidden" name="id" value="<?php echo $role['id']; ?>">
             <div class="px-4 py-6 sm:p-8">
                 <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     
