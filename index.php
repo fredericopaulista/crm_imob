@@ -195,6 +195,7 @@ $routes = [
     '/painel/whatsapp/conversas' => 'ChatController@getConversations',
     '/painel/whatsapp/mensagens' => 'ChatController@getMessages',
     '/painel/whatsapp/enviar' => 'ChatController@sendMessage',
+    '/painel/whatsapp/configuracoes' => 'ChatController@settings',
     '/whatsapp/webhook' => 'ChatController@webhook', // Keep public for webhook
 ];
 
