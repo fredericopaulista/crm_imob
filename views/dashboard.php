@@ -241,8 +241,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-
-    });
     }
 
     // Origins Chart
