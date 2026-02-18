@@ -123,7 +123,7 @@
                     </button>
                     <ul class="mt-1 px-2 space-y-1 <?php echo ($activeModule == 'configuracoes' || ($activeModule == 'marketing' && isset($currentParams[2]) && $currentParams[2] == 'configuracoes') || ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar')) ? '' : 'hidden'; ?>">
                         <li>
-                            <a href="<?php echo APP_URL; ?>/painel/configuracoes" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'configuracoes') ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
+                            <a href="<?php echo APP_URL; ?>/painel/configuracoes" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'configuracoes' && !isset($currentParams[2])) ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
                                 <i class="fas fa-search w-4 mr-2 text-xs"></i> SEO
                             </a>
                         </li>
