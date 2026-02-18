@@ -29,12 +29,7 @@
                         Imóveis
                     </a>
                 </li>
-                <li>
-                    <a href="<?php echo APP_URL; ?>/painel/imoveis/importar" class="<?php echo ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
-                        <i class="fas fa-file-import w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
-                        Importar XML
-                    </a>
-                </li>
+
                 <li>
                     <a href="<?php echo APP_URL; ?>/painel/proprietarios" class="<?php echo ($activeModule == 'proprietarios') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
                         <i class="fas fa-user-tie w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
@@ -115,12 +110,12 @@
                 <?php endif; ?>
 
                 <li>
-                    <button type="button" class="w-full text-left <?php echo ($activeModule == 'configuracoes' || ($activeModule == 'marketing' && isset($currentParams[2]) && $currentParams[2] == 'configuracoes')) ? 'text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.fa-chevron-right').classList.toggle('rotate-90');">
+                    <button type="button" class="w-full text-left <?php echo ($activeModule == 'configuracoes' || ($activeModule == 'marketing' && isset($currentParams[2]) && $currentParams[2] == 'configuracoes') || ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar')) ? 'text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.fa-chevron-right').classList.toggle('rotate-90');">
                         <i class="fas fa-cog w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
                         Configurações
-                        <i class="fas fa-chevron-right ml-auto text-xs transition-transform duration-200 <?php echo ($activeModule == 'configuracoes' || ($activeModule == 'marketing' && isset($currentParams[2]) && $currentParams[2] == 'configuracoes')) ? 'rotate-90' : ''; ?>"></i>
+                        <i class="fas fa-chevron-right ml-auto text-xs transition-transform duration-200 <?php echo ($activeModule == 'configuracoes' || ($activeModule == 'marketing' && isset($currentParams[2]) && $currentParams[2] == 'configuracoes') || ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar')) ? 'rotate-90' : ''; ?>"></i>
                     </button>
-                    <ul class="mt-1 px-2 space-y-1 <?php echo ($activeModule == 'configuracoes' || ($activeModule == 'marketing' && isset($currentParams[2]) && $currentParams[2] == 'configuracoes')) ? '' : 'hidden'; ?>">
+                    <ul class="mt-1 px-2 space-y-1 <?php echo ($activeModule == 'configuracoes' || ($activeModule == 'marketing' && isset($currentParams[2]) && $currentParams[2] == 'configuracoes') || ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar')) ? '' : 'hidden'; ?>">
                         <li>
                             <a href="<?php echo APP_URL; ?>/painel/configuracoes" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'configuracoes') ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
                                 <i class="fas fa-search w-4 mr-2 text-xs"></i> SEO
@@ -139,6 +134,11 @@
                         <li>
                             <a href="<?php echo APP_URL; ?>/painel/paginas" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'paginas') ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
                                 <i class="fas fa-file-alt w-4 mr-2 text-xs"></i> Páginas Legais
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo APP_URL; ?>/painel/imoveis/importar" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar') ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
+                                <i class="fas fa-file-import w-4 mr-2 text-xs"></i> Importar XML
                             </a>
                         </li>
                     </ul>
