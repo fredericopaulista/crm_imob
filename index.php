@@ -222,6 +222,13 @@ if (array_key_exists($request, $routes)) {
     $_GET['id'] = $matches[1];
     $controllerName = 'SiteController';
     $method = 'author';
+} elseif (preg_match('#^(venda|aluguel)/(apartamentos|casas|comerciais|terrenos|coberturas)$#', $request, $matches)) {
+    // Category Listing Pages
+    // e.g. /venda/apartamentos
+    $_GET['purpose'] = $matches[1];
+    $_GET['type'] = $matches[2];
+    $controllerName = 'SiteController';
+    $method = 'listing';
 } elseif (preg_match('#^(venda|aluguel)/(.+)$#', $request, $matches)) {
     // CATCH-ALL for the new advanced URL structure
     // Patterns:

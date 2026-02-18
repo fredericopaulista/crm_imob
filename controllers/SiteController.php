@@ -134,6 +134,63 @@ class SiteController {
         $this->catalog();
     }
 
+    public function listing() {
+        $propertyModel = new Property();
+
+        // 1. Map Purpose
+        // URL: venda / aluguel
+        // DB: sale / rent
+        $purposeMap = [
+            'venda' => 'sale',
+            'aluguel' => 'rent'
+        ];
+        $urlPurpose = $_GET['purpose'] ?? '';
+        $dbPurpose = $purposeMap[$urlPurpose] ?? null;
+
+        // 2. Map Type
+        // URL: apartamentos, casas, comerciais, terrenos, coberturas
+        // DB: Apartamento, Casa, Comercial, Terreno, Cobertura
+        $typeMap = [
+            'apartamentos' => 'Apartamento',
+            'casas' => 'Casa',
+            'comerciais' => 'Comercial',
+            'terrenos' => 'Terreno',
+            'coberturas' => 'Cobertura'
+        ];
+        $urlType = $_GET['type'] ?? '';
+        $dbType = $typeMap[$urlType] ?? null;
+
+        // Validations
+        if (!$dbPurpose || !$dbType) {
+            // Invalid category or purpose, redirect to catalog or 404
+            header('Location: ' . APP_URL . '/imoveis');
+            exit;
+        }
+
+        // 3. Prepare Filters
+        $filters = [
+            'purpose' => $dbPurpose,
+            'type' => $dbType,
+            'status' => 'active' // Only show active properties
+        ];
+
+        // 4. Fetch Properties
+        $properties = $propertyModel->getAll($filters);
+
+        // 5. Prepare View Data
+        // Breadcrumb / Title helper
+        $purposeLabel = ($dbPurpose === 'sale') ? 'à Venda' : 'para Alugar';
+        $typeLabel = $dbType . 's'; // Pluralize roughly for display, or use mapped label
+        if ($dbType === 'Comercial') $typeLabel = 'Imóveis Comerciais';
+        
+        $pageTitle = "$typeLabel $purposeLabel - " . company_name();
+        
+        // Pass data to view
+        require_once 'views/layout/header_public.php';
+        require_once 'views/site/listing.php';
+        require_once 'views/layout/footer_public.php';
+    }
+
     public function detail() {
         // Use $_GET directly because filter_input doesn't see values set in index.php
         $slug = isset($_GET['slug']) ? filter_var($_GET['slug'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;

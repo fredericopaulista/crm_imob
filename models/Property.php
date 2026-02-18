@@ -40,6 +40,12 @@ class Property {
             $sql .= " AND neighborhood = :neighborhood";
             $params[':neighborhood'] = $filters['neighborhood'];
         }
+
+        // Filter by purpose
+        if (!empty($filters['purpose'])) {
+            $sql .= " AND purpose = :purpose";
+            $params[':purpose'] = $filters['purpose'];
+        }
         
         $sql .= " ORDER BY created_at DESC";
         
