@@ -21,9 +21,9 @@ class PropertyController {
 
     public function create() {
         $pageTitle = 'Cadastrar Imóvel';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/properties/create.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function store() {
@@ -43,37 +43,32 @@ class PropertyController {
              $imagesJson = json_encode($images);
              $owner_id = !empty($_POST['owner_id']) ? $_POST['owner_id'] : null;
              
-             $sql = "INSERT INTO properties (title, type, purpose, price, address, neighborhood, city, area, bedrooms, bathrooms, garages, description, status, images, owner_id) 
-                     VALUES (:title, :type, :purpose, :price, :address, :neighborhood, :city, :area, :bedrooms, :bathrooms, :garages, :description, :status, :images, :owner_id)";
+             $propertyModel = new Property();
+             $data = [
+                 'title' => $_POST['title'],
+                 'type' => $_POST['type'],
+                 'purpose' => $_POST['purpose'],
+                 'price' => $_POST['price'],
+                 'address' => $_POST['address'],
+                 'neighborhood' => $_POST['neighborhood'],
+                 'city' => $_POST['city'],
+                 'state' => $_POST['state'] ?? 'MG', // Add state
+                 'area' => $_POST['area'] ?? null,
+                 'bedrooms' => $_POST['bedrooms'] ?? null,
+                 'bathrooms' => $_POST['bathrooms'] ?? null,
+                 'garages' => $_POST['garages'] ?? null,
+                 'description' => $_POST['description'] ?? null,
+                 'status' => $_POST['status'],
+                 'featured' => isset($_POST['featured']) ? 1 : 0,
+                 'images' => $imagesJson,
+                 'owner_id' => $owner_id
+             ];
              
-             $conn = Database::getInstance()->getConnection();
-             $stmt = $conn->prepare($sql);
-             
-             $success = $stmt->execute([
-                 ':title' => $_POST['title'],
-                 ':type' => $_POST['type'],
-                 ':purpose' => $_POST['purpose'],
-                 ':price' => $_POST['price'],
-                 ':address' => $_POST['address'],
-                 ':neighborhood' => $_POST['neighborhood'],
-                 ':city' => $_POST['city'],
-                 ':area' => $_POST['area'] ?? null,
-                 ':bedrooms' => $_POST['bedrooms'] ?? null,
-                 ':bathrooms' => $_POST['bathrooms'] ?? null,
-                 ':garages' => $_POST['garages'] ?? null,
-                 ':description' => $_POST['description'] ?? null,
-                 ':description' => $_POST['description'] ?? null,
-                 ':status' => $_POST['status'],
-                 ':featured' => isset($_POST['featured']) ? 1 : 0,
-                 ':images' => $imagesJson,
-                 ':owner_id' => $owner_id
-             ]);
-
-            if ($success) {
+             if ($propertyModel->create($data)) {
                 header('Location: ' . APP_URL . '/painel/imoveis');
-            } else {
+             } else {
                 echo "Erro ao cadastrar imóvel";
-            }
+             }
         }
     }
 
@@ -94,9 +89,9 @@ class PropertyController {
         }
 
         $pageTitle = 'Editar Imóvel';
-        require_once 'views/layout/header.php';
+        require_once 'views/layout/header_admin.php';
         require_once 'views/properties/edit.php';
-        require_once 'views/layout/footer.php';
+        require_once 'views/layout/footer_admin.php';
     }
 
     public function update() {
@@ -111,6 +106,7 @@ class PropertyController {
                 'address' => $_POST['address'],
                 'neighborhood' => $_POST['neighborhood'],
                 'city' => $_POST['city'],
+                'state' => $_POST['state'] ?? 'MG',
                 'area' => $_POST['area'],
                 'bedrooms' => $_POST['bedrooms'],
                 'bathrooms' => $_POST['bathrooms'],
