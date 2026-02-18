@@ -171,7 +171,7 @@ class SiteController {
         $filters = [
             'purpose' => $dbPurpose,
             'type' => $dbType,
-            'status' => 'active' // Only show active properties
+            'status' => 'available' // Only show available properties
         ];
 
         // 4. Fetch Properties
