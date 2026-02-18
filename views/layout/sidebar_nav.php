@@ -144,6 +144,7 @@
                         </li>
                         <li>
                             <a href="<?php echo APP_URL; ?>/painel/imoveis/importar" class="block rounded-md py-2 pr-2 pl-9 text-sm leading-6 <?php echo ($activeModule == 'imoveis' && isset($currentParams[2]) && $currentParams[2] == 'importar') ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> transition-colors">
+                                <i class="fas fa-file-import w-4 mr-2 text-xs"></i> Importar XML
                             </a>
                         </li>
                         <li>
