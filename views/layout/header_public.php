@@ -51,7 +51,37 @@
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex items-center gap-6">
                     <a href="<?php echo APP_URL; ?>" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Início</a>
-                    <a href="<?php echo APP_URL; ?>/imoveis" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Imóveis</a>
+                    
+                    <!-- Dropdown Imóveis -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-gray-600 hover:text-brand-600 font-medium transition-colors py-2 focus:outline-none">
+                            Imóveis <i class="fas fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                        </button>
+                        
+                        <!-- Dropdown Content -->
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full w-64 bg-white rounded-xl shadow-xl ring-1 ring-gray-900/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top pt-2">
+                             <!-- Arrow -->
+                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-l border-t border-gray-100"></div>
+
+                            <div class="relative bg-white rounded-xl overflow-hidden p-2">
+                                <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-100 mb-2">Comprar</div>
+                                <a href="<?php echo APP_URL; ?>/venda/apartamentos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition-colors">Apartamentos</a>
+                                <a href="<?php echo APP_URL; ?>/venda/casas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition-colors">Casas</a>
+                                <a href="<?php echo APP_URL; ?>/venda/coberturas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition-colors">Coberturas</a>
+                                <a href="<?php echo APP_URL; ?>/venda/terrenos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition-colors">Terrenos</a>
+
+                                <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-100 mb-2 mt-2">Alugar</div>
+                                <a href="<?php echo APP_URL; ?>/aluguel/apartamentos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition-colors">Apartamentos</a>
+                                <a href="<?php echo APP_URL; ?>/aluguel/casas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition-colors">Casas</a>
+                                <a href="<?php echo APP_URL; ?>/aluguel/comerciais" class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-lg transition-colors">Comercial</a>
+                                
+                                <div class="border-t border-gray-100 mt-2 pt-2">
+                                    <a href="<?php echo APP_URL; ?>/imoveis" class="block px-4 py-2 text-sm font-semibold text-brand-600 hover:bg-brand-50 rounded-lg transition-colors text-center">Ver Todos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <a href="<?php echo APP_URL; ?>/blog" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Blog</a>
                     <a href="#sobre" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Sobre Nós</a>
                     <a href="<?php echo APP_URL; ?>/contato" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Contato</a>
