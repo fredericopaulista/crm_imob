@@ -39,7 +39,7 @@ foreach ($properties as $property) {
   },{
     "@type": "ListItem",
     "position": 3,
-    "name": "<?php echo $pageTitle; ?>",
+    "name": "<?php echo $heading; ?>",
     "item": "<?php echo APP_URL . '/' . $urlPurpose . '/' . $urlType; ?>"
   }]
 }
@@ -67,7 +67,7 @@ foreach ($properties as $property) {
             <li>
               <div class="flex items-center">
                 <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400"></i>
-                <span class="ml-4 text-sm font-medium text-gray-500" aria-current="page"><?php echo $pageTitle; ?></span>
+                <span class="ml-4 text-sm font-medium text-gray-500" aria-current="page"><?php echo $heading; ?></span>
               </div>
             </li>
           </ol>
