@@ -49,6 +49,7 @@
                 </div>
 
                 <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-6">
                     <a href="<?php echo APP_URL; ?>" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Início</a>
                     <a href="<?php echo APP_URL; ?>/imoveis" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Imóveis</a>
                     <a href="<?php echo APP_URL; ?>/blog" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Blog</a>
