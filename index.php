@@ -46,6 +46,8 @@ $routes = [
         // --- PUBLIC ROUTES ---
     '/' => 'SiteController@index',
     '/imoveis' => 'SiteController@catalog',
+    '/imoveis-a-venda' => 'SiteController@catalogSale',
+    '/imoveis-para-alugar' => 'SiteController@catalogRent',
     '/imovel' => 'SiteController@detail', // regex handled below for slugs
     '/contato' => 'SiteController@contact',
     '/enviar-contato' => 'ContactController@send',

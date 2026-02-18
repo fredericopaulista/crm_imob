@@ -100,6 +100,7 @@ class SiteController {
         $filters = [
             'search' => isset($_GET['search']) ? filter_var($_GET['search'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
             'type' => isset($_GET['type']) ? filter_var($_GET['type'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
+            'purpose' => isset($_GET['purpose']) ? filter_var($_GET['purpose'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
             'status' => isset($_GET['status']) ? filter_var($_GET['status'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
             'city' => isset($_GET['city']) ? filter_var($_GET['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null,
             'neighborhood' => isset($_GET['neighborhood']) ? filter_var($_GET['neighborhood'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null
@@ -113,10 +114,24 @@ class SiteController {
         // Get neighborhoods for selected city, or all if no city selected
         $neighborhoods = $propertyModel->getNeighborhoods($filters['city'] ?? null);
         
-        $pageTitle = 'Imóveis - ' . company_name();
+        $titlePrefix = 'Imóveis';
+        if ($filters['purpose'] == 'sale') $titlePrefix = 'Imóveis à Venda';
+        if ($filters['purpose'] == 'rent') $titlePrefix = 'Imóveis para Alugar';
+
+        $pageTitle = $titlePrefix . ' - ' . company_name();
         require_once 'views/layout/header_public.php';
         require_once 'views/site/catalog.php';
         require_once 'views/layout/footer_public.php';
+    }
+
+    public function catalogSale() {
+        $_GET['purpose'] = 'sale';
+        $this->catalog();
+    }
+
+    public function catalogRent() {
+        $_GET['purpose'] = 'rent';
+        $this->catalog();
     }
 
     public function detail() {

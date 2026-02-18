@@ -1,9 +1,19 @@
 <?php
-// SEO Metadata
-$pageTitle = 'Catálogo de Imóveis em São Paulo - Venda e Aluguel | ' . company_name();
-$metaTitle = 'Catálogo Completo de Imóveis em SP - Apartamentos, Casas e Mais';
-$metaDescription = 'Explore nosso catálogo completo de imóveis em São Paulo. Apartamentos, casas, coberturas e lofts para venda e aluguel. Filtros avançados para encontrar o imóvel ideal. Confira!';
+// Determine Title and Canonical URL based on filters
+$catalogTitle = 'Nosso Catálogo';
 $canonicalUrl = APP_URL . '/imoveis';
+
+if (($filters['purpose'] ?? '') == 'sale') {
+    $catalogTitle = 'Imóveis à Venda';
+    $canonicalUrl = APP_URL . '/imoveis-a-venda';
+} elseif (($filters['purpose'] ?? '') == 'rent') {
+    $catalogTitle = 'Imóveis para Alugar';
+    $canonicalUrl = APP_URL . '/imoveis-para-alugar';
+}
+
+// SEO Metadata (override if needed, usually passed from controller but we refine here)
+// $pageTitle is already set in controller with semantic title
+$metaTitle = $catalogTitle . ' em SP - Apartamentos, Casas e Mais';
 $ogImage = APP_URL . '/assets/og-catalog.jpg';
 
 // Generate ItemList Schema
@@ -57,13 +67,20 @@ foreach ($properties as $property) {
             <li>
               <div class="flex items-center">
                 <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400"></i>
-                <a href="#" class="ml-4 text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors" aria-current="page">Imóveis</a>
+                <a href="<?php echo APP_URL; ?>/imoveis" class="ml-4 text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors">Imóveis</a>
+                 <?php if (($filters['purpose'] ?? '') == 'sale'): ?>
+                    <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400 ml-4"></i>
+                    <span class="ml-4 text-sm font-medium text-gray-500" aria-current="page">Venda</span>
+                <?php elseif (($filters['purpose'] ?? '') == 'rent'): ?>
+                    <i class="fas fa-chevron-right h-5 w-5 flex-shrink-0 text-gray-400 ml-4"></i>
+                    <span class="ml-4 text-sm font-medium text-gray-500" aria-current="page">Aluguel</span>
+                <?php endif; ?>
               </div>
             </li>
           </ol>
         </nav>
         <div class="mx-auto max-w-2xl text-center mb-12">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Nosso Catálogo</h2>
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><?php echo $catalogTitle; ?></h2>
             <p class="mt-2 text-lg leading-8 text-gray-600">Explore nossa seleção completa de imóveis exclusivos.</p>
         </div>
 

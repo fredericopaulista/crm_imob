@@ -232,7 +232,7 @@ $ogImage = APP_URL . '/assets/og-home.jpg';
             <?php endforeach; ?>
         </div>
         <div class="mt-12 text-center">
-            <a href="<?php echo APP_URL; ?>/imoveis?type=&purpose=sale" class="text-sm font-semibold leading-6 text-brand-600 hover:text-brand-500">Ver todos à venda <span aria-hidden="true">→</span></a>
+            <a href="<?php echo APP_URL; ?>/imoveis-a-venda" class="text-sm font-semibold leading-6 text-brand-600 hover:text-brand-500">Ver todos à venda <span aria-hidden="true">→</span></a>
         </div>
     </div>
 </div>
@@ -289,7 +289,7 @@ $ogImage = APP_URL . '/assets/og-home.jpg';
             <?php endforeach; ?>
         </div>
         <div class="mt-12 text-center">
-             <a href="<?php echo APP_URL; ?>/imoveis?type=&purpose=rent" class="text-sm font-semibold leading-6 text-brand-600 hover:text-brand-500">Ver todos para alugar <span aria-hidden="true">→</span></a>
+             <a href="<?php echo APP_URL; ?>/imoveis-para-alugar" class="text-sm font-semibold leading-6 text-brand-600 hover:text-brand-500">Ver todos para alugar <span aria-hidden="true">→</span></a>
         </div>
     </div>
 </div>
