@@ -225,14 +225,14 @@ if (array_key_exists($request, $routes)) {
     $_GET['id'] = $matches[1];
     $controllerName = 'SiteController';
     $method = 'author';
-} elseif (preg_match('#^(venda|aluguel)/(apartamentos|casas|comerciais|terrenos|coberturas)$#', $request, $matches)) {
+} elseif (preg_match('#^/(venda|aluguel)/(apartamentos|casas|comerciais|terrenos|coberturas)$#', $request, $matches)) {
     // Category Listing Pages
     // e.g. /venda/apartamentos
     $_GET['purpose'] = $matches[1];
     $_GET['type'] = $matches[2];
     $controllerName = 'SiteController';
     $method = 'listing';
-} elseif (preg_match('#^(venda|aluguel)/(.+)$#', $request, $matches)) {
+} elseif (preg_match('#^/(venda|aluguel)/(.+)$#', $request, $matches)) {
     // CATCH-ALL for the new advanced URL structure
     // Patterns:
     // venda/apartamentos/mg+belo-horizonte++sion/3-quartos-{id}
@@ -242,7 +242,16 @@ if (array_key_exists($request, $routes)) {
     // However, our slugs might have IDs appended.
     // Let's try to extract ID from the end if possible, or just pass the full slug line.
     
-    $fullPath = $matches[0]; // e.g. venda/apartamentos/...
+    // The regex is #^/(venda|aluguel)/(.+)$#
+    // $matches[0] is full match (e.g. /venda/apartamentos/...)
+    // $matches[1] is purpose (venda)
+    // $matches[2] is the rest
+    
+    // We want the slug to be the relative path (e.g. venda/apartamentos/...) without leading slash? 
+    // Property slugs usually stored as "venda/apartamentos/..." (no leading slash in DB?).
+    // Yes, generateAdvancedSlug doesn't add leading slash.
+    
+    $fullPath = ltrim($matches[0], '/'); // Remove leading slash for DB lookup
     
     // Check if it ends with -{id} (numeric)
     if (preg_match('/-(\d+)$/', $fullPath, $idMatch)) {
