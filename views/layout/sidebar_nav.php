@@ -78,9 +78,6 @@
                         <i class="fas fa-bullhorn w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity"></i>
                         Marketing
                     </a>
-                </li>
-                    </a>
-                </li>
                 <?php endif; ?>
                 <li>
                     <a href="<?php echo APP_URL; ?>/painel/blog" class="<?php echo ($activeModule == 'blog') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-2 text-sm leading-6 font-semibold transition-all duration-200">

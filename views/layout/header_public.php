@@ -58,7 +58,7 @@
         </div>
 
         <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute top-20 left-0 w-full shadow-xl">
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <a href="<?php echo APP_URL; ?>" class="block px-3 py-3 rounded-md text-base font-medium text-brand-600 bg-brand-50">Início</a>
                 <a href="<?php echo APP_URL; ?>/imoveis" class="block px-3 py-3 rounded-md text-base font-medium text-gray-600 hover:text-brand-600 hover:bg-gray-50">Imóveis</a>
