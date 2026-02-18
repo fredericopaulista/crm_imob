@@ -61,6 +61,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo APP_URL; ?>/painel/agenda" class="<?php echo ($activeModule == 'agenda') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
+                        <i class="fas fa-calendar-alt w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity text-purple-500"></i>
+                        Agenda
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo APP_URL; ?>/painel/whatsapp" class="<?php echo ($activeModule == 'whatsapp') ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/20' : 'text-gray-400 hover:text-white hover:bg-white/5'; ?> group flex gap-x-3 rounded-xl p-3 text-sm leading-6 font-semibold transition-all duration-200">
                         <i class="fab fa-whatsapp w-5 text-[16px] flex items-center justify-center opacity-75 group-hover:opacity-100 transition-opacity text-green-500"></i>
                         WhatsApp

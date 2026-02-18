@@ -112,6 +112,14 @@ $routes = [
     '/painel/propostas/excluir' => 'ProposalController@delete',
     '/painel/propostas/pdf' => 'ProposalController@pdf',
 
+    // Agenda
+    '/painel/agenda' => 'AppointmentController@index',
+    '/painel/agenda/novo' => 'AppointmentController@create',
+    '/painel/agenda/salvar' => 'AppointmentController@store',
+    '/painel/agenda/editar' => 'AppointmentController@edit',
+    '/painel/agenda/atualizar' => 'AppointmentController@update',
+    '/painel/agenda/excluir' => 'AppointmentController@delete',
+
     // Marketing
     '/painel/marketing' => 'CampaignController@index',
     '/painel/marketing/importar' => 'CampaignController@import',
