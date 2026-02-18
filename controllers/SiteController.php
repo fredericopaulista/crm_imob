@@ -200,6 +200,20 @@ class SiteController {
         
         if ($slug) {
             $property = $propertyModel->findBySlug($slug);
+            
+            // Fallback: If not found, try replacing spaces with +
+            // Browsers/Servers sometimes decode + to space in the URL path
+            if (!$property && strpos($slug, ' ') !== false) {
+                $slugWithPlus = str_replace(' ', '+', $slug);
+                $property = $propertyModel->findBySlug($slugWithPlus);
+            }
+
+            // Fallback 2: Extract ID from end of slug
+            // If slug title changed but ID remains
+            if (!$property && preg_match('/-(\d+)$/', $slug, $idMatch)) {
+                $extractedId = $idMatch[1];
+                $property = $propertyModel->find($extractedId);
+            }
         } elseif ($id) {
             $property = $propertyModel->find($id);
         } else {

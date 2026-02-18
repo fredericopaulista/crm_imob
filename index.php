@@ -203,12 +203,15 @@ $routes = [
 if (array_key_exists($request, $routes)) {
     $route = $routes[$request];
     list($controllerName, $method) = explode('@', $route);
-} elseif (preg_match('#^/imovel/([a-z0-9-]+)$#', $request, $matches)) {
+} elseif (preg_match('#^/imovel/(.+)$#', $request, $matches)) {
     // Regex match for /imovel/{slug} or /imovel/{id}
-    if (is_numeric($matches[1])) {
-        $_GET['id'] = $matches[1];
+    // Now supports complex slugs like /imovel/venda/apartamentos/...
+    $slugOrId = $matches[1];
+
+    if (is_numeric($slugOrId)) {
+        $_GET['id'] = $slugOrId;
     } else {
-        $_GET['slug'] = $matches[1];
+        $_GET['slug'] = $slugOrId;
     }
     $controllerName = 'SiteController';
     $method = 'detail';
