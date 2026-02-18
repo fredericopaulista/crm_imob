@@ -52,8 +52,8 @@ class Property {
         // Generate slug from title
         $slug = $this->generateSlug($data['title']);
         
-        $sql = "INSERT INTO properties (title, slug, type, purpose, price, address, neighborhood, city, area, bedrooms, bathrooms, garages, description, status, images, owner_id) 
-                VALUES (:title, :slug, :type, :purpose, :price, :address, :neighborhood, :city, :area, :bedrooms, :bathrooms, :garages, :description, :status, :images, :owner_id)";
+        $sql = "INSERT INTO properties (title, slug, type, purpose, price, address, neighborhood, city, area, bedrooms, bathrooms, garages, description, status, featured, images, owner_id) 
+                VALUES (:title, :slug, :type, :purpose, :price, :address, :neighborhood, :city, :area, :bedrooms, :bathrooms, :garages, :description, :status, :featured, :images, :owner_id)";
         
         $stmt = $this->conn->prepare($sql);
         
@@ -73,6 +73,7 @@ class Property {
             ':garages' => $data['garages'] ?? null,
             ':description' => $data['description'] ?? null,
             ':status' => $data['status'],
+            ':featured' => $data['featured'] ?? 0,
             ':images' => $data['images'] ?? '[]',
             ':owner_id' => $data['owner_id'] ?? null
         ]);
@@ -97,6 +98,7 @@ class Property {
                 garages = :garages, 
                 description = :description, 
                 status = :status,
+                featured = :featured,
                 owner_id = :owner_id
                 WHERE id = :id";
         
@@ -116,9 +118,25 @@ class Property {
             ':garages' => $data['garages'] ?? null,
             ':description' => $data['description'] ?? null,
             ':status' => $data['status'],
+            ':featured' => $data['featured'] ?? 0,
             ':owner_id' => $data['owner_id'] ?? null,
             ':id' => $id
         ]);
+    }
+
+    public function getFeatured($limit = 6) {
+        $stmt = $this->conn->prepare("SELECT * FROM properties WHERE featured = 1 AND status = 'available' ORDER BY created_at DESC LIMIT :limit");
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getByPurpose($purpose, $limit = 12) {
+        $stmt = $this->conn->prepare("SELECT * FROM properties WHERE purpose = :purpose AND status = 'available' ORDER BY created_at DESC LIMIT :limit");
+        $stmt->bindValue(':purpose', $purpose);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function count() {

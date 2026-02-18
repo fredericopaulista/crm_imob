@@ -59,6 +59,18 @@
                         </div>
                     </div>
 
+                    <div class="sm:col-span-3 flex items-center h-full pt-6">
+                         <div class="relative flex gap-x-3">
+                            <div class="flex h-6 items-center">
+                              <input id="featured" name="featured" type="checkbox" value="1" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" <?php echo (!empty($property['featured'])) ? 'checked' : ''; ?>>
+                            </div>
+                            <div class="text-sm leading-6">
+                              <label for="featured" class="font-medium text-gray-900">Destaque na Home</label>
+                              <p class="text-gray-500">Exibir este imóvel na seção de destaques.</p>
+                            </div>
+                        </div>
+                    </div>
+
                      <div class="sm:col-span-3">
                         <label for="owner_id" class="block text-sm font-medium leading-6 text-gray-900">Proprietário</label>
                          <div class="mt-2">

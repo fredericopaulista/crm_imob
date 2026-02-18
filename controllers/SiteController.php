@@ -80,10 +80,11 @@ class SiteController {
 
     public function index() {
         $propertyModel = new Property();
-        // Get recent properties for homepage
-        // Ideally add limit to getAll, but for now fetch all and slice
-        $allProperties = $propertyModel->getAll();
-        $recentProperties = array_slice($allProperties, 0, 6);
+        
+        // Fetch properties for different sections
+        $featuredProperties = $propertyModel->getFeatured(12); // Limit 12 for featured
+        $saleProperties = $propertyModel->getByPurpose('sale', 12); // Limit 12 for sale
+        $rentProperties = $propertyModel->getByPurpose('rent', 12); // Limit 12 for rent
         
         $pageTitle = 'Home - ' . company_name();
         $metaTitle = 'Imóveis em São Paulo - Apartamentos, Casas e Coberturas | ' . company_name();

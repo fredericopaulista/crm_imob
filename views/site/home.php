@@ -122,14 +122,15 @@ $ogImage = APP_URL . '/assets/og-home.jpg';
 </div>
 
 <!-- Featured Properties -->
-<div class="bg-white py-24 sm:py-32">
+<?php if (!empty($featuredProperties)): ?>
+<div class="bg-white py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Imóveis em Destaque</h2>
-            <p class="mt-4 text-lg leading-8 text-gray-600">Confira nossa seleção exclusiva das melhores oportunidades disponíveis nesta semana.</p>
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Imóveis em Destaque ⭐</h2>
+            <p class="mt-4 text-lg leading-8 text-gray-600">Confira nossa seleção exclusiva das melhores oportunidades.</p>
         </div>
         <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-             <?php foreach ($recentProperties as $property): 
+             <?php foreach ($featuredProperties as $property): 
                 $images = json_decode($property['images'], true);
                 $coverImage = !empty($images) ? APP_URL . '/assets/uploads/' . $images[0] : 'https://placehold.co/800x600/f3f4f6/9ca3af?text=Sem+Foto';
             ?>
@@ -141,8 +142,8 @@ $ogImage = APP_URL . '/assets/og-home.jpg';
                     <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand-700 shadow-sm">
                          <?php echo $property['purpose'] == 'sale' ? 'Venda' : 'Aluguel'; ?>
                     </div>
-                     <span class="absolute bottom-4 left-4 bg-brand-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow-sm">
-                        Semana passada
+                     <span class="absolute bottom-4 left-4 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-md shadow-sm">
+                        <i class="fas fa-star mr-1"></i> Destaque
                     </span>
                 </div>
                 <div class="max-w-xl w-full mt-4">
@@ -176,14 +177,123 @@ $ogImage = APP_URL . '/assets/og-home.jpg';
             </article>
             <?php endforeach; ?>
         </div>
-         <div class="mt-16 text-center">
-            <a href="<?php echo APP_URL; ?>/imoveis" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-brand-700 bg-brand-100 hover:bg-brand-200 transition-colors">
-                Ver todos os imóveis
-                <i class="fas fa-arrow-right ml-2"></i>
-            </a>
+    </div>
+</div>
+<?php endif; ?>
+
+<!-- Sale Properties -->
+<?php if (!empty($saleProperties)): ?>
+<div class="bg-gray-50 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Imóveis à Venda 🏠</h2>
+            <p class="mt-4 text-lg leading-8 text-gray-600">Encontre a casa dos seus sonhos para comprar.</p>
+        </div>
+        <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+             <?php foreach ($saleProperties as $property): 
+                $images = json_decode($property['images'], true);
+                $coverImage = !empty($images) ? APP_URL . '/assets/uploads/' . $images[0] : 'https://placehold.co/800x600/f3f4f6/9ca3af?text=Sem+Foto';
+            ?>
+            <article class="flex flex-col items-start justify-between group cursor-pointer" onclick="window.location.href='<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>'">
+                 <div class="relative w-full overflow-hidden rounded-2xl shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
+                    <img src="<?php echo $coverImage; ?>" alt="<?php echo $property['title']; ?>" class="aspect-[16/9] w-full bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2] transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                     <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand-700 shadow-sm">
+                         Venda
+                    </div>
+                </div>
+                <div class="max-w-xl w-full mt-4">
+                     <div class="flex items-center gap-x-4 text-xs">
+                        <span class="text-brand-600 font-bold bg-brand-50 px-2 py-1 rounded-md"><?php echo $property['type']; ?></span>
+                        <time datetime="<?php echo $property['created_at']; ?>" class="text-gray-500"><?php echo date('d M Y', strtotime($property['created_at'])); ?></time>
+                    </div>
+                    <div class="group relative">
+                        <h3 class="mt-3 text-lg font-bold leading-6 text-gray-900 group-hover:text-brand-600 transition-colors">
+                            <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>">
+                                <span class="absolute inset-0"></span>
+                                <?php echo $property['title']; ?>
+                            </a>
+                        </h3>
+                        <p class="mt-2 text-sm leading-6 text-gray-600 line-clamp-2"><?php echo $property['description']; ?></p>
+                    </div>
+                     <div class="mt-4 flex items-center justify-between text-gray-500 text-sm border-t border-gray-100 pt-4">
+                         <div class="flex items-center gap-1.5"><i class="fas fa-bed"></i> <?php echo $property['bedrooms']; ?></div>
+                         <div class="flex items-center gap-1.5"><i class="fas fa-bath"></i> <?php echo $property['bathrooms']; ?></div>
+                         <div class="flex items-center gap-1.5"><i class="fas fa-ruler-combined"></i> <?php echo $property['area']; ?>m²</div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between">
+                         <span class="text-2xl font-bold text-gray-900">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></span>
+                         <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-600 group-hover:text-white transition-all">
+                             <i class="fas fa-arrow-right text-sm"></i>
+                         </div>
+                    </div>
+                </div>
+            </article>
+            <?php endforeach; ?>
+        </div>
+        <div class="mt-12 text-center">
+            <a href="<?php echo APP_URL; ?>/imoveis?type=&purpose=sale" class="text-sm font-semibold leading-6 text-brand-600 hover:text-brand-500">Ver todos à venda <span aria-hidden="true">→</span></a>
         </div>
     </div>
 </div>
+<?php endif; ?>
+
+<!-- Rent Properties -->
+<?php if (!empty($rentProperties)): ?>
+<div class="bg-white py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Imóveis para Alugar 🔑</h2>
+            <p class="mt-4 text-lg leading-8 text-gray-600">As melhores opções de aluguel na região.</p>
+        </div>
+        <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+             <?php foreach ($rentProperties as $property): 
+                $images = json_decode($property['images'], true);
+                $coverImage = !empty($images) ? APP_URL . '/assets/uploads/' . $images[0] : 'https://placehold.co/800x600/f3f4f6/9ca3af?text=Sem+Foto';
+            ?>
+            <article class="flex flex-col items-start justify-between group cursor-pointer" onclick="window.location.href='<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>'">
+                 <div class="relative w-full overflow-hidden rounded-2xl shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
+                    <img src="<?php echo $coverImage; ?>" alt="<?php echo $property['title']; ?>" class="aspect-[16/9] w-full bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2] transition-transform duration-500 group-hover:scale-110">
+                   <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                     <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand-700 shadow-sm">
+                         Aluguel
+                    </div>
+                </div>
+                <div class="max-w-xl w-full mt-4">
+                     <div class="flex items-center gap-x-4 text-xs">
+                        <span class="text-brand-600 font-bold bg-brand-50 px-2 py-1 rounded-md"><?php echo $property['type']; ?></span>
+                        <time datetime="<?php echo $property['created_at']; ?>" class="text-gray-500"><?php echo date('d M Y', strtotime($property['created_at'])); ?></time>
+                    </div>
+                    <div class="group relative">
+                        <h3 class="mt-3 text-lg font-bold leading-6 text-gray-900 group-hover:text-brand-600 transition-colors">
+                            <a href="<?php echo APP_URL; ?>/imovel/<?php echo $property['slug'] ?? $property['id']; ?>">
+                                <span class="absolute inset-0"></span>
+                                <?php echo $property['title']; ?>
+                            </a>
+                        </h3>
+                        <p class="mt-2 text-sm leading-6 text-gray-600 line-clamp-2"><?php echo $property['description']; ?></p>
+                    </div>
+                     <div class="mt-4 flex items-center justify-between text-gray-500 text-sm border-t border-gray-100 pt-4">
+                         <div class="flex items-center gap-1.5"><i class="fas fa-bed"></i> <?php echo $property['bedrooms']; ?></div>
+                         <div class="flex items-center gap-1.5"><i class="fas fa-bath"></i> <?php echo $property['bathrooms']; ?></div>
+                         <div class="flex items-center gap-1.5"><i class="fas fa-ruler-combined"></i> <?php echo $property['area']; ?>m²</div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between">
+                         <span class="text-2xl font-bold text-gray-900">R$ <?php echo number_format($property['price'], 2, ',', '.'); ?></span>
+                         <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-600 group-hover:text-white transition-all">
+                             <i class="fas fa-arrow-right text-sm"></i>
+                         </div>
+                    </div>
+                </div>
+            </article>
+            <?php endforeach; ?>
+        </div>
+        <div class="mt-12 text-center">
+             <a href="<?php echo APP_URL; ?>/imoveis?type=&purpose=rent" class="text-sm font-semibold leading-6 text-brand-600 hover:text-brand-500">Ver todos para alugar <span aria-hidden="true">→</span></a>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
 
 <!-- Testimonials -->
 <section class="py-24 bg-gray-900 relative overflow-hidden">

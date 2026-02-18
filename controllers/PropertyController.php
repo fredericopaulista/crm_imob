@@ -62,7 +62,9 @@ class PropertyController {
                  ':bathrooms' => $_POST['bathrooms'] ?? null,
                  ':garages' => $_POST['garages'] ?? null,
                  ':description' => $_POST['description'] ?? null,
+                 ':description' => $_POST['description'] ?? null,
                  ':status' => $_POST['status'],
+                 ':featured' => isset($_POST['featured']) ? 1 : 0,
                  ':images' => $imagesJson,
                  ':owner_id' => $owner_id
              ]);
@@ -115,6 +117,7 @@ class PropertyController {
                 'garages' => $_POST['garages'],
                 'description' => $_POST['description'],
                 'status' => $_POST['status'],
+                'featured' => isset($_POST['featured']) ? 1 : 0,
                 'owner_id' => !empty($_POST['owner_id']) ? $_POST['owner_id'] : null
             ];
 
